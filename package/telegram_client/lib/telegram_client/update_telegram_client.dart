@@ -61,7 +61,7 @@ class UpdateTelegramClient {
 
   Map tgClientData() {
     if (telegramClientData.telegramClientType == TelegramClientType.telegam_bot_api) {
-      final Map decyprt = json.decode(tg.telegramBotApi.crypto.decrypt(data_base64: query["tg"]));
+      final Map decyprt = json.decode(tg.telegramBotApi.crypto.decrypt(data: query["tg"]));
 
       if (decyprt["client_tg_user_id"] == null || decyprt["client_tg_user_id"] == 0) {
         decyprt["client_tg_user_id"] = TgUtils.parserBotUserIdFromToken(decyprt["client_token"]);

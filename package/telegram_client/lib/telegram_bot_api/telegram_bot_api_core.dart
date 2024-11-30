@@ -167,7 +167,7 @@ class TelegramBotApi {
     if (query["tg"] is String == false) {
       query["tg"] = "";
     }
-    Map decyprt = convert.json.decode(crypto.decrypt(data_base64: query["tg"]));
+    Map decyprt = convert.json.decode(crypto.decrypt(data: query["tg"]));
 
     if (decyprt["client_tg_user_id"] == null || decyprt["client_tg_user_id"] == 0) {
       decyprt["client_tg_user_id"] = TgUtils.parserBotUserIdFromToken(decyprt["client_token"]);
