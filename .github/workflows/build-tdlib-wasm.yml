@@ -41,11 +41,12 @@ jobs:
 
         shell: bash
 
-      - name: Get List Dir
+      - name: Get List Dir And Delete node_modules
         continue-on-error: true
         run: |
           ls -a example/web/tdweb/
-
+          rm -rf example/web/tdweb/node_modules
+          tar czvf example/web/tdweb.tar.gz example/web/tdweb/
         shell: bash
 
 
@@ -57,7 +58,7 @@ jobs:
           path: |
             example/web/build/wasm/td_wasm.js
             example/web/build/wasm/td_wasm.wasm
-            example/web/tdweb/*
+            example/web/tdweb.tar.gz
 
       - name: Publish Release
         uses: marvinpinto/action-automatic-releases@latest
@@ -70,4 +71,4 @@ jobs:
           files: |
             example/web/build/wasm/td_wasm.js
             example/web/build/wasm/td_wasm.wasm
-            example/web/tdweb/*
+            example/web/tdweb.tar.gz
