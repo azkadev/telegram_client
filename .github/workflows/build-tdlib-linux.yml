@@ -1,0 +1,54 @@
+# name: Build Linux
+
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - '.github/workflows/build-linux.yml'
+#       - 'src/**'
+#       - 'include/**'
+#       - 'example/**'
+#       - 'CMakeLists.txt'
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-24.04
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#         with:
+#           submodules: recursive
+
+#       - name: Install CMake
+#         run: sudo apt-get update && sudo apt-get install -y cmake
+
+#       - name: Determine CPU Cores
+#         id: cpu-info
+#         run: echo "CPU_CORES=$(nproc)" >> $GITHUB_ENV
+
+#       - name: Configure CMake
+#         run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+#       - name: Build
+#         run: cmake --build build --config Release -- -j${{ env.CPU_CORES }}
+
+#       - name: Upload Build Artifacts
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: linux-x86_64
+#           path: |
+#             lib/
+#             include/
+            
+#       - name: Compile Binary
+#         run: make
+            
+#       - name: Upload Binary Artifacts
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: bin-linux-x86_64
+#           path: |
+#             bin/
+            

@@ -18,7 +18,7 @@ platforms:
 environment:
   sdk: '>=3.3.3 <4.0.0'
 dev_dependencies:
-  lints: '^4.0.0'
+  lints: '^5.0.0'
   test: 'any'
 topics:
   - 'telegram'

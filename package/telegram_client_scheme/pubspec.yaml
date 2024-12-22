@@ -5,7 +5,7 @@ environment:
   sdk: '>=3.3.3 <4.0.0'
 dependencies: {}
 dev_dependencies:
-  lints: '^4.0.0'
+  lints: '^5.0.0'
   test: 'any'
 repository: 'https://github.com/azkadev/telegram_client.git'
 homepage: 'https://github.com/azkadev/telegram_client'

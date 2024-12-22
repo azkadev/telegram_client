@@ -1,0 +1,52 @@
+name: Build Android
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/build-tdlib-android.yml'
+      - "package/telegram_client_android"
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+        
+    steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+        with:
+          repository: tdlib/td
+      - name: Install Dependencies
+        continue-on-error: false
+        run: | 
+          sudo apt update -y
+          sudo apt-get install -y make git zlib1g-dev libssl-dev gperf cmake clang libc++-dev libc++abi-dev ninja-build zip
+        shell: bash
+      - name: Compile Tdlib
+        continue-on-error: true
+        run: |
+          cd example/android/
+          docker build --build-arg TDLIB_INTERFACE=JSON --build-arg OPENSSL_VERSION="openssl-3.4.0" --build-arg ANDROID_NDK_VERSION="27.2.12479018" --output tdlib .
+
+        shell: bash
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        continue-on-error: true
+        with:
+          name: android
+          path: |
+            example/android/tdlib/tdlib.zip
+
+      - name: Publish Release
+        uses: marvinpinto/action-automatic-releases@latest
+        continue-on-error: true
+        with:
+          repo_token: "${{ github.token }}"
+          automatic_release_tag: "latest-tdlib-android"
+          prerelease: false
+          title: "Release Tdlib Android"
+          files: |
+            example/android/tdlib/tdlib.zip 

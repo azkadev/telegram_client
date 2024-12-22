@@ -95,7 +95,8 @@ void main(List<String> args) async {
     onUpdate: (UpdateTelegramClient updateTelegramClient) async {
       try {
         await tg.autoSetData(updateTelegramClient);
-
+        updateTelegramClient.rawData.printPretty();
+// 9996620318
         Map? update = await updateTelegramClient.updateRaw(
           is_lite: false,
           updataOptionTelegramClient: UpdataOptionTelegramClient(
@@ -224,6 +225,7 @@ void main(List<String> args) async {
       clientOption: TelegramClientLibraryTdlibOptionParameter.create(
         database_directory: database_directory.path,
         files_directory: directory_tg.path,
+        use_test_dc: true,
       ),
     ),
   );

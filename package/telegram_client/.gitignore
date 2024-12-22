@@ -46,3 +46,4 @@ dev/
 
 tg_db/
 tg_file/
+*.binlog
