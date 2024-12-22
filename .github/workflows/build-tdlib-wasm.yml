@@ -1,0 +1,61 @@
+name: Build Tdlib Wasm
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/build-tdlib-wasm.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+        
+    steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+        with:
+          repository: tdlib/td
+      - name: Install Dependencies
+        continue-on-error: true
+        run: |
+          sudo apt update -y
+          sudo apt-get install -y make git zlib1g-dev libssl-dev gperf cmake clang libc++-dev libc++abi-dev ninja-build zip
+        shell: bash
+      - name: Compile Tdlib
+        continue-on-error: true
+        run: |
+          cd example/web
+          git clone https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          git pull
+           ./emsdk install 3.1.1
+          ./emsdk activate 3.1.1
+          source ./emsdk_env.sh
+          cd ..
+          ./build-openssl.sh
+          ./build-tdlib.sh
+          ./copy-tdlib.sh
+          ./build-tdweb.sh
+
+        shell: bash
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        continue-on-error: true
+        with:
+          name: wasm
+          path: |
+            example/web/tdweb/*
+
+      - name: Publish Release
+        uses: marvinpinto/action-automatic-releases@latest
+        continue-on-error: true
+        with:
+          repo_token: "${{ github.token }}"
+          automatic_release_tag: "latest-tdlib-wasm"
+          prerelease: false
+          title: "Release Tdlib Wasm"
+          files: |
+            example/web/tdweb/*
