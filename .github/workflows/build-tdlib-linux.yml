@@ -1,54 +1,54 @@
-# name: Build Linux
+name: Build Tdlib Linux
 
-# on:
-#   push:
-#     branches:
-#       - main
-#     paths:
-#       - '.github/workflows/build-linux.yml'
-#       - 'src/**'
-#       - 'include/**'
-#       - 'example/**'
-#       - 'CMakeLists.txt'
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/build-tdlib-linux.yml'
+      - "package/telegram_client_linux"
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-24.04
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+        
+    steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+        with:
+          repository: tdlib/td
+      - name: Install Dependencies
+        continue-on-error: true
+        run: |
+          sudo apt update -y
+          sudo apt-get install -y make git zlib1g-dev libssl-dev gperf cmake clang libc++-dev libc++abi-dev ninja-build zip
+        shell: bash
+      - name: Compile Tdlib
+        continue-on-error: true
+        run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../tdlib ..
+          cmake --build .
+        shell: bash
 
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-#         with:
-#           submodules: recursive
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        continue-on-error: true
+        with:
+          name: android
+          path: |
+            example/android/tdlib/tdlib.zip
 
-#       - name: Install CMake
-#         run: sudo apt-get update && sudo apt-get install -y cmake
-
-#       - name: Determine CPU Cores
-#         id: cpu-info
-#         run: echo "CPU_CORES=$(nproc)" >> $GITHUB_ENV
-
-#       - name: Configure CMake
-#         run: cmake -B build -DCMAKE_BUILD_TYPE=Release
-
-#       - name: Build
-#         run: cmake --build build --config Release -- -j${{ env.CPU_CORES }}
-
-#       - name: Upload Build Artifacts
-#         uses: actions/upload-artifact@v3
-#         with:
-#           name: linux-x86_64
-#           path: |
-#             lib/
-#             include/
-            
-#       - name: Compile Binary
-#         run: make
-            
-#       - name: Upload Binary Artifacts
-#         uses: actions/upload-artifact@v3
-#         with:
-#           name: bin-linux-x86_64
-#           path: |
-#             bin/
-            
+      - name: Publish Release
+        uses: marvinpinto/action-automatic-releases@latest
+        continue-on-error: true
+        with:
+          repo_token: "${{ github.token }}"
+          automatic_release_tag: "latest-tdlib-linux"
+          prerelease: false
+          title: "Release Tdlib Linux"
+          files: |
+            tdlib/tg_cli
+            tdlib/libtdjson.*
