@@ -41,12 +41,22 @@ jobs:
 
         shell: bash
 
+      - name: Get List Dir
+        continue-on-error: true
+        run: |
+          ls -a example/web/tdweb/
+
+        shell: bash
+
+
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         continue-on-error: true
         with:
           name: wasm
           path: |
+            example/web/build/wasm/td_wasm.js
+            example/web/build/wasm/td_wasm.wasm
             example/web/tdweb/*
 
       - name: Publish Release
@@ -58,4 +68,6 @@ jobs:
           prerelease: false
           title: "Release Tdlib Wasm"
           files: |
+            example/web/build/wasm/td_wasm.js
+            example/web/build/wasm/td_wasm.wasm
             example/web/tdweb/*
