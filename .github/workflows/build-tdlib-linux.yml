@@ -29,7 +29,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../tdlib ..
+          cmake -DCMAKE_BUILD_TYPE=Release ..
           cmake --build .
         shell: bash
 
@@ -37,9 +37,10 @@ jobs:
         uses: actions/upload-artifact@v3
         continue-on-error: true
         with:
-          name: android
+          name: linux
           path: |
-            example/android/tdlib/tdlib.zip
+            build/tg_cli
+            build/libtdjson.*
 
       - name: Publish Release
         uses: marvinpinto/action-automatic-releases@latest
@@ -50,5 +51,5 @@ jobs:
           prerelease: false
           title: "Release Tdlib Linux"
           files: |
-            tdlib/tg_cli
-            tdlib/libtdjson.*
+            build/tg_cli
+            build/libtdjson.*
