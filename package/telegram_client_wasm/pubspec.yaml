@@ -1,4 +1,4 @@
-name: telegram_client_wasm 
+name: 'telegram_client_wasm'
 description: 'Telegram Client Lightweight, blazing and Highly customizable for make application telegram based tdlib, mtproto, or bot api and support server side.'
 version: '0.0.0'
 homepage: 'https://github.com/azkadev/telegram_client'
@@ -8,7 +8,6 @@ documentation: 'https://github.com/azkadev/telegram_client/tree/main/docs'
 funding:
   - 'https://github.com/sponsors/azkadev'
   - 'https://github.com/sponsors/generalfoss'
-  
 platforms:
   android: null
   ios: null
@@ -22,10 +21,12 @@ topics:
   - 'mtproto'
   - 'userbot'
   - 'bot'
-
 environment:
-  sdk: ^3.6.0
- 
+  sdk: '>=3.3.3 <4.0.0'
 dev_dependencies:
-  lints: ^5.0.0
-  test: ^1.24.0
+  lints: '^5.0.0'
+  test: 'any'
+dependencies: {}
+dependency_overrides:
+  pointycastle: '3.8.0'
+  mime: '^2.0.0'
