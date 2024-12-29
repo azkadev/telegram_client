@@ -2,7 +2,7 @@ name: 'telegram_client_isar_scheme'
 description: 'Telegram Client Lightweight, blazing and Highly customizable for make application telegram based tdlib, mtproto, or bot api and support server side.'
 version: '0.8.24'
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
 dependencies: {}
 dev_dependencies:
   lints: '^5.0.0'

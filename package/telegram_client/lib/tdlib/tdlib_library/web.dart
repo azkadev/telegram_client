@@ -145,9 +145,14 @@ Future<void> opentdLib({
 
   TdlibNative.tdLib = await DynamicLibrary.open(pathTdlib);
   TdlibNative.is_open_tdlib = true;
-  TdlibNative.td_execute_native_function = TdlibNative.tdLib.lookupFunction<TdExecuteNative, TdExecuteNative>('td_execute');
-  TdlibNative.td_send_function = TdlibNative.tdLib.lookupFunction<TdSendNative, TdSendDart>('td_send');
-  TdlibNative.td_pointer_native_function = TdlibNative.tdLib.lookupFunction<TdCreateClientIdNative, TdCreateClientIdDart>('td_create_client_id');
-  TdlibNative.td_receive_function = TdlibNative.tdLib.lookupFunction<TdReceiveNative, TdReceiveDart>('td_receive');
+  TdlibNative.td_execute_native_function = TdlibNative.tdLib
+      .lookupFunction<TdExecuteNative, TdExecuteNative>('td_execute');
+  TdlibNative.td_send_function =
+      TdlibNative.tdLib.lookupFunction<TdSendNative, TdSendDart>('td_send');
+  TdlibNative.td_pointer_native_function = TdlibNative.tdLib
+      .lookupFunction<TdCreateClientIdNative, TdCreateClientIdDart>(
+          'td_create_client_id');
+  TdlibNative.td_receive_function = TdlibNative.tdLib
+      .lookupFunction<TdReceiveNative, TdReceiveDart>('td_receive');
   TdlibNative._td_completer.complete(true);
 }

@@ -3,7 +3,7 @@ description: 'Telegram Client Lightweight, blazing and Highly customizable for m
 version: '0.8.24'
 homepage: 'https://github.com/azkadev/telegram_client'
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
   flutter: '>=3.3.0'
 dependencies:
   flutter:

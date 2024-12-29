@@ -2,7 +2,7 @@ name: 'telegram_client_ios_example'
 description: 'Demonstrates how to use the telegram_client_ios plugin.'
 version: '0.0.0'
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
 dependencies:
   flutter:
     sdk: 'flutter'

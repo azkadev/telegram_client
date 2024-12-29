@@ -47,3 +47,4 @@ dev/
 tg_db/
 tg_file/
 *.binlog
+generate_general_private_tools_*
