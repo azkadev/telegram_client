@@ -35,7 +35,7 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 import 'dart:async';
 
 import 'package:http/http.dart';
-import 'package:universal_io/io.dart';
+import 'package:io_universe/io_universe.dart';
 
 /// telegram bot api server
 class TelegramBotApiServer {

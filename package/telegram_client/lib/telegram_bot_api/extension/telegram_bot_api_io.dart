@@ -35,7 +35,7 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 import 'package:telegram_client/telegram_bot_api/telegram_bot_api.dart';
 import 'package:telegram_client/util/util.dart';
 
-import 'package:universal_io/io.dart';
+import 'package:io_universe/io_universe.dart';
 // import 'package:path/path.dart' as p;
 
 /// extension tdlib for make
@@ -46,14 +46,10 @@ extension TelegramBotApiTypeFileMethodExtensions on TelegramBotApi {
     if (content is String) {
       if (RegExp(r"^http", caseSensitive: false).hasMatch(content)) {
         return {"@type": 'inputFileRemote', "data": content};
-      } else if (RegExp(r"^(\/|\.\.?\/|~\/)", caseSensitive: false)
-          .hasMatch(content)) {
+      } else if (RegExp(r"^(\/|\.\.?\/|~\/)", caseSensitive: false).hasMatch(content)) {
         File file = File(content);
         // file.uri.;
-        return {
-          "@type": 'inputFileLocal',
-          "data": TgUtils.telegram_bot_api_file(file: file)
-        };
+        return {"@type": 'inputFileLocal', "data": TgUtils.telegram_bot_api_file(file: file)};
       } else if (content is int) {
         return {"@type": 'inputFileId', "data": content};
       } else {

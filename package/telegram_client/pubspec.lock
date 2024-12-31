@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "16e298750b6d0af7ce8a3ba7c18c69c3785d11b15ec83f6dcd0ad2a0009b3cab"
+      sha256: "88399e291da5f7e889359681a8f64b18c5123e03576b01f32a6a276611e511c3"
       url: "https://pub.dev"
     source: hosted
-    version: "76.0.0"
+    version: "78.0.0"
   _macros:
     dependency: transitive
     description: dart
@@ -18,10 +18,10 @@ packages:
     dependency: transitive
     description:
       name: analyzer
-      sha256: "1f14db053a8c23e260789e9b0980fa27f2680dd640932cae5e1137cce0e46e1e"
+      sha256: "62899ef43d0b962b056ed2ebac6b47ec76ffd003d5f7c4e4dc870afe63188e33"
       url: "https://pub.dev"
     source: hosted
-    version: "6.11.0"
+    version: "7.1.0"
   archive:
     dependency: transitive
     description:
@@ -66,10 +66,10 @@ packages:
     dependency: transitive
     description:
       name: build
-      sha256: "80184af8b6cb3e5c1c4ec6d8544d27711700bc3e6d2efad04238c7b5290889f0"
+      sha256: cef23f1eda9b57566c81e2133d196f8e3df48f244b317368d65c5943d91148f0
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1"
+    version: "2.4.2"
   built_collection:
     dependency: transitive
     description:
@@ -162,10 +162,10 @@ packages:
     dependency: transitive
     description:
       name: dart_style
-      sha256: "99e066ce75c89d6b29903d788a7bb9369cf754f7b24bf70bf4b6d6d6b26853b9"
+      sha256: "27eb0ae77836989a3bc541ce55595e8ceee0992807f14511552a898ddd0d88ac"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.6"
+    version: "3.0.1"
   encrypt:
     dependency: transitive
     description:
@@ -223,10 +223,10 @@ packages:
     dependency: "direct main"
     description:
       name: general_lib
-      sha256: "2f3500176fb7382fec651df0d5418a4981c244dde02139371eec6189386339ff"
+      sha256: "410fde426da545b3e3e2aa813d688dd39442ad9741f71ab6a630de1aa34cd95a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.49"
+    version: "0.0.51"
   glob:
     dependency: transitive
     description:
@@ -275,6 +275,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  io_universe:
+    dependency: "direct main"
+    description:
+      name: io_universe
+      sha256: "1cdda523af01167c552360881be82d0daefb5c6e16fcfc84fcff67b92a8acef4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   js:
     dependency: transitive
     description:
@@ -463,10 +471,10 @@ packages:
     dependency: "direct main"
     description:
       name: server_universe
-      sha256: "6485c87d64a114c9c6c1353c07b8fe4856ba7a67e31131937f94f98484f08e43"
+      sha256: "4e8c0dca3d82668496d0a4019cd666868cd026f2bc07b7266e6297bc22f7a554"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.25"
+    version: "0.0.27"
   shelf:
     dependency: transitive
     description:
@@ -508,10 +516,10 @@ packages:
     dependency: transitive
     description:
       name: source_gen
-      sha256: "14658ba5f669685cd3d63701d01b31ea748310f7ab854e471962670abcf57832"
+      sha256: "35c8150ece9e8c8d263337a265153c3329667640850b9304861faea59fc98f6b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "2.0.0"
   source_map_stack_trace:
     dependency: transitive
     description:
@@ -564,18 +572,18 @@ packages:
     dependency: "direct dev"
     description:
       name: system_information
-      sha256: "3837d8c76705f8110c268bd1e61061caea6e59ad47ce61b8e4b559d1a986781e"
+      sha256: a170cc1cc512dd2c471264548417b4e3db747bcb289abbf61077e4fc84ea25c5
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.5"
   system_information_flutter:
     dependency: transitive
     description:
       name: system_information_flutter
-      sha256: "782771efe5a5e89d0794906963e351c2965b86df1a7b7400449545ab71932c98"
+      sha256: "665b97a6055d06c06f3168487b0636c972918e06d7a174082e81bac817bd5628"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.5"
   term_glyph:
     dependency: transitive
     description:
@@ -588,34 +596,34 @@ packages:
     dependency: "direct dev"
     description:
       name: test
-      sha256: "713a8789d62f3233c46b4a90b174737b2c04cb6ae4500f2aa8b1be8f03f5e67f"
+      sha256: "8391fbe68d520daf2314121764d38e37f934c02fd7301ad18307bd93bd6b725d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.25.8"
+    version: "1.25.14"
   test_api:
     dependency: transitive
     description:
       name: test_api
-      sha256: "664d3a9a64782fcdeb83ce9c6b39e78fd2971d4e37827b9b06c3aa1edc5e760c"
+      sha256: fb31f383e2ee25fbbfe06b40fe21e1e458d14080e3c67e7ba0acfde4df4e0bbd
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.3"
+    version: "0.7.4"
   test_core:
     dependency: transitive
     description:
       name: test_core
-      sha256: "12391302411737c176b0b5d6491f466b0dd56d4763e347b6714efbaa74d7953d"
+      sha256: "84d17c3486c8dfdbe5e12a50c8ae176d15e2a771b96909a9442b40173649ccaa"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.8"
   ts2dart_fork:
     dependency: transitive
     description:
       name: ts2dart_fork
-      sha256: "73d82276b8267b1cbb2f3e27758c7af869cc2a809f31aa0bee27565c8f604f1a"
+      sha256: d4a410a4eaf90306de9669326342282eef81a2ef1ec8d3da51743db361a9de6b
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.5"
   typed_data:
     dependency: transitive
     description:
@@ -628,12 +636,12 @@ packages:
     dependency: transitive
     description:
       name: typings_fork
-      sha256: "81e7c0bf3c34cad6d035f025beeaf93567abd20ade1d01f0ec244cdcdac38c7d"
+      sha256: "08900b86a65b4cf52d13b5c5494c9ef9805dd70d52975b16fe077e6bb14a35d0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.5"
   universal_io:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: universal_io
       sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"

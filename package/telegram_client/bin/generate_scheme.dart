@@ -35,7 +35,7 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 import 'package:general_lib/general_lib.dart';
 import 'package:path/path.dart';
 import 'package:telegram_client/schemes/schemes.dart';
-import 'package:universal_io/io.dart';
+import 'package:io_universe/io_universe.dart';
 
 void main(List<String> args) async {
   Directory directory_scheme = Directory(

@@ -34,7 +34,7 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 import 'package:general_lib/general_lib.dart';
 import 'package:path/path.dart';
-import 'package:universal_io/io.dart';
+import 'package:io_universe/io_universe.dart';
 
 // import ;
 void main(List<String> args) async {
@@ -64,8 +64,7 @@ updateActiveNotifications, updateAnimatedEmojiMessageClicked, updateAnimationSea
 
   for (var i = 0; i < methods.length; i++) {
     String method = methods[i];
-    File file = File(join(Directory.current.path, "lib", "telegram_client",
-        "update", "$method.dart"));
+    File file = File(join(Directory.current.path, "lib", "telegram_client", "update", "$method.dart"));
     if (file.existsSync()) {
       continue;
     }
