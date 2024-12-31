@@ -160,7 +160,8 @@ void main(List<String> args) async {
     "sendChatScreenshotTakenNotification",
   ];
 
-  Directory directory = Directory(join(Directory.current.path, "lib", "telegram_client", "extension"));
+  Directory directory = Directory(
+      join(Directory.current.path, "lib", "telegram_client", "extension"));
   if (!directory.existsSync()) {
     await directory.create(recursive: true);
   }
@@ -196,7 +197,8 @@ extension ${method_origin.toUpperCaseFirstData()}DataOn on TelegramClient {
 """;
     String name_file = "";
     for (var index = 0; index < method_origin.length; index++) {
-      if (RegExp(r"[A-Z]+", caseSensitive: true).hasMatch(method_origin[index])) {
+      if (RegExp(r"[A-Z]+", caseSensitive: true)
+          .hasMatch(method_origin[index])) {
         name_file += "_${method_origin[index]}";
       } else {
         name_file += method_origin[index];
