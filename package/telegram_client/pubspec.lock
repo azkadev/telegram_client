@@ -223,10 +223,10 @@ packages:
     dependency: "direct main"
     description:
       name: general_lib
-      sha256: "410fde426da545b3e3e2aa813d688dd39442ad9741f71ab6a630de1aa34cd95a"
+      sha256: bb10daf66b67e80315ebc19641f241cf2a0d911801c9fe120a24defcd140e99c
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.51"
+    version: "0.0.55"
   glob:
     dependency: transitive
     description:
@@ -279,10 +279,10 @@ packages:
     dependency: "direct main"
     description:
       name: io_universe
-      sha256: "1cdda523af01167c552360881be82d0daefb5c6e16fcfc84fcff67b92a8acef4"
+      sha256: "18eb40422cfe7f689e75184fc01e91109dd80f4dced47cd54cc8ca314d581002"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   js:
     dependency: transitive
     description:
@@ -471,10 +471,10 @@ packages:
     dependency: "direct main"
     description:
       name: server_universe
-      sha256: "4e8c0dca3d82668496d0a4019cd666868cd026f2bc07b7266e6297bc22f7a554"
+      sha256: e2f899690ec0b4c094ec7f7af13ea5cf939053ae26846bb4feecb13e4f6dcc07
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.27"
+    version: "0.0.30"
   shelf:
     dependency: transitive
     description:
@@ -572,18 +572,18 @@ packages:
     dependency: "direct dev"
     description:
       name: system_information
-      sha256: a170cc1cc512dd2c471264548417b4e3db747bcb289abbf61077e4fc84ea25c5
+      sha256: a4acb005280ed5636f5644f2bb74a6e08cddec16c251d90ef5ac06b8ce675131
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.8"
   system_information_flutter:
     dependency: transitive
     description:
       name: system_information_flutter
-      sha256: "665b97a6055d06c06f3168487b0636c972918e06d7a174082e81bac817bd5628"
+      sha256: "3898a0a85564c6b6e88bf6a20b9c11fac5f54ec449eba1e3b1fca848b9e49f92"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.8"
   term_glyph:
     dependency: transitive
     description:
@@ -640,14 +640,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.5"
-  universal_io:
-    dependency: transitive
-    description:
-      name: universal_io
-      sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.2"
   vector_math:
     dependency: transitive
     description:

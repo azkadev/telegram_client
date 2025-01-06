@@ -32,14 +32,14 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 <!-- END LICENSE --> */
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps,
 
-import 'dart:convert';
-
+import 'dart:async';
 import 'package:general_lib/general_lib.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart';
 import 'package:telegram_client/scheme/telegram_client_library_tdlib_option_parameter.dart';
 import 'package:telegram_client/telegram_client.dart';
 import 'package:io_universe/io_universe.dart';
+import "package:path/path.dart" as path;
 
 void main(List<String> args) async {
   Logger logger = Logger(level: Level.verbose);
@@ -49,48 +49,6 @@ void main(List<String> args) async {
     await directory_tg.create(recursive: true);
   }
 
-  String name = () {
-    List<Directory> clients = directory_tg
-        .listSync()
-        .where((e) {
-          print(basenameWithoutExtension(e.path));
-          if (RegExp(r"^(client_)", caseSensitive: false)
-              .hasMatch(basenameWithoutExtension(e.path))) {
-            return true;
-          }
-          return false;
-        })
-        .map((e) => Directory(e.path))
-        .toList();
-    if (clients.isNotEmpty) {
-      Directory result = logger.chooseOne(
-        "Pilih Clients",
-        choices: [
-          Directory("create_new"),
-          ...clients,
-        ],
-        display: (choice) {
-          return basenameWithoutExtension(choice.path);
-        },
-      );
-      if (basenameWithoutExtension(result.path) != "create_new") {
-        return basenameWithoutExtension(result.path)
-            .replaceAll(RegExp(r"^(client_)", caseSensitive: false), "");
-      }
-    }
-    String res = logger.prompt("Name :");
-    while (true) {
-      if (res.isNotEmpty) {
-        return res;
-      }
-    }
-  }()
-      .toLowerCase()
-      .replaceAll(RegExp(r"([ \+]+)", caseSensitive: false), "");
-
-  Directory database_directory =
-      Directory(join(directory_tg.path, "client_${name}"));
-
   TelegramClient tg = TelegramClient();
 
   tg.on(
@@ -98,9 +56,7 @@ void main(List<String> args) async {
     onUpdate: (UpdateTelegramClient updateTelegramClient) async {
       try {
         await tg.autoSetData(updateTelegramClient);
-        // updateTelegramClient.rawData.printPretty();
 // 9996620318
-// 99966271396928
         Map? update = await updateTelegramClient.updateRaw(
           is_lite: false,
           updataOptionTelegramClient: UpdataOptionTelegramClient(
@@ -116,52 +72,20 @@ void main(List<String> args) async {
             Map authorization_state = update["authorization_state"];
             if (authorization_state["@type"] ==
                 "authorizationStateWaitPhoneNumber") {
-              String phone_number_or_token_bot = () {
-                String res = logger.prompt("Phone Number / Token Bot:");
-                while (true) {
-                  if (res.isNotEmpty) {
-                    return res;
-                  }
-                }
-              }()
-                  .replaceAll(RegExp(r"([ \+]+)", caseSensitive: false), "");
+              final String phone_numbers =
+                  updateTelegramClient.client_option["phone_number"];
+              Map res = await tg.invoke(
+                parameters: {
+                  "@type": "setAuthenticationPhoneNumber",
+                  "phone_number": phone_numbers,
+                },
+                telegramClientData: updateTelegramClient.telegramClientData,
+              );
 
-              if (RegExp(r"^([0-9]+:AA[a-z0-9_-]+)$", caseSensitive: false)
-                  .hashData(phone_number_or_token_bot)) {
-                Map res = await tg.invoke(
-                  parameters: {
-                    "@type": "checkAuthenticationBotToken",
-                    "token": phone_number_or_token_bot,
-                  },
-                  telegramClientData: updateTelegramClient.telegramClientData,
-                );
-
-                print(res);
-              } else {
-                Map res = await tg.invoke(
-                  parameters: {
-                    "@type": "setAuthenticationPhoneNumber",
-                    "phone_number": phone_number_or_token_bot,
-                  },
-                  telegramClientData: updateTelegramClient.telegramClientData,
-                );
-
-                print(res);
-              }
+              print(res);
             }
             if (authorization_state["@type"] == "authorizationStateWaitCode") {
-              updateTelegramClient.rawData.printPretty();
-              String code = () {
-                String res = logger.prompt("Code Number:");
-                while (true) {
-                  if (res.isNotEmpty) {
-                    return res;
-                  }
-                }
-              }()
-                  .toLowerCase()
-                  .replaceAll(RegExp(r"([ \+]+)", caseSensitive: false), "");
-
+              final String code = updateTelegramClient.client_option["code"];
               Map res = await tg.invoke(
                 parameters: {
                   "@type": "checkAuthenticationCode",
@@ -180,6 +104,13 @@ void main(List<String> args) async {
               ))["result"];
               get_me.removeByKeys(["phone_number"]);
               get_me.printPretty(2);
+              File(path.join(
+                      TelegramClientLibraryTdlibOptionParameter(
+                                  updateTelegramClient.client_option)
+                              .database_directory ??
+                          "",
+                      "login.txt"))
+                  .writeAsStringSync("test_account_login");
             }
 
             return null;
@@ -236,25 +167,36 @@ void main(List<String> args) async {
     pathTdlib: TgUtils.pathTdlib(),
     telegramClientTdlibOption: TelegramClientTdlibOption(
       clientOption: TelegramClientLibraryTdlibOptionParameter.create(
-        database_directory: database_directory.path,
+        database_directory: directory_tg.path,
         files_directory: directory_tg.path,
         use_test_dc: true,
       ),
     ),
   );
-  await tg.tdlib.createclient(
-    clientId: tg.tdlib.td_create_client_id(),
-  );
-  stdin.listen((event) async {
-    String text = utf8.decode(event).trim();
-
-    if (text == "get_me") {
-      var res = await tg.tdlib.invoke(
-        "getMe",
-        clientId: tg.tdlib.clients.keys.first,
-        isUseCache: true,
-      );
-      res.printPretty();
+  Timer.periodic(Duration(seconds: 2), (e) async {
+    print("Create Client");
+    if (tg.tdlib.clients.length > 5) {
+      await tg.tdlib.closeClients();
     }
+    final dc = "2";
+    final phone_number = TgUtils.generate_test_dc_phone_number(
+      dc: dc,
+    );
+    Directory database_directory =
+        Directory(join(directory_tg.path, "client_${phone_number}"));
+
+    final TelegramClientLibraryTdlibOptionParameter
+        telegramClientLibraryTdlibOptionParameter =
+        TelegramClientLibraryTdlibOptionParameter.create(
+      database_directory: database_directory.path,
+      files_directory: database_directory.path,
+      use_test_dc: true,
+    );
+    telegramClientLibraryTdlibOptionParameter["phone_number"] = phone_number;
+    telegramClientLibraryTdlibOptionParameter["code"] = dc * 5;
+    await tg.tdlib.createclient(
+      clientId: tg.tdlib.td_create_client_id(),
+      clientOption: telegramClientLibraryTdlibOptionParameter,
+    );
   });
 }
