@@ -1,6 +1,6 @@
 name: 'telegram_client_android'
 description: 'Telegram Client Lightweight, blazing and Highly customizable for make application telegram based tdlib, mtproto, or bot api and support server side.'
-version: '1.8.38'
+version: '1.8.42'
 homepage: 'https://github.com/azkadev/telegram_client'
 repository: 'https://github.com/azkadev/telegram_client.git'
 issue_tracker: 'https://t.me/DEVELOPER_GLOBAL_PUBLIC'
@@ -31,6 +31,7 @@ dev_dependencies:
   flutter_test:
     sdk: 'flutter'
   flutter_lints: '^5.0.0'
+  general_lib: '^0.0.56'
 flutter:
   plugin:
     platforms:
@@ -42,7 +43,6 @@ topics:
   - 'mtproto'
   - 'android'
   - 'telegram-bot-api'
-
 dependency_overrides:
   pointycastle: '3.8.0'
   mime: '^2.0.0'

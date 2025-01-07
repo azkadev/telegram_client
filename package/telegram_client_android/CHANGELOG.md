@@ -1,9 +1,4 @@
-## 1.8.38
+## 1.8.42
 
-- New Version 1.8.38
-
-
-## 0.8.24
-
-- Update: 2024-09-24 02:31:41.948583 - update library.
-- Revisi And Change Style Code for improve MAX speed 
+- New Tdlib Version 1.8.42
+ 

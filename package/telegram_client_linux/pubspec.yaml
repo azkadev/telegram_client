@@ -1,6 +1,6 @@
 name: 'telegram_client_linux'
 description: 'Telegram Client Lightweight, blazing and Highly customizable for make application telegram based tdlib, mtproto, or bot api and support server side.'
-version: '1.8.38'
+version: '1.8.41'
 homepage: 'https://github.com/azkadev/telegram_client'
 repository: 'https://github.com/azkadev/telegram_client.git'
 issue_tracker: 'https://t.me/DEVELOPER_GLOBAL_PUBLIC'
@@ -37,8 +37,8 @@ topics:
   - 'telegram'
   - 'tdlib'
   - 'mtproto'
-  - 'userbot'
-  - 'bot'
+  - 'telegram-bot-api'
+  - 'linux'
 dependency_overrides:
   pointycastle: '3.8.0'
   mime: '^2.0.0'
