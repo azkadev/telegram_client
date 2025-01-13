@@ -56,6 +56,7 @@ import 'package:telegram_client/tdlib/tdlib_library/base.dart';
 /// ````
 ///
 class TdlibNative extends TdlibBase {
+  /// TelegramClientUncompleDocumentation
   TdlibNative({
     super.clientOption,
     super.delayInvoke,

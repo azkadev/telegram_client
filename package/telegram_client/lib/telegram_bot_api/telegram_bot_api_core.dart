@@ -61,10 +61,19 @@ import "package:server_universe/native/native.dart";
 /// ````
 ///
 class TelegramBotApi {
+  /// TelegramClientUncompleDocumentation
   late final String token_bot;
+
+  /// TelegramClientUncompleDocumentation
   ServerUniverseNative? serverUniverseNative;
+
+  /// TelegramClientUncompleDocumentation
   final Crypto crypto;
+
+  /// TelegramClientUncompleDocumentation
   final Client httpClient;
+
+  /// TelegramClientUncompleDocumentation
   final Map client_option = {
     "api_id": 0,
     "api_hash": "",
@@ -92,9 +101,16 @@ class TelegramBotApi {
     ],
   };
 
+  /// TelegramClientUncompleDocumentation
   final EventEmitter eventEmitter;
+
+  /// TelegramClientUncompleDocumentation
   final String eventInvoke;
+
+  /// TelegramClientUncompleDocumentation
   final String eventUpdate;
+
+  /// TelegramClientUncompleDocumentation
 
   Uri telegramUrlWebhook;
 
@@ -124,7 +140,10 @@ class TelegramBotApi {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   bool is_init_server = false;
+
+  /// TelegramClientUncompleDocumentation
   void initServer() {
     final serverUniverseNative = this.serverUniverseNative;
     if (serverUniverseNative == null) {
@@ -178,6 +197,8 @@ class TelegramBotApi {
     }
     return TelegramClientLibraryClientData(decyprt);
   }
+
+  /// TelegramClientUncompleDocumentation
 
   Future<Map> initIsolate({
     String? tokenBot,
@@ -247,6 +268,7 @@ class TelegramBotApi {
     return new_scheme;
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<Map> initIsolateNewClient({
     required String tokenBot,
     int owner_user_id = 0,
@@ -305,6 +327,7 @@ class TelegramBotApi {
     // return event_emitter.emit(type_update, null, updateBot);
   }
 
+  /// TelegramClientUncompleDocumentation
   Map typeFile(dynamic content) {
     Map data = {};
     if (content is String) {
@@ -598,6 +621,7 @@ class TelegramBotApi {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   void utils_remove_parameters({
     required Map data,
   }) {
@@ -615,6 +639,7 @@ class TelegramBotApi {
     });
   }
 
+  /// TelegramClientUncompleDocumentation
   void utils_remove_parameterss({
     required List datas,
   }) {

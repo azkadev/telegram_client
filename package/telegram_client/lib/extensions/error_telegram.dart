@@ -31,7 +31,7 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 <!-- END LICENSE --> */
 // ignore_for_file: camel_case_extensions, non_constant_identifier_names, empty_catches
-
+/// TelegramClientUncompleDocumentation
 extension TelegramClientExtension_on_ObjectData on Object {
   /// check apakah ada error di timeout jika true error jika false tidak
   /// jika true berarti ada masalah pada koneksi internet anda

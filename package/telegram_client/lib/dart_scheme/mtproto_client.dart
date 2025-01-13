@@ -38,11 +38,19 @@ import 'package:telegram_client/isolate/isolate.dart';
 
 /// add state data
 class MtprotoClient {
+  /// TelegramClient
   int client_id;
+
+  /// TelegramClient
   Isolate isolate;
+
+  /// TelegramClient
   int client_tg_user_id;
+
+  /// TelegramClient
   DateTime join_date = DateTime.now();
 
+  /// TelegramClient
   MtprotoClient({
     required this.client_id,
     required this.isolate,
@@ -54,6 +62,7 @@ class MtprotoClient {
     isolate.kill();
   }
 
+  /// TelegramClientUncompleDocumentation
   Map toJson() {
     return {
       "client_id": client_id,
@@ -68,8 +77,9 @@ class MtprotoClient {
   }
 }
 
+/// TelegramClientUncompleDocumentation
 extension MtprotoClients on List<MtprotoClient> {
-  // exit
+  /// TelegramClientUncompleDocumentation
   MtprotoClient? getClientByUserId(int clientUserId) {
     for (var i = 0; i < length; i++) {
       MtprotoClient tdlibClient = this[i];
@@ -80,7 +90,7 @@ extension MtprotoClients on List<MtprotoClient> {
     return null;
   }
 
-  // exit
+  /// TelegramClientUncompleDocumentation
   MtprotoClient? getClientById(int clientId) {
     for (var i = 0; i < length; i++) {
       MtprotoClient tdlibClient = this[i];
@@ -91,6 +101,7 @@ extension MtprotoClients on List<MtprotoClient> {
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<bool> exitClientById(
     int clientId, {
     String? extra,

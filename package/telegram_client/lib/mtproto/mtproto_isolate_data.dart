@@ -32,14 +32,30 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 <!-- END LICENSE --> */
 import 'package:telegram_client/isolate/isolate.dart';
 
+/// TelegramClientUncompleDocumentation
 class MtprotoIsolateData {
+  /// TelegramClientUncompleDocumentation
   SendPort sendPort;
+
+  /// TelegramClientUncompleDocumentation
   Map clientOption;
+
+  /// TelegramClientUncompleDocumentation
   int clientId;
+
+  /// TelegramClientUncompleDocumentation
   String pathMtproto;
+
+  /// TelegramClientUncompleDocumentation
   bool isAndroid;
+
+  /// TelegramClientUncompleDocumentation
   Duration delayUpdate;
+
+  /// TelegramClientUncompleDocumentation
   double timeOutUpdate;
+
+  /// TelegramClientUncompleDocumentation
   MtprotoIsolateData({
     required this.sendPort,
     required this.clientOption,

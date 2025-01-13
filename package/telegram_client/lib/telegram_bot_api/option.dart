@@ -36,13 +36,27 @@ import 'package:server_universe/native/core/server_universe_native.dart';
 import "package:server_universe/native/native.dart";
 // import 'package:telegram_client/serverUniverseNative/serverUniverseNative.dart';
 
+/// TelegramClientUncompleDocumentation
 class TelegramClientTelegramBotApiOption {
+  /// TelegramClientUncompleDocumentation
   final Map clientOption;
+
+  /// TelegramClientUncompleDocumentation
   final String tokenBot;
+
+  /// TelegramClientUncompleDocumentation
   final ServerUniverseNative? serverUniverseNative;
+
+  /// TelegramClientUncompleDocumentation
   final Crypto? crypto;
+
+  /// TelegramClientUncompleDocumentation
   final Uri? telegramUrlWebhook;
+
+  /// TelegramClientUncompleDocumentation
   final Client? httpClient;
+
+  /// TelegramClientUncompleDocumentation
   const TelegramClientTelegramBotApiOption({
     required this.tokenBot,
     required this.clientOption,
@@ -51,6 +65,8 @@ class TelegramClientTelegramBotApiOption {
     this.telegramUrlWebhook,
     this.httpClient,
   });
+
+  /// TelegramClientUncompleDocumentation
 
   TelegramClientTelegramBotApiOption copyWith({
     String? tokenBot,

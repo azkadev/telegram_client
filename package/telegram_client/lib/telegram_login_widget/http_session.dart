@@ -36,7 +36,10 @@ import 'package:http/http.dart' as http;
 
 /// run executable telegram bot api
 class HttpSession {
+  /// TelegramClientUncompleDocumentation
   String cookies = "";
+
+  /// TelegramClientUncompleDocumentation
   late http.Client http_client;
 
   /// run executable telegram bot api

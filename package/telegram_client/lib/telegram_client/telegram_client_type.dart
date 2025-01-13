@@ -34,12 +34,21 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 /// return original data json
 enum TelegramClientType {
+  /// TelegramClientUncompleDocumentation
   tdlib,
-  telegam_bot_api,
+
+  /// TelegramClientUncompleDocumentation
+  telegam_bot_api;
 }
 
+/// TelegramClientUncompleDocumentation
 enum TelegramClientTelegramType {
+  /// TelegramClientUncompleDocumentation
   bot,
+
+  /// TelegramClientUncompleDocumentation
   userbot,
+
+  /// TelegramClientUncompleDocumentation
   telegram,
 }

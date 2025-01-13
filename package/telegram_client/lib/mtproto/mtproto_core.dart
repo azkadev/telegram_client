@@ -62,7 +62,10 @@ import 'update_mtproto.dart';
 /// ````
 ///
 class Mtproto {
+  /// TelegramClientUncompleDocumentation
   ReceivePort receivePort = ReceivePort();
+
+  /// TelegramClientUncompleDocumentation
   Map client_option = {
     'api_id': 0,
     'api_hash': '',
@@ -82,24 +85,58 @@ class Mtproto {
     "database_key": "",
     "start": true,
   };
+
+  /// TelegramClientUncompleDocumentation
   late String path_tdlib;
+
+  /// TelegramClientUncompleDocumentation
   bool is_cli;
+
+  /// TelegramClientUncompleDocumentation
   bool is_android = Platform.isAndroid;
+
+  /// TelegramClientUncompleDocumentation
   List<MtprotoClient> clients = [];
+
+  /// TelegramClientUncompleDocumentation
   int client_id = 0;
+
+  /// TelegramClientUncompleDocumentation
   String event_invoke = "invoke";
+
+  /// TelegramClientUncompleDocumentation
   String event_update = "update";
+
+  /// TelegramClientUncompleDocumentation
   EventEmitter event_emitter = EventEmitter();
+
+  /// TelegramClientUncompleDocumentation
   Duration delay_update = Duration(milliseconds: 1);
+
+  /// TelegramClientUncompleDocumentation
   Duration delay_invoke = Duration(milliseconds: 1);
+
+  /// TelegramClientUncompleDocumentation
   bool is_auto_get_chat = false;
+
+  /// TelegramClientUncompleDocumentation
   Duration invoke_time_out = Duration(minutes: 10);
+
+  /// TelegramClientUncompleDocumentation
   late double timeOutUpdate;
+
+  /// TelegramClientUncompleDocumentation
   FutureOr<void> Function(dynamic update, Mtproto Mtproto)? on_receive_update;
+
+  /// TelegramClientUncompleDocumentation
   FutureOr<String> Function(int client_id, Mtproto Mtproto)?
       on_generate_extra_invoke;
+
+  /// TelegramClientUncompleDocumentation
   FutureOr<Map> Function(String extra, int client_id, Mtproto Mtproto)?
       on_get_invoke_data;
+
+  /// TelegramClientUncompleDocumentation
   Mtproto({
     String? pathTdl,
     Map? clientOption,
@@ -149,6 +186,7 @@ class Mtproto {
     });
   }
 
+  /// TelegramClientUncompleDocumentation
   String get getFormatLibrary {
     if (Platform.isAndroid || Platform.isLinux) {
       return "so";
@@ -159,10 +197,12 @@ class Mtproto {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<void> init() async {
     return;
   }
 
+  /// TelegramClientUncompleDocumentation
   get tdLib {
     return;
   }
@@ -173,6 +213,7 @@ class Mtproto {
     return 0;
   }
 
+  /// TelegramClientUncompleDocumentation
   client_id_addres(int clientId) {}
 
   /// client_send
@@ -223,6 +264,7 @@ class Mtproto {
     );
   }
 
+  /// TelegramClientUncompleDocumentation
   // exit
   MtprotoClient? getClientByUserId(int clientUserId) {
     for (var i = 0; i < clients.length; i++) {
@@ -244,6 +286,7 @@ class Mtproto {
         .cast<int>();
   }
 
+  /// TelegramClientUncompleDocumentation
   // exit
   MtprotoClient? getClientById(int clientId) {
     for (var i = 0; i < clients.length; i++) {
@@ -255,6 +298,7 @@ class Mtproto {
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<bool> exitClientById(
     int clientId, {
     bool isClose = false,

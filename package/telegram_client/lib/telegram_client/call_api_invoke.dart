@@ -34,7 +34,7 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 import 'dart:async';
 
-// slebew
+/// TelegramClientUncompleDocumentation
 typedef TelegramClientCallApiInvoke = FutureOr<Map> Function({
   required Map parameters,
   bool? is_invoke_no_relevance,

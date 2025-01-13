@@ -2,7 +2,9 @@
 import "package:general_lib/general_lib.dart";
 // import "dart:convert";
 
+/// TelegramClientSchema
 class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
+  /// TelegramClientSchema
   TelegramClientLibraryTdlibOptionParameter(super.rawData);
 
   /// return default data
@@ -32,12 +34,28 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     };
   }
 
+  /// check data
+  /// if raw data
+  /// - rawData["@type"] == telegramClientLibraryTdlibOptionParameter
+  /// if same return true
+  bool json_scheme_utils_checkDataIsSameBySpecialType() {
+    return rawData["@type"] == defaultData["@type"];
+  }
+
+  /// check value data whatever do yout want
+  bool json_scheme_utils_checkDataIsSameBuilder({
+    required bool Function(Map rawData, Map defaultData) onResult,
+  }) {
+    return onResult(rawData["@type"], defaultData["@type"]);
+  }
+
   /// create [TelegramClientLibraryTdlibOptionParameter]
   /// Empty
   static TelegramClientLibraryTdlibOptionParameter empty() {
     return TelegramClientLibraryTdlibOptionParameter({});
   }
 
+  /// TelegramClientSchema
   String? get special_type {
     try {
       if (rawData["@type"] is String == false) {
@@ -49,10 +67,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set special_type(String? value) {
     rawData["@type"] = value;
   }
 
+  /// TelegramClientSchema
   num? get api_id {
     try {
       if (rawData["api_id"] is num == false) {
@@ -64,10 +84,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set api_id(num? value) {
     rawData["api_id"] = value;
   }
 
+  /// TelegramClientSchema
   String? get api_hash {
     try {
       if (rawData["api_hash"] is String == false) {
@@ -79,10 +101,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set api_hash(String? value) {
     rawData["api_hash"] = value;
   }
 
+  /// TelegramClientSchema
   String? get database_directory {
     try {
       if (rawData["database_directory"] is String == false) {
@@ -94,10 +118,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set database_directory(String? value) {
     rawData["database_directory"] = value;
   }
 
+  /// TelegramClientSchema
   String? get files_directory {
     try {
       if (rawData["files_directory"] is String == false) {
@@ -109,10 +135,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set files_directory(String? value) {
     rawData["files_directory"] = value;
   }
 
+  /// TelegramClientSchema
   bool? get use_file_database {
     try {
       if (rawData["use_file_database"] is bool == false) {
@@ -124,10 +152,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set use_file_database(bool? value) {
     rawData["use_file_database"] = value;
   }
 
+  /// TelegramClientSchema
   bool? get use_chat_info_database {
     try {
       if (rawData["use_chat_info_database"] is bool == false) {
@@ -139,10 +169,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set use_chat_info_database(bool? value) {
     rawData["use_chat_info_database"] = value;
   }
 
+  /// TelegramClientSchema
   bool? get use_message_database {
     try {
       if (rawData["use_message_database"] is bool == false) {
@@ -154,10 +186,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set use_message_database(bool? value) {
     rawData["use_message_database"] = value;
   }
 
+  /// TelegramClientSchema
   bool? get use_secret_chats {
     try {
       if (rawData["use_secret_chats"] is bool == false) {
@@ -169,10 +203,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set use_secret_chats(bool? value) {
     rawData["use_secret_chats"] = value;
   }
 
+  /// TelegramClientSchema
   bool? get enable_storage_optimizer {
     try {
       if (rawData["enable_storage_optimizer"] is bool == false) {
@@ -184,10 +220,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set enable_storage_optimizer(bool? value) {
     rawData["enable_storage_optimizer"] = value;
   }
 
+  /// TelegramClientSchema
   String? get system_language_code {
     try {
       if (rawData["system_language_code"] is String == false) {
@@ -199,10 +237,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set system_language_code(String? value) {
     rawData["system_language_code"] = value;
   }
 
+  /// TelegramClientSchema
   num? get new_verbosity_level {
     try {
       if (rawData["new_verbosity_level"] is num == false) {
@@ -214,10 +254,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set new_verbosity_level(num? value) {
     rawData["new_verbosity_level"] = value;
   }
 
+  /// TelegramClientSchema
   String? get application_version {
     try {
       if (rawData["application_version"] is String == false) {
@@ -229,10 +271,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set application_version(String? value) {
     rawData["application_version"] = value;
   }
 
+  /// TelegramClientSchema
   String? get device_model {
     try {
       if (rawData["device_model"] is String == false) {
@@ -244,10 +288,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set device_model(String? value) {
     rawData["device_model"] = value;
   }
 
+  /// TelegramClientSchema
   String? get system_version {
     try {
       if (rawData["system_version"] is String == false) {
@@ -259,10 +305,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set system_version(String? value) {
     rawData["system_version"] = value;
   }
 
+  /// TelegramClientSchema
   String? get database_key {
     try {
       if (rawData["database_key"] is String == false) {
@@ -274,10 +322,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set database_key(String? value) {
     rawData["database_key"] = value;
   }
 
+  /// TelegramClientSchema
   bool? get start {
     try {
       if (rawData["start"] is bool == false) {
@@ -289,10 +339,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set start(bool? value) {
     rawData["start"] = value;
   }
 
+  /// TelegramClientSchema
   String? get database_encryption_key {
     try {
       if (rawData["database_encryption_key"] is String == false) {
@@ -304,10 +356,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set database_encryption_key(String? value) {
     rawData["database_encryption_key"] = value;
   }
 
+  /// TelegramClientSchema
   bool? get use_test_dc {
     try {
       if (rawData["use_test_dc"] is bool == false) {
@@ -319,10 +373,12 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set use_test_dc(bool? value) {
     rawData["use_test_dc"] = value;
   }
 
+  /// TelegramClientSchema
   static TelegramClientLibraryTdlibOptionParameter create({
     bool schemeUtilsIsSetDefaultData = false,
     String special_type = "telegramClientLibraryTdlibOptionParameter",

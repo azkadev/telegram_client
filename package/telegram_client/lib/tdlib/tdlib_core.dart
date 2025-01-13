@@ -163,6 +163,8 @@ class Tdlib extends TdlibNative {
     super.onReceiveUpdate,
     super.isInvokeThrowOnError,
   });
+
+  /// TelegramClientUncompleDocumentation
   FutureOr<void> closeClients() async {
     final int client_id_first = () {
       if (first_client_id < 1) {
@@ -922,6 +924,7 @@ class Tdlib extends TdlibNative {
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<Map> requestInvoke(
     String method, {
     Map? parameters,
@@ -1585,6 +1588,7 @@ class Tdlib extends TdlibNative {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<Map> editMessageCaption({
     dynamic chat_id,
     dynamic message_id,

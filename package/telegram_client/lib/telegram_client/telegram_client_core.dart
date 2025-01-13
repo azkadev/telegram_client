@@ -96,11 +96,23 @@ import 'telegram_client_type.dart';
 
 /// return original data json
 class TelegramClient {
+  /// TelegramClientUncompleDocumentation
   late final Tdlib tdlib;
+
+  /// TelegramClientUncompleDocumentation
   late final TelegramBotApi telegramBotApi;
+
+  /// TelegramClientUncompleDocumentation
+
   late final EventEmitter event_emitter;
+
+  /// TelegramClientUncompleDocumentation
   final String event_update;
+
+  /// TelegramClientUncompleDocumentation
   final String event_invoke;
+
+  /// TelegramClientUncompleDocumentation
   Directory? directory_temp;
 
   /// return original data json
@@ -176,6 +188,7 @@ class TelegramClient {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<void> autoSetData(UpdateTelegramClient updateTelegramClient) async {
     if (updateTelegramClient.telegramClientData.telegramClientType ==
         TelegramClientType.tdlib) {
@@ -516,6 +529,7 @@ class TelegramClient {
     return error.rawData;
   }
 
+  /// TelegramClientUncompleDocumentation
   Map requestReturnAsApi({
     required Map result,
     required bool is_return_as_api,

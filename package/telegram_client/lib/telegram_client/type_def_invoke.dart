@@ -38,6 +38,7 @@ import 'package:telegram_client/tdlib/tdlib_library/tdlib.dart';
 
 import 'package:telegram_client/telegram_client/telegram_client_data.dart';
 
+/// TelegramClientUncompleDocumentation
 typedef TgClientInvokeFunction = FutureOr<Map> Function({
   required Map parameters,
   required TelegramClientData telegramClientData,

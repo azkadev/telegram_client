@@ -36,13 +36,25 @@ import 'dart:convert';
 
 /// add state data
 class TdlibClient {
+  /// TelegramClientUncompleDocumentation
   int client_id;
+
+  /// TelegramClientUncompleDocumentation
   int client_tg_user_id;
+
+  /// TelegramClientUncompleDocumentation
   bool is_bot;
+
+  /// TelegramClientUncompleDocumentation
   Map client_option;
+
+  /// TelegramClientUncompleDocumentation
   Map client_dynamic = {};
+
+  /// TelegramClientUncompleDocumentation
   DateTime join_date = DateTime.now();
 
+  /// TelegramClientUncompleDocumentation
   TdlibClient({
     required this.client_id,
     required this.client_option,

@@ -48,14 +48,21 @@ import 'package:telegram_client/tdlib/update_td.dart';
 
 import 'package:io_universe/io_universe.dart';
 
+/// TelegramClientUncompleDocumentation
 typedef TdlibOnReceiveUpdate = FutureOr<void> Function(
     dynamic update, TdlibBase libTdJson);
+
+/// TelegramClientUncompleDocumentation
 typedef TdlibOnGenerateExtraInvoke = FutureOr<String> Function(
     int client_id, TdlibBase libTdJson);
+
+/// TelegramClientUncompleDocumentation
 typedef TdlibOnGetInvokeData = FutureOr<Map> Function(
     String extra, int client_id, TdlibBase libTdJson);
 
+/// TelegramClientUncompleDocumentation
 abstract class TdlibBaseCore {
+  /// TelegramClientUncompleDocumentation
   Future<bool> is_td_initialized() async {
     return false;
   }
@@ -65,6 +72,7 @@ abstract class TdlibBaseCore {
     return "unknown";
   }
 
+  /// TelegramClientUncompleDocumentation
   int td_create_client_id() {
     return 0;
   }
@@ -124,7 +132,10 @@ abstract class TdlibBaseCore {
 /// ````
 ///
 abstract class TdlibBase implements TdlibBaseCore {
+  /// TelegramClientUncompleDocumentation
   final ReceivePort receivePort = ReceivePort();
+
+  /// TelegramClientUncompleDocumentation
   final TelegramClientLibraryTdlibOptionParameter client_option =
       TelegramClientLibraryTdlibOptionParameter.create(
     api_id: num.tryParse("OTQ1NzU=".general_lib_utils_decryptFromBase64()),
@@ -148,31 +159,66 @@ abstract class TdlibBase implements TdlibBaseCore {
     database_encryption_key: "",
   );
   // late SendPort sendPort;
+  /// TelegramClientUncompleDocumentation
   late Isolate isolate;
+
+  /// TelegramClientUncompleDocumentation
   bool is_init_isolate = false;
   // bool is_init_send_port = false;
+  /// TelegramClientUncompleDocumentation
   late String path_tdlib;
   // bool is_cli;
   // List<TdlibClient> clients = [];
-
+  /// TelegramClientUncompleDocumentation
   final Map<int, TdlibClient> clients = {};
   // Map<int, TdlibClient> client = {};
   // int client_id = 0;
+  /// TelegramClientUncompleDocumentation
   int task_count = 0;
+
+  /// TelegramClientUncompleDocumentation
   final String event_invoke;
+
+  /// TelegramClientUncompleDocumentation
   final String event_update;
+
+  /// TelegramClientUncompleDocumentation
   final EventEmitter eventEmitter;
+
+  /// TelegramClientUncompleDocumentation
   Duration? delay_update;
+
+  /// TelegramClientUncompleDocumentation
   Duration delay_invoke = Duration(milliseconds: 1);
+
+  /// TelegramClientUncompleDocumentation
   bool is_auto_get_chat = false;
+
+  /// TelegramClientUncompleDocumentation
   Duration invoke_time_out = Duration(minutes: 10);
+
+  /// TelegramClientUncompleDocumentation
   double timeOutUpdate;
+
+  /// TelegramClientUncompleDocumentation
   bool is_invoke_throw_on_error = false;
+
+  /// TelegramClientUncompleDocumentation
   TdlibOnReceiveUpdate? onReceiveUpdate;
+
+  /// TelegramClientUncompleDocumentation
   TdlibOnGenerateExtraInvoke? onGenerateExtraInvoke;
+
+  /// TelegramClientUncompleDocumentation
   TdlibOnGetInvokeData? onGetInvokeData;
+
+  /// TelegramClientUncompleDocumentation
   int taskMaxCount;
+
+  /// TelegramClientUncompleDocumentation
   int taskMinCooldown;
+
+  /// TelegramClientUncompleDocumentation
   TdlibBase({
     String? pathTdl,
     TelegramClientLibraryTdlibOptionParameter? clientOption,
@@ -245,12 +291,15 @@ abstract class TdlibBase implements TdlibBaseCore {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   void task_increase() {
     if (task_count < 0) {
       task_count = 0;
     }
     task_count += 1;
   }
+
+  /// TelegramClientUncompleDocumentation
 
   void task_decrease() {
     task_count -= 1;
@@ -259,6 +308,7 @@ abstract class TdlibBase implements TdlibBaseCore {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   String get getFormatLibrary {
     if (Platform.isAndroid || Platform.isLinux) {
       return "so";
@@ -269,10 +319,12 @@ abstract class TdlibBase implements TdlibBaseCore {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<void> init() async {
     return;
   }
 
+  /// TelegramClientUncompleDocumentation
   static void opentdLib({
     required String pathTdlib,
   }) {}
@@ -285,6 +337,7 @@ abstract class TdlibBase implements TdlibBaseCore {
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<void> ensureInitialized() async {
     if (is_init_isolate) {
       return;
@@ -307,6 +360,8 @@ abstract class TdlibBase implements TdlibBaseCore {
       is_init_isolate = false;
     }
   }
+
+  /// TelegramClientUncompleDocumentation
 
   int get first_client_id {
     try {
@@ -385,7 +440,7 @@ abstract class TdlibBase implements TdlibBaseCore {
     );
   }
 
-  // exit
+  /// TelegramClientUncompleDocumentation
   TdlibClient? getClientByUserId(int clientUserId) {
     List<MapEntry<int, TdlibClient>> entries = clients.entries.toList();
     for (var i = 0; i < entries.length; i++) {
@@ -408,11 +463,12 @@ abstract class TdlibBase implements TdlibBaseCore {
     //     .cast<int>();
   }
 
-  // exit
+  /// TelegramClientUncompleDocumentation
   TdlibClient? getClientById(int clientId) {
     return clients[clientId];
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<bool> updateClientById(
     int clientId, {
     required TdlibClient newTdlibClient,
@@ -429,6 +485,7 @@ abstract class TdlibBase implements TdlibBaseCore {
     return false;
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<bool> exitClientById(
     int clientId, {
     bool isClose = false,
@@ -718,6 +775,7 @@ abstract class TdlibBase implements TdlibBaseCore {
     );
   }
 
+  /// TelegramClientUncompleDocumentation
   Future<Map> request(
     String method, {
     Map? parameters,

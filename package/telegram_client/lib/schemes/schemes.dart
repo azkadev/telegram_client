@@ -1,5 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-
+/// TelegramClientUncompleDocumentation
 List<Map<String, dynamic>> telegram_client_schemes = () {
   return <Map<String, dynamic>>[
     {

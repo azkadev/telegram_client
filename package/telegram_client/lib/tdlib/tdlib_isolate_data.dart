@@ -32,11 +32,21 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 <!-- END LICENSE --> */
 import 'package:telegram_client/isolate/isolate.dart';
 
+/// TelegramClientUncompleDocumentation
 class TdlibIsolateData {
+  /// TelegramClientUncompleDocumentation
   final SendPort sendPort;
+
+  /// TelegramClientUncompleDocumentation
   final String pathTdlib;
+
+  /// TelegramClientUncompleDocumentation
   final Duration? delayUpdate;
+
+  /// TelegramClientUncompleDocumentation
   final double timeOutUpdate;
+
+  /// TelegramClientUncompleDocumentation
   const TdlibIsolateData({
     required this.sendPort,
     required this.pathTdlib,

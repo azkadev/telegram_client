@@ -39,6 +39,7 @@ import 'package:telegram_client/util/util.dart';
 
 /// extension tdlib for make
 extension TdlibMethodExtensions on Tdlib {
+  /// TelegramClientUncompleDocumentation
   Future<Map> banAutoChat({
     required Object chat_id,
     required Object target_chat_id,

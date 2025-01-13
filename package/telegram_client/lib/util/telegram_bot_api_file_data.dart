@@ -34,12 +34,15 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 import 'dart:typed_data';
 
-// parse to telegram bot api file data
+/// TelegramClientUncompleDocumentation
 class TelegramBotApiFileData {
+  /// TelegramClientUncompleDocumentation
   final String name;
+
+  /// TelegramClientUncompleDocumentation
   final Uint8List buffer_data;
 
-// parse to telegram bot api file data
+  /// TelegramClientUncompleDocumentation
   const TelegramBotApiFileData({
     required this.name,
     required this.buffer_data,

@@ -36,13 +36,22 @@ import 'package:telegram_client/telegram_client/telegram_client_type.dart';
 
 /// return original data json
 class TelegramClientData {
+  /// TelegramClientUncompleDocumentation
   final TelegramClientType telegramClientType;
+
+  /// TelegramClientUncompleDocumentation
   final int client_tg_user_id;
 
+  /// TelegramClientUncompleDocumentation
   int tdlib_client_id;
+
+  /// TelegramClientUncompleDocumentation
   String telegram_bot_api_token_bot;
+
+  /// TelegramClientUncompleDocumentation
   bool is_bot;
 
+  /// TelegramClientUncompleDocumentation
   String client_user_name;
 
   /// return original data json

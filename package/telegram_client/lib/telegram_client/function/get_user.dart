@@ -40,7 +40,9 @@ import 'package:general_lib/general_lib.dart' as glx_lib;
 import 'package:telegram_client/telegram_client/telegram_client.dart';
 import 'package:telegram_client/util/util.dart';
 
+/// TelegramClientUncompleDocumentation
 extension GetUserDataOn on TelegramClient {
+  /// TelegramClientUncompleDocumentation
   FutureOr<Map> getUser({
     required Map parameters,
     required TelegramClientCallApiInvoke callApiInvoke,

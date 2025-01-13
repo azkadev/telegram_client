@@ -43,13 +43,25 @@ import 'package:telegram_client/util/util.dart';
 
 /// update telegram data
 class UpdateTelegramClient {
+  /// TelegramClientUncompleDocumentation
   final Map rawData;
+
+  /// TelegramClientUncompleDocumentation
   final Map query;
+
+  /// TelegramClientUncompleDocumentation
   final Uri uri;
+
+  /// TelegramClientUncompleDocumentation
   final Map client_option;
 
+  /// TelegramClientUncompleDocumentation
   final TelegramClientData telegramClientData;
+
+  /// TelegramClientUncompleDocumentation
   final TelegramClient tg;
+
+  /// TelegramClientUncompleDocumentation
   const UpdateTelegramClient({
     required this.rawData,
     required this.uri,
@@ -59,6 +71,7 @@ class UpdateTelegramClient {
     required this.tg,
   });
 
+  /// TelegramClientUncompleDocumentation
   Map tgClientData() {
     if (telegramClientData.telegramClientType ==
         TelegramClientType.telegam_bot_api) {
@@ -139,20 +152,33 @@ class UpdateTelegramClient {
   }
 }
 
+/// TelegramClientUncompleDocumentation
 class UpdataOptionTelegramClient {
+  /// TelegramClientUncompleDocumentation
   final UpdataMessageTelegramClient updataMessageTelegramClient;
+
+  /// TelegramClientUncompleDocumentation
   UpdataOptionTelegramClient({
     required this.updataMessageTelegramClient,
   });
 }
 
+/// TelegramClientUncompleDocumentation
 class UpdataMessageTelegramClient {
+  /// TelegramClientUncompleDocumentation
   final bool bot_is_skip_old_message;
+
+  /// TelegramClientUncompleDocumentation
   final bool user_is_skip_old_message;
+
+  /// TelegramClientUncompleDocumentation
   late final Duration duration_old_message_skip;
+
+  /// TelegramClientUncompleDocumentation
   late final List<String> skip_old_chat_types;
+
   // final bool is_use_cache;
-  // final Duration? duration_expire_cache;
+  /// TelegramClientUncompleDocumentation
   UpdataMessageTelegramClient({
     this.bot_is_skip_old_message = false,
     this.user_is_skip_old_message = true,

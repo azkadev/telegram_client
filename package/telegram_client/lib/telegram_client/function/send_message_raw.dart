@@ -599,6 +599,7 @@ extension SendMessageRawDataOn on TelegramClient {
     throw result;
   }
 
+  /// TelegramClientUncompleDocumentation
   FutureOr<Map> sendMediaGroupRaw({
     required Map parameters,
     required TelegramClientCallApiInvoke callApiInvoke,

@@ -51,6 +51,7 @@ void main(List<String> args) async {
   directory_scheme.createSync(recursive: true);
   await jsonToScripts(
     telegram_client_schemes,
+    comment: "/// TelegramClientSchema",
     directory: directory_scheme,
   );
   Process.runSync("dart", [

@@ -2,7 +2,9 @@
 import "package:general_lib/general_lib.dart";
 // import "dart:convert";
 
+/// TelegramClientSchema
 class TelegramClientLibraryError extends JsonScheme {
+  /// TelegramClientSchema
   TelegramClientLibraryError(super.rawData);
 
   /// return default data
@@ -17,12 +19,28 @@ class TelegramClientLibraryError extends JsonScheme {
     };
   }
 
+  /// check data
+  /// if raw data
+  /// - rawData["@type"] == telegramClientLibraryError
+  /// if same return true
+  bool json_scheme_utils_checkDataIsSameBySpecialType() {
+    return rawData["@type"] == defaultData["@type"];
+  }
+
+  /// check value data whatever do yout want
+  bool json_scheme_utils_checkDataIsSameBuilder({
+    required bool Function(Map rawData, Map defaultData) onResult,
+  }) {
+    return onResult(rawData["@type"], defaultData["@type"]);
+  }
+
   /// create [TelegramClientLibraryError]
   /// Empty
   static TelegramClientLibraryError empty() {
     return TelegramClientLibraryError({});
   }
 
+  /// TelegramClientSchema
   String? get special_type {
     try {
       if (rawData["@type"] is String == false) {
@@ -34,10 +52,12 @@ class TelegramClientLibraryError extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set special_type(String? value) {
     rawData["@type"] = value;
   }
 
+  /// TelegramClientSchema
   num? get code {
     try {
       if (rawData["code"] is num == false) {
@@ -49,10 +69,12 @@ class TelegramClientLibraryError extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set code(num? value) {
     rawData["code"] = value;
   }
 
+  /// TelegramClientSchema
   String? get message {
     try {
       if (rawData["message"] is String == false) {
@@ -64,10 +86,12 @@ class TelegramClientLibraryError extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set message(String? value) {
     rawData["message"] = value;
   }
 
+  /// TelegramClientSchema
   String? get description {
     try {
       if (rawData["description"] is String == false) {
@@ -79,10 +103,12 @@ class TelegramClientLibraryError extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set description(String? value) {
     rawData["description"] = value;
   }
 
+  /// TelegramClientSchema
   String? get special_extra {
     try {
       if (rawData["@extra"] is String == false) {
@@ -94,10 +120,12 @@ class TelegramClientLibraryError extends JsonScheme {
     }
   }
 
+  /// TelegramClientSchema
   set special_extra(String? value) {
     rawData["@extra"] = value;
   }
 
+  /// TelegramClientSchema
   static TelegramClientLibraryError create({
     bool schemeUtilsIsSetDefaultData = false,
     String special_type = "telegramClientLibraryError",

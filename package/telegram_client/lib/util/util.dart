@@ -48,6 +48,7 @@ import 'package:io_universe/io_universe.dart';
 
 /// telegram util
 class TgUtils {
+  /// TelegramClientUncompleDocumentation
   static dynamic autoParseChatId(dynamic data) {
     try {
       try {
@@ -62,6 +63,7 @@ class TgUtils {
     return 0;
   }
 
+  /// TelegramClientUncompleDocumentation
   static TelegramBotApiFileData telegram_bot_api_file_data({
     required String name,
     required Uint8List buffer_data,
@@ -72,9 +74,13 @@ class TgUtils {
     );
   }
 
+  /// TelegramClientUncompleDocumentation
+
   static RegExp telegram_regexp_token_bot() {
     return RegExp(r"([0-9]{8,10}:[a-zA-Z0-9_-]{35})", caseSensitive: false);
   }
+
+  /// TelegramClientUncompleDocumentation
 
   static TelegramBotApiFileData telegram_bot_api_file({
     required File file,
@@ -85,6 +91,7 @@ class TgUtils {
     );
   }
 
+  /// TelegramClientUncompleDocumentation
   static int parserBotUserIdFromToken(dynamic token_bot) {
     try {
       return int.parse(token_bot.split(":")[0]);
@@ -93,6 +100,7 @@ class TgUtils {
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   static String pathTdlib() {
     if (Platform.isAndroid || Platform.isLinux) {
       return "libtdjson.so";
@@ -176,6 +184,7 @@ class TgUtils {
     return [];
   }
 
+  /// TelegramClientUncompleDocumentation
   static int toSuperGroupId(dynamic chat_id) {
     if (chat_id is int) {
       if (chat_id.isNegative) {
@@ -222,6 +231,7 @@ class TgUtils {
     return (listOffset, limitCount);
   }
 
+  /// TelegramClientUncompleDocumentation
   static bool getBoolean(dynamic data) {
     if (data == null) {
       return false;
@@ -323,14 +333,18 @@ class TgUtils {
     }).toString();
   }
 
+  /// TelegramClientUncompleDocumentation
+
   static String parseMarkdownLink(String text, String links) {
     return "[${text}](${links})";
   }
 
+  /// TelegramClientUncompleDocumentation
   static String parseHtmlLink(String text, String links) {
     return "<a href='${links}'>${text}</a>";
   }
 
+  /// TelegramClientUncompleDocumentation
   static String parseMarkdownCodeWithLanguage(String text, String language) {
     return """
 ```${language}
@@ -339,30 +353,39 @@ ${text}
         .trim();
   }
 
+  /// TelegramClientUncompleDocumentation
+
   static String parseHtmlCodeWithLanguage(String text, String language) {
     return "<pre><code class=\"language-${language}\">${text}</code></pre>";
   }
+
+  /// TelegramClientUncompleDocumentation
 
   static String parseMarkdownCode(String text) {
     return "```${text}```";
   }
 
+  /// TelegramClientUncompleDocumentation
   static String parseHtmlCode(String text) {
     return "<code>${text}</code>";
   }
 
+  /// TelegramClientUncompleDocumentation
   static String parseHtmlSpoiler(String text) {
     return "<tg-spoiler>${text}</tg-spoiler>";
   }
 
+  /// TelegramClientUncompleDocumentation
   static String parseMarkdownBold(String text) {
     return "**${text}**";
   }
 
+  /// TelegramClientUncompleDocumentation
   static String parseHtmlBold(String text) {
     return "<b>${text}</b>";
   }
 
+  /// TelegramClientUncompleDocumentation
   static dynamic parse_all_chat_id({
     required Map parameters,
   }) {
@@ -396,6 +419,8 @@ ${text}
     return target_chat_id;
   }
 
+  /// TelegramClientUncompleDocumentation
+
   static dynamic parse_chat_id({
     required Map parameters,
   }) {
@@ -417,6 +442,7 @@ ${text}
     return target_chat_id;
   }
 
+  /// TelegramClientUncompleDocumentation
   static Map? replyMarkupTgApiToTdlib({
     required Map replyMarkup,
   }) {
@@ -629,6 +655,7 @@ ${text}
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   static Map? replyMarkupTdlibToTgApi({
     required Map replyMarkup,
   }) {
@@ -776,18 +803,21 @@ ${text}
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   static Map? entitiesTgApiToTdlib({
     required Map replyMarkup,
   }) {
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   static Map? entitiesTdlibToTgApi({
     required Map replyMarkup,
   }) {
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   static Map? inputMessageContentInlineQueryTgToTdlib({
     required Map inputMessageContent,
     required TelegramClient tg,
@@ -845,6 +875,7 @@ ${text}
     return null;
   }
 
+  /// TelegramClientUncompleDocumentation
   static Map sender_id_from_int(int data_id) {
     if (data_id > 0) {
       return {
@@ -859,6 +890,7 @@ ${text}
     }
   }
 
+  /// TelegramClientUncompleDocumentation
   static Map sender_id_from_msg(Map msg) {
     if (msg["sender_chat"] is Map) {
       return sender_id_from_int(msg["sender_chat"]["id"]);
@@ -894,10 +926,12 @@ ${text}
     });
   }
 
+  /// TelegramClientUncompleDocumentation
   static String generate_test_dc_code() {
     return "22222";
   }
 
+  /// TelegramClientUncompleDocumentation
   static List<String> bot_emoji_reactions() {
     return [
       "👍",
@@ -976,6 +1010,7 @@ ${text}
     ];
   }
 
+  /// TelegramClientUncompleDocumentation
   static List<String> bot_emoji_reaction_goods() {
     return [
       "👍",
@@ -989,6 +1024,7 @@ ${text}
     ];
   }
 
+  /// TelegramClientUncompleDocumentation
   static List<String> bot_emoji_reaction_bads() {
     return ["👎", "🤬", "🤮", "💩", "🤡", "🥱", "🥴", "🤣", "🤪", "😡"];
   }

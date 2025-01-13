@@ -34,7 +34,7 @@ dependencies:
   io_universe: '^0.0.4'
   mason_logger: '^0.3.1'
   mime: '^2.0.0'
-  general_lib: '^0.0.56'
+  general_lib: '^0.0.58'
   collection: '^1.19.0'
   server_universe: '^0.0.31'
   yaml: '^3.1.3'

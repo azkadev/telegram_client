@@ -40,6 +40,7 @@ import 'package:telegram_client/util/util.dart';
 
 /// method MessageData
 extension MessageDataDataOn on TelegramClient {
+  /// TelegramClientUncompleDocumentation
   Future<Map> message_Message({
     required Map message,
     required TelegramClientData telegramClientData,
@@ -767,6 +768,8 @@ extension MessageDataDataOn on TelegramClient {
 
     return msg;
   }
+
+  /// TelegramClientUncompleDocumentation
 
   Future<List<Map<dynamic, dynamic>>> entitiesToApi({
     required List oldEntities,

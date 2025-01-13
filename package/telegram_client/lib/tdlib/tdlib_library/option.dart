@@ -36,22 +36,48 @@ import 'package:general_lib/event_emitter/event_emitter.dart';
 import 'package:telegram_client/scheme/telegram_client_library_tdlib_option_parameter.dart';
 import 'base.dart';
 
+/// TelegramClientUncompleDocumentation
 class TelegramClientTdlibOption {
+  /// TelegramClientUncompleDocumentation
   final TelegramClientLibraryTdlibOptionParameter? clientOption;
+
+  /// TelegramClientUncompleDocumentation
   final Duration? invokeTimeOut;
 
+  /// TelegramClientUncompleDocumentation
   final Duration? delayUpdate;
+
+  /// TelegramClientUncompleDocumentation
   final double timeOutUpdate;
+
+  /// TelegramClientUncompleDocumentation
   final EventEmitter? eventEmitter;
+
+  /// TelegramClientUncompleDocumentation
   final bool isAutoGetChat;
 
+  /// TelegramClientUncompleDocumentation
   final TdlibOnGetInvokeData? onGetInvokeData;
+
+  /// TelegramClientUncompleDocumentation
   final TdlibOnReceiveUpdate? onReceiveUpdate;
+
+  /// TelegramClientUncompleDocumentation
   final TdlibOnGenerateExtraInvoke? onGenerateExtraInvoke;
+
+  /// TelegramClientUncompleDocumentation
   final bool isInvokeThrowOnError;
+
+  /// TelegramClientUncompleDocumentation
   final Duration? delayInvoke;
+
+  /// TelegramClientUncompleDocumentation
   final int taskMaxCount;
+
+  /// TelegramClientUncompleDocumentation
   final int taskMinCooldown;
+
+  /// TelegramClientUncompleDocumentation
   const TelegramClientTdlibOption({
     this.isAutoGetChat = false,
     this.taskMaxCount = 10000,
@@ -68,6 +94,7 @@ class TelegramClientTdlibOption {
     this.isInvokeThrowOnError = true,
   });
 
+  /// TelegramClientUncompleDocumentation
   TelegramClientTdlibOption copyWith({
     TelegramClientLibraryTdlibOptionParameter? clientOption,
     Duration? invokeTimeOut,

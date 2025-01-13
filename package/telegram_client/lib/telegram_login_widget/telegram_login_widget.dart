@@ -37,13 +37,23 @@ import 'package:http/http.dart' as http;
 
 /// run executable telegram bot api
 class TelegramLogin {
+  /// TelegramClientUncompleDocumentation
   final HttpSession session = HttpSession();
+
+  /// TelegramClientUncompleDocumentation
   String botId;
+
+  /// TelegramClientUncompleDocumentation
   String botDomain;
+
+  /// TelegramClientUncompleDocumentation
   Map<String, String> userData = {};
+
+  /// TelegramClientUncompleDocumentation
   String user_agent =
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36";
 
+  /// TelegramClientUncompleDocumentation
   late http.Client http_client;
 
   /// run executable telegram bot api

@@ -35,8 +35,14 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 ///
 class TdlibInvokeResult {
+  /// TelegramClientUncompleDocumentation
+  ///
   final int client_id;
+
+  /// TelegramClientUncompleDocumentation
   final Map result;
+
+  /// TelegramClientUncompleDocumentation
   const TdlibInvokeResult({
     required this.client_id,
     required this.result,

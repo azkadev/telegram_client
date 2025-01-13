@@ -34,9 +34,16 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 /// Update td for make update support raw, raw api, raw api light
 class UpdateTelegramClientTdlib {
+  /// TelegramClientUncompleDocumentation
   final Map update;
+
+  /// TelegramClientUncompleDocumentation
   final int client_id;
+
+  /// TelegramClientUncompleDocumentation
   final Map client_option;
+
+  /// TelegramClientUncompleDocumentation
   const UpdateTelegramClientTdlib({
     required this.update,
     required this.client_id,

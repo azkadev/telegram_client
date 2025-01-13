@@ -30,23 +30,33 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 
 <!-- END LICENSE --> */
+/// TelegramClientUncompleDocumentation
 class ReceivePort {
+  /// TelegramClientUncompleDocumentation
   ReceivePort();
 
+  /// TelegramClientUncompleDocumentation
   SendPort get sendPort {
     return SendPort();
   }
 
+  /// TelegramClientUncompleDocumentation
   listen(Future<dynamic> Function(dynamic data) callback) {}
 }
 
+/// TelegramClientUncompleDocumentation
+
 class SendPort {
+  /// TelegramClientUncompleDocumentation
   SendPort();
 
+  /// TelegramClientUncompleDocumentation
   void send(dynamic data) {}
 }
 
+/// TelegramClientUncompleDocumentation
 class Isolate {
+  /// TelegramClientUncompleDocumentation
   static Future<Isolate> spawn<T>(
     Future<dynamic> Function(T data) callback,
     T data, {
@@ -56,5 +66,6 @@ class Isolate {
     return Isolate();
   }
 
+  /// TelegramClientUncompleDocumentation
   void kill() {}
 }

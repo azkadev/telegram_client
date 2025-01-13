@@ -57,14 +57,28 @@ import 'package:io_universe/io_universe.dart';
 /// void 	td_json_client_destroy (void *client)
 
 // typedef TdStringNative = Pointer<Utf8>;
+/// TelegramClientUncompleDocumentation
 typedef TdCharNative = Pointer<Char>;
+
+/// TelegramClientUncompleDocumentation
 typedef TdReceiveNative = TdCharNative Function(Double timout);
+
+/// TelegramClientUncompleDocumentation
 typedef TdReceiveDart = TdCharNative Function(double timout);
 
+/// TelegramClientUncompleDocumentation
 typedef TdCreateClientIdNative = Int Function();
+
+/// TelegramClientUncompleDocumentation
 typedef TdCreateClientIdDart = int Function();
+
+/// TelegramClientUncompleDocumentation
 typedef TdSendNative = Void Function(Int client, TdCharNative request);
+
+/// TelegramClientUncompleDocumentation
 typedef TdSendDart = void Function(int client, TdCharNative request);
+
+/// TelegramClientUncompleDocumentation
 typedef TdExecuteNative = TdCharNative Function(TdCharNative parameters);
 
 /// Cheatset
@@ -84,6 +98,7 @@ typedef TdExecuteNative = TdCharNative Function(TdCharNative parameters);
 /// ````
 ///
 class TdlibNative extends TdlibBase {
+  /// TelegramClientUncompleDocumentation
   TdlibNative({
     super.clientOption,
     super.delayInvoke,
@@ -113,13 +128,26 @@ class TdlibNative extends TdlibBase {
       ensureInitialized();
     }
   }
+
+  /// TelegramClientUncompleDocumentation
   static late DynamicLibrary tdLib;
+
+  /// TelegramClientUncompleDocumentation
   static bool is_open_tdlib = false;
 
+  /// TelegramClientUncompleDocumentation
   static late final TdExecuteNative td_execute_native_function;
+
+  /// TelegramClientUncompleDocumentation
   static late final TdSendDart td_send_function;
+
+  /// TelegramClientUncompleDocumentation
   static late final TdCreateClientIdDart td_pointer_native_function;
+
+  /// TelegramClientUncompleDocumentation
   static late final TdReceiveDart td_receive_function;
+
+  /// TelegramClientUncompleDocumentation
 
   static void opentdLib({
     required String pathTdlib,

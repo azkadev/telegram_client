@@ -30,10 +30,15 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 
 <!-- END LICENSE --> */
+/// TelegramClientUncompleDocumentation
 class TdlibIsolateReceiveData {
+  /// TelegramClientUncompleDocumentation
   final Map updateData;
+
+  /// TelegramClientUncompleDocumentation
   final int clientId;
   // Map clientOption;
+  /// TelegramClientUncompleDocumentation
   TdlibIsolateReceiveData({
     required this.updateData,
     required this.clientId,
@@ -41,6 +46,8 @@ class TdlibIsolateReceiveData {
   });
 }
 
+/// TelegramClientUncompleDocumentation
 class TdlibIsolateReceiveDataError {
+  /// TelegramClientUncompleDocumentation
   TdlibIsolateReceiveDataError();
 }

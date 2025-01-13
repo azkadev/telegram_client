@@ -42,14 +42,28 @@ import 'dart:async';
 import 'package:telegram_client/tdlib/tdlib_library/base.dart';
 import 'package:wasm_ffi/ffi.dart';
 
+/// TelegramClientUncompleDocumentation
 typedef TdCharNative = Pointer<Char>;
+
+/// TelegramClientUncompleDocumentation
 typedef TdReceiveNative = TdCharNative Function(Double timout);
+
+/// TelegramClientUncompleDocumentation
 typedef TdReceiveDart = TdCharNative Function(double timout);
 
+/// TelegramClientUncompleDocumentation
 typedef TdCreateClientIdNative = Int Function();
+
+/// TelegramClientUncompleDocumentation
 typedef TdCreateClientIdDart = int Function();
+
+/// TelegramClientUncompleDocumentation
 typedef TdSendNative = Void Function(Int client, TdCharNative request);
+
+/// TelegramClientUncompleDocumentation
 typedef TdSendDart = void Function(int client, TdCharNative request);
+
+/// TelegramClientUncompleDocumentation
 typedef TdExecuteNative = TdCharNative Function(TdCharNative parameters);
 
 /// Cheatset
@@ -70,6 +84,8 @@ typedef TdExecuteNative = TdCharNative Function(TdCharNative parameters);
 ///
 class TdlibNative extends TdlibBase {
   static final Completer<bool> _td_completer = Completer<bool>();
+
+  /// TelegramClientUncompleDocumentation
   TdlibNative({
     super.clientOption,
     super.delayInvoke,
@@ -100,12 +116,23 @@ class TdlibNative extends TdlibBase {
       }
     });
   }
+
+  /// TelegramClientUncompleDocumentation
   static late DynamicLibrary tdLib;
+
+  /// TelegramClientUncompleDocumentation
   static bool is_open_tdlib = false;
 
+  /// TelegramClientUncompleDocumentation
   static late final TdExecuteNative td_execute_native_function;
+
+  /// TelegramClientUncompleDocumentation
   static late final TdSendDart td_send_function;
+
+  /// TelegramClientUncompleDocumentation
   static late final TdCreateClientIdDart td_pointer_native_function;
+
+  /// TelegramClientUncompleDocumentation
   static late final TdReceiveDart td_receive_function;
 
   @override
@@ -135,6 +162,7 @@ class TdlibNative extends TdlibBase {
   }
 }
 
+/// TelegramClientUncompleDocumentation
 Future<void> opentdLib({
   required String pathTdlib,
 }) async {

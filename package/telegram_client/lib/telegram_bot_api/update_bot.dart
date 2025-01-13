@@ -30,12 +30,21 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 
 <!-- END LICENSE --> */
+/// TelegramClientUncompleDocumentation
 class UpdateTelegramClientTelegramBotApi {
+  /// TelegramClientUncompleDocumentation
   final Map<String, dynamic> body;
+
+  /// TelegramClientUncompleDocumentation
   final Map query;
+
+  /// TelegramClientUncompleDocumentation
   final String type;
+
+  /// TelegramClientUncompleDocumentation
   final Uri uri;
 
+  /// TelegramClientUncompleDocumentation
   const UpdateTelegramClientTelegramBotApi({
     required this.uri,
     required this.body,
