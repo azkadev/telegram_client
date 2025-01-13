@@ -8,7 +8,6 @@ analyzer:
     - example
     - examples
     - bin
-
 linter:
   rules:
     - public_member_api_docs
