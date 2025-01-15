@@ -1,24 +1,4 @@
-## 0.8.34
+## 0.8.35
 
-- New Version 0.8.34
-
-
-## 0.8.33
-
-- New Version 0.8.33
-
-
-## 0.8.32
-
-- New Version 0.8.32
-
-
-## 0.8.31
-
-- New Version 0.8.31
-
-
-## 0.8.29
-
-- Update: 2024-09-24 02:31:41.980504 - update library.
-- Revisi And Change Style Code for improve MAX speed 
+- New Version 0.8.35
+- Fix Telegram Bot Api Auto Set allow_sending_without_reply

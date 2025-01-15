@@ -374,9 +374,16 @@ class TelegramBotApi {
     // auto set reply parameters
     if (parameters["reply_parameters"] is Map == false) {
       if (parameters["reply_to_message_id"] is num) {
-        parameters["reply_parameters"] = {
-          "message_id": parameters["reply_to_message_id"],
-        };
+        if (parameters["reply_parameters"] is Map) {
+          parameters["reply_parameters"]["message_id"] =
+              parameters["reply_to_message_id"];
+          parameters["reply_parameters"]["allow_sending_without_reply"] = true;
+        } else {
+          parameters["reply_parameters"] = {
+            "message_id": parameters["reply_to_message_id"],
+            "allow_sending_without_reply": true,
+          };
+        }
       }
     }
     String url = Uri.parse((urlApi ?? "")).replace(pathSegments: [
