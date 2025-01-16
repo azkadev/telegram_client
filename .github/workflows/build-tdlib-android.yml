@@ -1,4 +1,4 @@
-name: Build Android
+name: Build Tdlib Android AZKADEV TELEGRAM CLIENT
 
 on:
   push:
@@ -29,7 +29,6 @@ jobs:
         run: |
           cd example/android/
           docker build --build-arg TDLIB_INTERFACE=JSON --build-arg OPENSSL_VERSION="openssl-3.4.0" --build-arg ANDROID_NDK_VERSION="27.2.12479018" --output tdlib .
-
         shell: bash
 
       - name: Upload Build Artifacts
@@ -39,7 +38,6 @@ jobs:
           name: android
           path: |
             example/android/tdlib/tdlib.zip
-
       - name: Publish Release
         uses: marvinpinto/action-automatic-releases@latest
         continue-on-error: true
@@ -51,3 +49,10 @@ jobs:
           files: |
             example/android/tdlib/tdlib.zip 
 
+      - name: Publish Release
+        working-directory: package/telegram_client_android
+        shell: bash
+        run: |
+          dart format .
+          sleep 10
+          dart pub publish --force --skip-validation
