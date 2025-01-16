@@ -40,7 +40,7 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 import 'dart:async';
 
 import 'package:telegram_client/tdlib/tdlib_library/base.dart';
-import 'package:wasm_ffi/ffi.dart';
+import 'package:ffi_universe/wasm/ffi.dart';
 
 /// TelegramClientUncompleDocumentation
 typedef TdCharNative = Pointer<Char>;
