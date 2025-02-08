@@ -163,18 +163,10 @@ class TdlibNative extends TdlibBase {
       tdLib = DynamicLibrary.open(pathTdlib);
     }
     is_open_tdlib = true;
-    td_execute_native_function =
-        tdLib.lookupFunction<TdExecuteNative, TdExecuteNative>('td_execute',
-            isLeaf: false);
-    td_send_function = tdLib.lookupFunction<TdSendNative, TdSendDart>('td_send',
-        isLeaf: false);
-    td_pointer_native_function =
-        tdLib.lookupFunction<TdCreateClientIdNative, TdCreateClientIdDart>(
-            'td_create_client_id',
-            isLeaf: false);
-    td_receive_function = tdLib.lookupFunction<TdReceiveNative, TdReceiveDart>(
-        'td_receive',
-        isLeaf: false);
+    td_execute_native_function = tdLib.lookupFunction<TdExecuteNative, TdExecuteNative>('td_execute', isLeaf: false);
+    td_send_function = tdLib.lookupFunction<TdSendNative, TdSendDart>('td_send', isLeaf: false);
+    td_pointer_native_function = tdLib.lookupFunction<TdCreateClientIdNative, TdCreateClientIdDart>('td_create_client_id', isLeaf: false);
+    td_receive_function = tdLib.lookupFunction<TdReceiveNative, TdReceiveDart>('td_receive', isLeaf: false);
   }
 
   /// Returns an opaque identifier of a new TDLib instance. The TDLib instance will not send updates until the first request is sent to it.
@@ -186,8 +178,7 @@ class TdlibNative extends TdlibBase {
   /// td_send
   @override
   void td_send(int clientId, Map parameters) {
-    final TdCharNative request_data =
-        convert.json.encode(parameters).toNativeUtf8().cast<Char>();
+    final TdCharNative request_data = convert.json.encode(parameters).toNativeUtf8().cast<Char>();
     td_send_function(clientId, request_data);
     malloc.free(request_data);
     return;
@@ -196,12 +187,9 @@ class TdlibNative extends TdlibBase {
   /// client_execute
   @override
   Map<String, dynamic> td_execute(Map parameters) {
-    final TdCharNative request_data =
-        convert.json.encode(parameters).toNativeUtf8().cast<Char>();
-    final TdCharNative td_execute_native_result =
-        td_execute_native_function(request_data);
-    final Map<String, dynamic> result_data = convert.json
-        .decode(td_execute_native_result.cast<Utf8>().toDartString());
+    final TdCharNative request_data = convert.json.encode(parameters).toNativeUtf8().cast<Char>();
+    final TdCharNative td_execute_native_result = td_execute_native_function(request_data);
+    final Map<String, dynamic> result_data = convert.json.decode(td_execute_native_result.cast<Utf8>().toDartString());
     malloc.free(request_data);
     return result_data;
   }
@@ -217,8 +205,7 @@ class TdlibNative extends TdlibBase {
         if (update_string.isEmpty) {
           return null;
         }
-        final Map<String, dynamic> updateOrigin =
-            convert.json.decode(update_string);
+        final Map<String, dynamic> updateOrigin = convert.json.decode(update_string);
         return updateOrigin;
       }
       return null;
