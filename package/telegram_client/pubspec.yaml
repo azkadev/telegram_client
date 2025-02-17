@@ -33,7 +33,7 @@ dependencies:
   path: '^1.9.0'
   io_universe: '^0.0.5'
   mime: '^2.0.0'
-  general_lib: '^0.0.63'
+  general_lib: '^0.0.66'
   collection: '^1.19.0'
   server_universe: '^0.0.36'
   ffi_universe: '^0.0.2'
@@ -43,3 +43,5 @@ screenshots:
 dependency_overrides:
   pointycastle: '3.8.0'
   mime: '^2.0.0'
+project:
+  type: ''
