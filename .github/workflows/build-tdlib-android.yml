@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - '.github/workflows/build-tdlib-android.yml'
-      - "package/telegram_client_android"
+  workflow_dispatch:
 
 jobs:
   build:
