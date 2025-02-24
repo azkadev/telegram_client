@@ -113,7 +113,7 @@ import 'package:telegram_client/telegram_client.dart';
 
 ### Docs
  
-1. [Github Docs](https://github.com/azkadev/telegram_client/tree/main/docs)
+1. [Github Docs](https://www.youtube.com/@GENERAL_DEV)
 2. [Support Group](https://t.me/DEVELOPER_GLOBAL_PUBLIC)
 3. [Youtube](https://youtube.com/@azkadev)
 
