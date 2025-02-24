@@ -132,11 +132,12 @@ class TelegramBotApi {
     this.eventUpdate = "update",
     Uri? telegramUrlWebhook,
     Client? httpClient,
-  })  : crypto = crypto ?? Crypto(key: "aeatmlvodkm9ii37l2p0WGkaAAF3BWCh"),
-        httpClient = httpClient ?? Client(),
-        eventEmitter = eventEmitter ?? EventEmitter(),
-        telegramUrlWebhook = telegramUrlWebhook ??
-            Uri.parse("http://0.0.0.0:8080/telegram/webhook") {
+  }) : crypto = crypto ?? Crypto(key: "aeatmlvodkm9ii37l2p0WGkaAAF3BWCh"),
+       httpClient = httpClient ?? Client(),
+       eventEmitter = eventEmitter ?? EventEmitter(),
+       telegramUrlWebhook =
+           telegramUrlWebhook ??
+           Uri.parse("http://0.0.0.0:8080/telegram/webhook") {
     if (clientOption != null) {
       client_option.addAll(clientOption);
     }
@@ -159,8 +160,10 @@ class TelegramBotApi {
     }
     is_init_server = true;
 
-    serverUniverseNative.post(telegramUrlWebhook.path,
-        (HttpRequest req, HttpResponse res) async {
+    serverUniverseNative.post(telegramUrlWebhook.path, (
+      HttpRequest req,
+      HttpResponse res,
+    ) async {
       try {
         Map query = (req.uri.queryParameters).clone();
         Map<String, dynamic> body = await req.bodyAsJsonMap;
@@ -175,18 +178,14 @@ class TelegramBotApi {
         );
         return {"@type": "ok"};
       } catch (e) {
-        return {
-          "@type": "ok",
-        };
+        return {"@type": "ok"};
       }
     });
   }
 
   /// Parse Query Http To TgClientClientData
   ///
-  TelegramClientLibraryClientData tgClientData({
-    required Map query,
-  }) {
+  TelegramClientLibraryClientData tgClientData({required Map query}) {
     if (query["tg"] is String == false) {
       query["tg"] = "";
     }
@@ -194,8 +193,9 @@ class TelegramBotApi {
 
     if (decyprt["client_tg_user_id"] == null ||
         decyprt["client_tg_user_id"] == 0) {
-      decyprt["client_tg_user_id"] =
-          TgUtils.parserBotUserIdFromToken(decyprt["client_token"]);
+      decyprt["client_tg_user_id"] = TgUtils.parserBotUserIdFromToken(
+        decyprt["client_token"],
+      );
     }
     return TelegramClientLibraryClientData(decyprt);
   }
@@ -214,10 +214,7 @@ class TelegramBotApi {
   }) async {
     tokenBot ??= token_bot;
 
-    final Map getMe = await request(
-      "getMe",
-      tokenBot: tokenBot,
-    );
+    final Map getMe = await request("getMe", tokenBot: tokenBot);
     final Map client_data = {
       "client_token": tokenBot,
       "owner_user_id": owner_user_id,
@@ -228,8 +225,9 @@ class TelegramBotApi {
       "expire_date": expire_date,
       "version": version,
     };
-    final String query_telegram_webhook =
-        crypto.encryptMapToBase64(data: client_data);
+    final String query_telegram_webhook = crypto.encryptMapToBase64(
+      data: client_data,
+    );
 
     final get_webhook_info_old_procces = await request(
       "getWebhookInfo",
@@ -238,13 +236,14 @@ class TelegramBotApi {
 
     final String url_webhook_old =
         get_webhook_info_old_procces["result"]["url"];
-    final String url_webhook_new = telegramUrlWebhook.replace(
-      path: path,
-      pathSegments: pathSegments,
-      queryParameters: {
-        "tg": query_telegram_webhook,
-      },
-    ).toString();
+    final String url_webhook_new =
+        telegramUrlWebhook
+            .replace(
+              path: path,
+              pathSegments: pathSegments,
+              queryParameters: {"tg": query_telegram_webhook},
+            )
+            .toString();
 
     if (url_webhook_old == url_webhook_new) {
       final Map new_scheme = {
@@ -257,9 +256,7 @@ class TelegramBotApi {
     }
     final Map result_webhook = await request(
       "setWebhook",
-      parameters: {
-        "url": url_webhook_new,
-      },
+      parameters: {"url": url_webhook_new},
       tokenBot: tokenBot,
     );
     final Map new_scheme = {
@@ -301,9 +298,10 @@ class TelegramBotApi {
   /// ```
   /// add this for handle update api
   EventEmitterListener on(
-      String type_update,
-      FutureOr<dynamic> Function(UpdateTelegramClientTelegramBotApi updateBot)
-          callback) {
+    String type_update,
+    FutureOr<dynamic> Function(UpdateTelegramClientTelegramBotApi updateBot)
+    callback,
+  ) {
     return eventEmitter.on(
       eventName: type_update,
       onCallback: (listener, update) async {
@@ -370,9 +368,7 @@ class TelegramBotApi {
     clientType ??= client_option["type"];
     urlApi ??= client_option["api"];
     tokenBot ??= token_bot;
-    Map<dynamic, dynamic> option = <dynamic, dynamic>{
-      "method": "post",
-    };
+    Map<dynamic, dynamic> option = <dynamic, dynamic>{"method": "post"};
     // auto set reply parameters
     if (parameters["reply_parameters"] is Map == false) {
       if (parameters["reply_to_message_id"] is num) {
@@ -388,10 +384,10 @@ class TelegramBotApi {
         }
       }
     }
-    String url = Uri.parse((urlApi ?? "")).replace(pathSegments: [
-      (clientType ?? "bot") + tokenBot,
-      method,
-    ]).toString();
+    String url =
+        Uri.parse((urlApi ?? ""))
+            .replace(pathSegments: [(clientType ?? "bot") + tokenBot, method])
+            .toString();
     if (!is_form) {
       List<String> methodForm = [
         "sendDocument",
@@ -473,15 +469,22 @@ class TelegramBotApi {
               form.files.add(files);
             } else if (value["is_post_buffer"] == true) {
               var files = MultipartFile.fromBytes(
-                  key, (value["buffer"] as List).cast<int>(),
-                  filename: value["name"], contentType: value["content_type"]);
+                key,
+                (value["buffer"] as List).cast<int>(),
+                filename: value["name"],
+                contentType: value["content_type"],
+              );
               form.files.add(files);
             } else {
               form.fields[key] = convert.json.encode(value);
             }
           } else if (value is TelegramBotApiFileData) {
-            var files = MultipartFile.fromBytes(key, value.buffer_data,
-                filename: value.name, contentType: null);
+            var files = MultipartFile.fromBytes(
+              key,
+              value.buffer_data,
+              filename: value.name,
+              contentType: null,
+            );
             form.files.add(files);
           } else if (value is String) {
             form.fields[key] = value;
@@ -607,8 +610,10 @@ class TelegramBotApi {
     } catch (e) {
       if (RegExp(r"^(send)", caseSensitive: false).hasMatch(method)) {
         if (e is Map) {
-          if (RegExp("Unsupported start tag", caseSensitive: false)
-              .hasMatch(e["description"])) {
+          if (RegExp(
+            "Unsupported start tag",
+            caseSensitive: false,
+          ).hasMatch(e["description"])) {
             parameters.remove("parse_mode");
             return await invoke(
               method,
@@ -631,9 +636,7 @@ class TelegramBotApi {
   }
 
   /// TelegramClientUncompleDocumentation
-  void utils_remove_parameters({
-    required Map data,
-  }) {
+  void utils_remove_parameters({required Map data}) {
     data.removeWhere((key, value) {
       if (value is File) {
         return true;
@@ -649,9 +652,7 @@ class TelegramBotApi {
   }
 
   /// TelegramClientUncompleDocumentation
-  void utils_remove_parameterss({
-    required List datas,
-  }) {
+  void utils_remove_parameterss({required List datas}) {
     datas.removeWhere((element) {
       if (element is Map) {
         utils_remove_parameters(data: element);
@@ -702,8 +703,10 @@ class TelegramBotApi {
             try {
               await Future.delayed(Duration(milliseconds: 500));
               parameters["text"] = loopData;
-              if (RegExp("(editMessageText)", caseSensitive: false)
-                  .hashData(method)) {
+              if (RegExp(
+                "(editMessageText)",
+                caseSensitive: false,
+              ).hashData(method)) {
                 if (i != 0) {
                   method = "sendMessage";
                 }
@@ -737,8 +740,10 @@ class TelegramBotApi {
             try {
               await Future.delayed(Duration(milliseconds: 500));
               parameters["caption"] = loopData;
-              if (RegExp("(editMessageCaption)", caseSensitive: false)
-                  .hashData(method)) {
+              if (RegExp(
+                "(editMessageCaption)",
+                caseSensitive: false,
+              ).hashData(method)) {
                 if (i != 0) {
                   parameters["text"] = loopData;
                   method = "sendMessage";
@@ -820,8 +825,10 @@ class TelegramBotApi {
   }) async {
     final httpClient = HttpClient();
     final request = await httpClient.getUrl(Uri.parse(url));
-    request.headers
-        .add(HttpHeaders.contentTypeHeader, "application/octet-stream");
+    request.headers.add(
+      HttpHeaders.contentTypeHeader,
+      "application/octet-stream",
+    );
     var httpResponse = await request.close();
     int byteCount = 0;
     int totalBytes = httpResponse.contentLength;

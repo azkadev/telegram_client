@@ -41,11 +41,7 @@ import 'package:io_universe/io_universe.dart';
 
 void main(List<String> args) async {
   Directory directory_scheme = Directory(
-    join(
-      Directory.current.uri.toFilePath(),
-      "lib",
-      "scheme",
-    ),
+    join(Directory.current.uri.toFilePath(), "lib", "scheme"),
   );
   if (directory_scheme.existsSync()) {
     directory_scheme.deleteSync(recursive: true);
@@ -56,9 +52,6 @@ void main(List<String> args) async {
     comment: "/// TelegramClientSchema",
     directory: directory_scheme,
   );
-  Process.runSync("dart", [
-    "format",
-    directory_scheme.uri.toFilePath(),
-  ]);
+  Process.runSync("dart", ["format", directory_scheme.uri.toFilePath()]);
   exit(0);
 }

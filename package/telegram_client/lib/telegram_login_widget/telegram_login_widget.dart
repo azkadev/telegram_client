@@ -79,8 +79,9 @@ class TelegramLogin {
     http.Client? httpClient,
   }) async {
     httpClient ??= http_client;
-    phoneNumber =
-        phoneNumber.replaceAll(RegExp('\\+'), '').replaceAll(RegExp(' '), '');
+    phoneNumber = phoneNumber
+        .replaceAll(RegExp('\\+'), '')
+        .replaceAll(RegExp(' '), '');
     Map<String, String> headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       "origin": "https://oauth.telegram.org",
@@ -88,10 +89,7 @@ class TelegramLogin {
           "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     };
     Uri uri = Uri.parse("https://oauth.telegram.org").replace(
-      pathSegments: [
-        "auth",
-        "request",
-      ],
+      pathSegments: ["auth", "request"],
       queryParameters: {
         "bot_id": botId,
         "origin": botDomain,
@@ -114,9 +112,7 @@ class TelegramLogin {
   }
 
   /// run executable telegram bot api
-  Future<bool> checkIsLogin({
-    http.Client? httpClient,
-  }) async {
+  Future<bool> checkIsLogin({http.Client? httpClient}) async {
     httpClient ??= http_client;
     Map<String, String> headers = {
       "Content-length": "0",
@@ -126,10 +122,7 @@ class TelegramLogin {
           "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     };
     Uri uri_api = Uri.parse("https://oauth.telegram.org").replace(
-      pathSegments: [
-        "auth",
-        "login",
-      ],
+      pathSegments: ["auth", "login"],
       queryParameters: {
         "bot_id": botId,
         "origin": botDomain,
@@ -138,18 +131,17 @@ class TelegramLogin {
       },
     );
     String ans = await session.post(
-        url: uri_api.toString(),
-        headers: headers,
-        body: "",
-        httpClient: httpClient);
+      url: uri_api.toString(),
+      headers: headers,
+      body: "",
+      httpClient: httpClient,
+    );
 
     return ans == 'true';
   }
 
   /// run executable telegram bot api
-  Future<bool> confirmLogin({
-    http.Client? httpClient,
-  }) async {
+  Future<bool> confirmLogin({http.Client? httpClient}) async {
     httpClient ??= http_client;
     Map<String, String> headers = {
       "Content-length": "0",
@@ -159,10 +151,7 @@ class TelegramLogin {
           "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     };
     Uri uri_api = Uri.parse("https://oauth.telegram.org").replace(
-      pathSegments: [
-        "auth",
-        "auth",
-      ],
+      pathSegments: ["auth", "auth"],
       queryParameters: {
         "bot_id": botId,
         "origin": botDomain,
@@ -197,10 +186,7 @@ class TelegramLogin {
 
     if (hash_confirm.isNotEmpty) {
       uri_api = uri_api.replace(
-        pathSegments: [
-          "auth",
-          "auth",
-        ],
+        pathSegments: ["auth", "auth"],
         queryParameters: {
           "bot_id": botId,
           "origin": botDomain,

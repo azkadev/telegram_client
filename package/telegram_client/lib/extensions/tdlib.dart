@@ -57,19 +57,14 @@ extension TdlibMethodExtensions on Tdlib {
     whiteListUserIds ??= [];
     var get_chat_user = await request(
       "getChat",
-      parameters: {
-        "chat_id": target_chat_id,
-      },
+      parameters: {"chat_id": target_chat_id},
       clientId: clientId,
       isUseCache: isUseCache,
       durationCacheExpire: durationCacheExpire,
     );
     await request(
       "sendMessage",
-      parameters: {
-        "chat_id": chat_id,
-        "text": "Process",
-      },
+      parameters: {"chat_id": chat_id, "text": "Process"},
       clientId: clientId,
       isUseCache: isUseCache,
       durationCacheExpire: durationCacheExpire,
@@ -111,9 +106,7 @@ extension TdlibMethodExtensions on Tdlib {
           } else {
             var getChatAdministrators = await request(
               "getChatAdministrators",
-              parameters: {
-                "chat_id": get_chat_user["result"]["id"],
-              },
+              parameters: {"chat_id": get_chat_user["result"]["id"]},
               clientId: clientId,
               isUseCache: isUseCache,
               durationCacheExpire: durationCacheExpire,
@@ -121,9 +114,11 @@ extension TdlibMethodExtensions on Tdlib {
             List<Map> administrators =
                 (getChatAdministrators['administrators'] as List).cast<Map>();
             late bool isNotOwned = true;
-            for (var admin_index = 0;
-                admin_index < administrators.length;
-                admin_index++) {
+            for (
+              var admin_index = 0;
+              admin_index < administrators.length;
+              admin_index++
+            ) {
               try {
                 Map admin = administrators[admin_index];
 
@@ -155,10 +150,7 @@ extension TdlibMethodExtensions on Tdlib {
           await Future.delayed(Duration(seconds: 2));
           await request(
             "sendMessage",
-            parameters: {
-              "chat_id": chat_id,
-              "text": msg_text,
-            },
+            parameters: {"chat_id": chat_id, "text": msg_text},
             clientId: clientId,
             isUseCache: isUseCache,
             durationCacheExpire: durationCacheExpire,
@@ -167,9 +159,7 @@ extension TdlibMethodExtensions on Tdlib {
           try {
             await request(
               "getChat",
-              parameters: {
-                "chat_id": chatUsername,
-              },
+              parameters: {"chat_id": chatUsername},
               clientId: clientId,
               isUseCache: isUseCache,
               durationCacheExpire: durationCacheExpire,
@@ -184,10 +174,7 @@ extension TdlibMethodExtensions on Tdlib {
           await Future.delayed(Duration(seconds: 2));
           await request(
             "sendMessage",
-            parameters: {
-              "chat_id": chat_id,
-              "text": msg_text,
-            },
+            parameters: {"chat_id": chat_id, "text": msg_text},
             clientId: clientId,
             isUseCache: isUseCache,
             durationCacheExpire: durationCacheExpire,
@@ -196,9 +183,7 @@ extension TdlibMethodExtensions on Tdlib {
           try {
             await request(
               "getChat",
-              parameters: {
-                "chat_id": chatUsername,
-              },
+              parameters: {"chat_id": chatUsername},
               clientId: clientId,
               isUseCache: isUseCache,
               durationCacheExpire: durationCacheExpire,
@@ -241,11 +226,7 @@ extension TdlibMethodExtensions on Tdlib {
         print(e);
       }
     }
-    return {
-      "@type": "bannedChats",
-      "data_succes": [],
-      "data_failed": failed,
-    };
+    return {"@type": "bannedChats", "data_succes": [], "data_failed": failed};
   }
 
   /// delete chat history
@@ -273,10 +254,7 @@ extension TdlibMethodExtensions on Tdlib {
       isUseCache: isUseCache,
       durationCacheExpire: durationCacheExpire,
     );
-    late Map jsonRespond = {
-      "@type": "users",
-      "users": [],
-    };
+    late Map jsonRespond = {"@type": "users", "users": []};
     if (members["user_ids"] is List) {
       late List<Map> users = [];
       List<int> member_user_ids = (members["user_ids"] as List).cast<int>();
@@ -286,13 +264,13 @@ extension TdlibMethodExtensions on Tdlib {
         try {
           Map toggle_message_sender_is_blocked =
               await toggleMessageSenderIsBlocked(
-            user_id: user_id,
-            is_blocked: is_blocked,
-            clientId: clientId,
-            isVoid: isVoid,
-            isUseCache: isUseCache,
-            durationCacheExpire: durationCacheExpire,
-          );
+                user_id: user_id,
+                is_blocked: is_blocked,
+                clientId: clientId,
+                isVoid: isVoid,
+                isUseCache: isUseCache,
+                durationCacheExpire: durationCacheExpire,
+              );
           toggle_message_sender_is_blocked["user_id"] = user_id;
           users.add(toggle_message_sender_is_blocked);
           if (is_delete_chat_history) {
@@ -361,10 +339,7 @@ extension TdlibMethodExtensions on Tdlib {
     return await request(
       "toggleMessageSenderIsBlocked",
       parameters: {
-        "sender_id": {
-          "@type": "messageSenderUser",
-          "user_id": user_id,
-        },
+        "sender_id": {"@type": "messageSenderUser", "user_id": user_id},
         "is_blocked": is_blocked,
       },
       isUseCache: isUseCache,
@@ -413,8 +388,12 @@ extension TdlibMethodExtensions on Tdlib {
       var getSupergroupMembers = await request(
         "getSupergroupMembers",
         parameters: {
-          "supergroup_id": int.parse("${chat["id"]}"
-              .replaceAll(RegExp(r"^-100", caseSensitive: false), "")),
+          "supergroup_id": int.parse(
+            "${chat["id"]}".replaceAll(
+              RegExp(r"^-100", caseSensitive: false),
+              "",
+            ),
+          ),
           "offset": loop_data,
           "limit": 200,
         },
@@ -437,13 +416,7 @@ extension TdlibMethodExtensions on Tdlib {
             if (!user_ids.contains(memberUserId)) {
               if (!isDetail) {
                 if (onProcces != null) {
-                  onProcces.call(
-                    {
-                      "@type": "user",
-                      "id": memberUserId,
-                    },
-                    0,
-                  );
+                  onProcces.call({"@type": "user", "id": memberUserId}, 0);
                 }
               }
               user_ids.add(memberUserId);
@@ -467,24 +440,15 @@ extension TdlibMethodExtensions on Tdlib {
           );
           array.add(user_detail["result"] as Map);
           if (onProcces != null) {
-            onProcces.call(
-              user_detail["result"] as Map,
-              0,
-            );
+            onProcces.call(user_detail["result"] as Map, 0);
           }
         } catch (e) {
           array.add({"@type": "error", "user_id": user_ids[i]});
         }
       }
-      return {
-        "@type": "members",
-        "users": array,
-      };
+      return {"@type": "members", "users": array};
     } else {
-      return {
-        "@type": "members",
-        "user_ids": user_ids,
-      };
+      return {"@type": "members", "user_ids": user_ids};
     }
   }
 }

@@ -37,9 +37,10 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 import 'dart:async';
 
 /// TelegramClientUncompleDocumentation
-typedef TelegramClientCallApiInvoke = FutureOr<Map> Function({
-  required Map parameters,
-  bool? is_invoke_no_relevance,
-  bool? is_use_cache,
-  Duration? duration_cache_expire,
-});
+typedef TelegramClientCallApiInvoke =
+    FutureOr<Map> Function({
+      required Map parameters,
+      bool? is_invoke_no_relevance,
+      bool? is_use_cache,
+      Duration? duration_cache_expire,
+    });

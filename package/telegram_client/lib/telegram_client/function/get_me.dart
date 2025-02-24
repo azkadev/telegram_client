@@ -48,9 +48,7 @@ extension GetMeDataOn on TelegramClient {
     required Map parameters,
     required TelegramClientCallApiInvoke callApiInvoke,
   }) async {
-    Map get_user = await callApiInvoke(
-      parameters: {"@type": "getMe"},
-    );
+    Map get_user = await callApiInvoke(parameters: {"@type": "getMe"});
 
     Map newScheme = {
       "@type": "user",
@@ -67,15 +65,18 @@ extension GetMeDataOn on TelegramClient {
     if (get_user["@type"] == "user") {
       newScheme["id"] = get_user["id"];
       if (get_user["type"] is Map) {
-        newScheme["type"] = (get_user["type"]["@type"] as String)
-            .replaceAll(RegExp(r"(userType)", caseSensitive: false), "")
-            .toLowerCase();
+        newScheme["type"] =
+            (get_user["type"]["@type"] as String)
+                .replaceAll(RegExp(r"(userType)", caseSensitive: false), "")
+                .toLowerCase();
       }
 
       newScheme["id"] = get_user["id"];
       try {
-        if (RegExp("^userTypeBot\$", caseSensitive: false)
-            .hashData(get_user["type"]["@type"])) {
+        if (RegExp(
+          "^userTypeBot\$",
+          caseSensitive: false,
+        ).hashData(get_user["type"]["@type"])) {
           newScheme["is_bot"] = true;
         } else {
           newScheme["is_bot"] = false;

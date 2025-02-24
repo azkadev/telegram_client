@@ -70,10 +70,7 @@ class TgUtils {
     required String name,
     required Uint8List buffer_data,
   }) {
-    return TelegramBotApiFileData(
-      buffer_data: buffer_data,
-      name: name,
-    );
+    return TelegramBotApiFileData(buffer_data: buffer_data, name: name);
   }
 
   /// TelegramClientUncompleDocumentation
@@ -84,9 +81,7 @@ class TgUtils {
 
   /// TelegramClientUncompleDocumentation
 
-  static TelegramBotApiFileData telegram_bot_api_file({
-    required File file,
-  }) {
+  static TelegramBotApiFileData telegram_bot_api_file({required File file}) {
     return TelegramBotApiFileData(
       buffer_data: file.readAsBytesSync(),
       name: basename(file.path),
@@ -114,9 +109,7 @@ class TgUtils {
   }
 
   /// convert string or text ro base64
-  static String stringToBase64({
-    required String value,
-  }) {
+  static String stringToBase64({required String value}) {
     return base64.encode(utf8.encode(value));
   }
 
@@ -197,14 +190,19 @@ class TgUtils {
   }
 
   /// ccreate offset for tl
-  static List<String> splitByLength(String text, int length,
-      {bool ignoreEmpty = false}) {
+  static List<String> splitByLength(
+    String text,
+    int length, {
+    bool ignoreEmpty = false,
+  }) {
     final List<String> pieces = [];
 
     for (int i = 0; i < text.length; i += length) {
       final int offset = i + length;
-      String piece =
-          text.substring(i, offset >= text.length ? text.length : offset);
+      String piece = text.substring(
+        i,
+        offset >= text.length ? text.length : offset,
+      );
 
       if (ignoreEmpty) {
         piece = piece.replaceAll(RegExp(r'\s+'), '');
@@ -282,19 +280,13 @@ class TgUtils {
   /// ```dart
   /// String telegram_share = TgUtils.telegram_share(text: "slebew", url: "hi"); // result: https://t.me/share/url?url=hi&text=slebew
   /// ```
-  static String telegram_share({
-    required String text,
-    required String url,
-  }) {
-    final Map<String, String> queryParameters = {
-      "url": url,
-      "text": text,
-    };
+  static String telegram_share({required String text, required String url}) {
+    final Map<String, String> queryParameters = {"url": url, "text": text};
     queryParameters.removeWhere((key, value) => value.isEmpty);
 
-    return Uri.parse("https://t.me/share/url")
-        .replace(queryParameters: queryParameters)
-        .toString();
+    return Uri.parse(
+      "https://t.me/share/url",
+    ).replace(queryParameters: queryParameters).toString();
   }
 
   /// convert messages_api to messages_api_tdlib
@@ -307,15 +299,18 @@ class TgUtils {
     required dynamic chat_id,
     required dynamic message_id,
   }) {
-    return Uri.parse("https://t.me/").replace(
-      pathSegments: [
-        "c",
-        chat_id
-            .toString()
-            .replaceAll(RegExp(r"^(-100|-)", caseSensitive: false), ""),
-        message_id.toString(),
-      ],
-    ).toString();
+    return Uri.parse("https://t.me/")
+        .replace(
+          pathSegments: [
+            "c",
+            chat_id.toString().replaceAll(
+              RegExp(r"^(-100|-)", caseSensitive: false),
+              "",
+            ),
+            message_id.toString(),
+          ],
+        )
+        .toString();
   }
 
   /// convert messages_api to messages_api_tdlib
@@ -328,11 +323,14 @@ class TgUtils {
     required String chat_username,
     required String text,
   }) {
-    return Uri.parse("https://t.me/").replace(pathSegments: [
-      "${chat_username.toString().replaceAll(RegExp(r"(@)", caseSensitive: false), "").trim()}",
-    ], queryParameters: {
-      "text": text,
-    }).toString();
+    return Uri.parse("https://t.me/")
+        .replace(
+          pathSegments: [
+            "${chat_username.toString().replaceAll(RegExp(r"(@)", caseSensitive: false), "").trim()}",
+          ],
+          queryParameters: {"text": text},
+        )
+        .toString();
   }
 
   /// TelegramClientUncompleDocumentation
@@ -351,8 +349,7 @@ class TgUtils {
     return """
 ```${language}
 ${text}
-```"""
-        .trim();
+```""".trim();
   }
 
   /// TelegramClientUncompleDocumentation
@@ -388,18 +385,20 @@ ${text}
   }
 
   /// TelegramClientUncompleDocumentation
-  static dynamic parse_all_chat_id({
-    required Map parameters,
-  }) {
+  static dynamic parse_all_chat_id({required Map parameters}) {
     final dynamic target_chat_id = () {
       if (parameters["chat_id"] is int) {
         return (parameters["chat_id"]);
       }
       if (parameters["chat_id"] is String &&
-          RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-              .hashData(parameters["chat_id"])) {
-        if (RegExp(r"^((-)?[0-9]+)$", caseSensitive: false)
-            .hashData(parameters["chat_id"])) {
+          RegExp(
+            r"^((@)[a-z0-9_]+)$",
+            caseSensitive: false,
+          ).hashData(parameters["chat_id"])) {
+        if (RegExp(
+          r"^((-)?[0-9]+)$",
+          caseSensitive: false,
+        ).hashData(parameters["chat_id"])) {
           return int.tryParse(parameters["chat_id"]) ?? 0;
         }
         return (parameters["chat_id"]);
@@ -408,10 +407,14 @@ ${text}
         return (parameters["user_id"]);
       }
       if (parameters["user_id"] is String &&
-          RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-              .hashData(parameters["user_id"])) {
-        if (RegExp(r"^((-)?[0-9]+)$", caseSensitive: false)
-            .hashData(parameters["user_id"])) {
+          RegExp(
+            r"^((@)[a-z0-9_]+)$",
+            caseSensitive: false,
+          ).hashData(parameters["user_id"])) {
+        if (RegExp(
+          r"^((-)?[0-9]+)$",
+          caseSensitive: false,
+        ).hashData(parameters["user_id"])) {
           return int.tryParse(parameters["user_id"]) ?? 0;
         }
         return (parameters["user_id"]);
@@ -423,18 +426,20 @@ ${text}
 
   /// TelegramClientUncompleDocumentation
 
-  static dynamic parse_chat_id({
-    required Map parameters,
-  }) {
+  static dynamic parse_chat_id({required Map parameters}) {
     final dynamic target_chat_id = () {
       if (parameters["chat_id"] is int) {
         return (parameters["chat_id"]);
       }
       if (parameters["chat_id"] is String &&
-          RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-              .hashData(parameters["chat_id"])) {
-        if (RegExp(r"^((-)?[0-9]+)$", caseSensitive: false)
-            .hashData(parameters["chat_id"])) {
+          RegExp(
+            r"^((@)[a-z0-9_]+)$",
+            caseSensitive: false,
+          ).hashData(parameters["chat_id"])) {
+        if (RegExp(
+          r"^((-)?[0-9]+)$",
+          caseSensitive: false,
+        ).hashData(parameters["chat_id"])) {
           return int.tryParse(parameters["chat_id"]) ?? 0;
         }
         return (parameters["chat_id"]);
@@ -445,9 +450,7 @@ ${text}
   }
 
   /// TelegramClientUncompleDocumentation
-  static Map? replyMarkupTgApiToTdlib({
-    required Map replyMarkup,
-  }) {
+  static Map? replyMarkupTgApiToTdlib({required Map replyMarkup}) {
     if (replyMarkup["keyboard"] is List) {
       final Map replyMarkupShowKeyboard = <dynamic, dynamic>{
         "@type": "replyMarkupShowKeyboard",
@@ -572,9 +575,7 @@ ${text}
                 jsonData["type"] = {
                   "@type": "inlineKeyboardButtonTypeSwitchInline",
                   "query": data_row["switch_inline_query_current_chat"],
-                  "target_chat": {
-                    "@type": "targetChatCurrent",
-                  },
+                  "target_chat": {"@type": "targetChatCurrent"},
                 };
               }
 
@@ -616,51 +617,30 @@ ${text}
           if (content["buffer"] is List<int>) {
             await file.writeAsBytes((content["buffer"] as List<int>));
           }
-          return {
-            "@type": 'inputFileLocal',
-            "path": file.path,
-          };
+          return {"@type": 'inputFileLocal', "path": file.path};
         }
       }
     } else if (content is Uri) {
-      return {
-        "@type": 'inputFileRemote',
-        "id": content.toString(),
-      };
+      return {"@type": 'inputFileRemote', "id": content.toString()};
     } else if (RegExp(r"^(http)", caseSensitive: false).hashData(content)) {
-      return {
-        "@type": 'inputFileRemote',
-        "id": content,
-      };
-    } else if (RegExp(r"^(\/|\.\.?\/|~\/)", caseSensitive: false)
-        .hashData(content)) {
-      return {
-        "@type": 'inputFileLocal',
-        "path": content,
-      };
+      return {"@type": 'inputFileRemote', "id": content};
+    } else if (RegExp(
+      r"^(\/|\.\.?\/|~\/)",
+      caseSensitive: false,
+    ).hashData(content)) {
+      return {"@type": 'inputFileLocal', "path": content};
     } else if (content is File) {
-      return {
-        "@type": 'inputFileLocal',
-        "path": content.path,
-      };
+      return {"@type": 'inputFileLocal', "path": content.path};
     } else if (content is int) {
-      return {
-        "@type": 'inputFileId',
-        "id": content,
-      };
+      return {"@type": 'inputFileId', "id": content};
     } else {
-      return {
-        "@type": 'inputFileRemote',
-        "id": content,
-      };
+      return {"@type": 'inputFileRemote', "id": content};
     }
     return null;
   }
 
   /// TelegramClientUncompleDocumentation
-  static Map? replyMarkupTdlibToTgApi({
-    required Map replyMarkup,
-  }) {
+  static Map? replyMarkupTdlibToTgApi({required Map replyMarkup}) {
     if (replyMarkup["@type"] == "replyMarkupShowKeyboard") {
       final Map replyMarkupShowKeyboard = <dynamic, dynamic>{};
       replyMarkup.forEach((key, value) {
@@ -763,8 +743,9 @@ ${text}
                   final Map data_row_type = data_row["type"];
                   if (data_row_type["@type"] ==
                       "inlineKeyboardButtonTypeCallback") {
-                    jsonData["callback_data"] =
-                        utf8.decode(base64.decode(data_row_type["data"]));
+                    jsonData["callback_data"] = utf8.decode(
+                      base64.decode(data_row_type["data"]),
+                    );
                   }
                   if (data_row_type["@type"] ==
                       "inlineKeyboardButtonTypeWebApp") {
@@ -806,16 +787,12 @@ ${text}
   }
 
   /// TelegramClientUncompleDocumentation
-  static Map? entitiesTgApiToTdlib({
-    required Map replyMarkup,
-  }) {
+  static Map? entitiesTgApiToTdlib({required Map replyMarkup}) {
     return null;
   }
 
   /// TelegramClientUncompleDocumentation
-  static Map? entitiesTdlibToTgApi({
-    required Map replyMarkup,
-  }) {
+  static Map? entitiesTdlibToTgApi({required Map replyMarkup}) {
     return null;
   }
 
@@ -825,9 +802,7 @@ ${text}
     required TelegramClient tg,
   }) {
     if (inputMessageContent.containsKey("message_text")) {
-      final Map new_scheme = <dynamic, dynamic>{
-        "@type": "inputMessageText",
-      };
+      final Map new_scheme = <dynamic, dynamic>{"@type": "inputMessageText"};
 
       inputMessageContent.forEach((key, value) {
         if (["@type"].contains(key)) {
@@ -851,25 +826,17 @@ ${text}
         return "";
       }();
       if (parse_mode == "html") {
-        formatted_text = tg.tdlib.td_execute(
-          {
-            "@type": 'parseTextEntities',
-            "parse_mode": {
-              "@type": "textParseModeHTML",
-            },
-            "text": formatted_text["text"],
-          },
-        );
+        formatted_text = tg.tdlib.td_execute({
+          "@type": 'parseTextEntities',
+          "parse_mode": {"@type": "textParseModeHTML"},
+          "text": formatted_text["text"],
+        });
       } else if (parse_mode == "markdown") {
-        formatted_text = tg.tdlib.td_execute(
-          {
-            "@type": 'parseTextEntities',
-            "parse_mode": {
-              "@type": "textParseModeMarkdown",
-            },
-            "text": formatted_text["text"],
-          },
-        );
+        formatted_text = tg.tdlib.td_execute({
+          "@type": 'parseTextEntities',
+          "parse_mode": {"@type": "textParseModeMarkdown"},
+          "text": formatted_text["text"],
+        });
       }
       new_scheme["text"] = formatted_text;
       return new_scheme;
@@ -880,15 +847,9 @@ ${text}
   /// TelegramClientUncompleDocumentation
   static Map sender_id_from_int(int data_id) {
     if (data_id > 0) {
-      return {
-        "@type": "messageSenderUser",
-        "user_id": data_id,
-      };
+      return {"@type": "messageSenderUser", "user_id": data_id};
     } else {
-      return {
-        "@type": "messageSenderChat",
-        "chat_id": data_id,
-      };
+      return {"@type": "messageSenderChat", "chat_id": data_id};
     }
   }
 
@@ -916,16 +877,16 @@ ${text}
   /// // 99966XYYYY
   /// String phone_number_dc = (TgUtils.generate_test_dc_phone_number());
   /// ```
-  static String generate_test_dc_phone_number({
-    String dc = "2",
-  }) {
+  static String generate_test_dc_phone_number({String dc = "2"}) {
     if (["2", "3", "1"].contains(dc) == false) {
       dc = "2";
     }
-    return "99966${dc}YYYY"
-        .replaceAllMapped(RegExp("(y)", caseSensitive: false), (match) {
-      return "${Random().nextInt(9)}";
-    });
+    return "99966${dc}YYYY".replaceAllMapped(
+      RegExp("(y)", caseSensitive: false),
+      (match) {
+        return "${Random().nextInt(9)}";
+      },
+    );
   }
 
   /// TelegramClientUncompleDocumentation
@@ -1008,22 +969,13 @@ ${text}
       "🤷‍♂",
       "🤷",
       "🤷‍♀",
-      "😡"
+      "😡",
     ];
   }
 
   /// TelegramClientUncompleDocumentation
   static List<String> bot_emoji_reaction_goods() {
-    return [
-      "👍",
-      "❤",
-      "🔥",
-      "🥰",
-      "👏",
-      "🎉",
-      "🤩",
-      "😍",
-    ];
+    return ["👍", "❤", "🔥", "🥰", "👏", "🎉", "🤩", "😍"];
   }
 
   /// TelegramClientUncompleDocumentation

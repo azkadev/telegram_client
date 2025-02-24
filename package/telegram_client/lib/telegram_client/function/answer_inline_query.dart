@@ -51,9 +51,7 @@ extension AnswerInlineQueryDataOn on TelegramClient {
     bool? isUseCache = false,
     Duration? durationCacheExpire,
   }) async {
-    Map request_parameters = {
-      "@type": "answerInlineQuery",
-    };
+    Map request_parameters = {"@type": "answerInlineQuery"};
 
     parameters.forEach((key, value) {
       if (["@type"].contains(key)) {
@@ -84,9 +82,7 @@ extension AnswerInlineQueryDataOn on TelegramClient {
       for (var i = 0; i < results.length; i++) {
         dynamic result_data = results[i];
         if (result_data is Map) {
-          Map jsonData = {
-            "@type": "inputInlineQueryResultArticle",
-          };
+          Map jsonData = {"@type": "inputInlineQueryResultArticle"};
           if (result_data["type"] == "article") {
             jsonData["@type"] = "inputInlineQueryResultArticle";
           }
@@ -97,8 +93,9 @@ extension AnswerInlineQueryDataOn on TelegramClient {
 
             if (value is Map) {
               if (key == "reply_markup") {
-                jsonData[key] =
-                    TgUtils.replyMarkupTgApiToTdlib(replyMarkup: value);
+                jsonData[key] = TgUtils.replyMarkupTgApiToTdlib(
+                  replyMarkup: value,
+                );
               }
               if (key == "input_message_content") {
                 jsonData[key] = TgUtils.inputMessageContentInlineQueryTgToTdlib(
@@ -119,9 +116,7 @@ extension AnswerInlineQueryDataOn on TelegramClient {
       request_parameters["results"] = result_tdlib;
     }
 
-    Map request_result = await callApiInvoke(
-      parameters: request_parameters,
-    );
+    Map request_result = await callApiInvoke(parameters: request_parameters);
 
     return request_result;
   }

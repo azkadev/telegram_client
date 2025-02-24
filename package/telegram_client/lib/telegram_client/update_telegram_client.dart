@@ -77,13 +77,15 @@ class UpdateTelegramClient {
   Map tgClientData() {
     if (telegramClientData.telegramClientType ==
         TelegramClientType.telegam_bot_api) {
-      final Map decyprt =
-          json.decode(tg.telegramBotApi.crypto.decrypt(data: query["tg"]));
+      final Map decyprt = json.decode(
+        tg.telegramBotApi.crypto.decrypt(data: query["tg"]),
+      );
 
       if (decyprt["client_tg_user_id"] == null ||
           decyprt["client_tg_user_id"] == 0) {
-        decyprt["client_tg_user_id"] =
-            TgUtils.parserBotUserIdFromToken(decyprt["client_token"]);
+        decyprt["client_tg_user_id"] = TgUtils.parserBotUserIdFromToken(
+          decyprt["client_token"],
+        );
       }
       return decyprt;
     }
@@ -137,8 +139,8 @@ class UpdateTelegramClient {
       is_lite: true,
       updataOptionTelegramClient: UpdataOptionTelegramClient(
         updataMessageTelegramClient: UpdataMessageTelegramClient(
-            // is_use_cache: true,
-            ),
+          // is_use_cache: true,
+        ),
       ),
     );
   }
@@ -160,9 +162,7 @@ class UpdataOptionTelegramClient {
   final UpdataMessageTelegramClient updataMessageTelegramClient;
 
   /// TelegramClientUncompleDocumentation
-  UpdataOptionTelegramClient({
-    required this.updataMessageTelegramClient,
-  });
+  UpdataOptionTelegramClient({required this.updataMessageTelegramClient});
 }
 
 /// TelegramClientUncompleDocumentation

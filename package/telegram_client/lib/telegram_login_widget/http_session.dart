@@ -45,9 +45,7 @@ class HttpSession {
   late http.Client http_client;
 
   /// run executable telegram bot api
-  HttpSession({
-    http.Client? httpClient,
-  }) {
+  HttpSession({http.Client? httpClient}) {
     if (httpClient != null) {
       http_client = httpClient;
     } else {

@@ -42,9 +42,7 @@ import 'package:telegram_client/telegram_client/telegram_client.dart';
 void main(List<String> args) async {
   print("Start Program");
   TelegramClient tg = TelegramClient();
-  tg.ensureInitialized(
-    is_init_tdlib: false,
-  );
+  tg.ensureInitialized(is_init_tdlib: false);
 
   tg.on(
     event_name: tg.event_update,
@@ -75,10 +73,7 @@ void main(List<String> args) async {
 
           if (authorization_state["@type"] == "authorizationStateWaitCode") {
             Map res = await tg.invoke(
-              parameters: {
-                "@type": "checkAuthenticationCode",
-                "code": "xxxxx",
-              },
+              parameters: {"@type": "checkAuthenticationCode", "code": "xxxxx"},
               telegramClientData: updateTelegramClient.telegramClientData,
             );
             print(res);
@@ -86,9 +81,7 @@ void main(List<String> args) async {
 
           if (authorization_state["@type"] == "authorizationStateReady") {
             Map get_me = await tg.invoke(
-              parameters: {
-                "@type": "getMe",
-              },
+              parameters: {"@type": "getMe"},
               telegramClientData: updateTelegramClient.telegramClientData,
             );
             get_me.printPretty();

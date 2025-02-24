@@ -51,13 +51,17 @@ extension GetUserDataOn on TelegramClient {
   }) async {
     dynamic target_chat_id = TgUtils.parse_all_chat_id(parameters: parameters);
     if (target_chat_id is String &&
-        RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-            .hashData(target_chat_id)) {
+        RegExp(
+          r"^((@)[a-z0-9_]+)$",
+          caseSensitive: false,
+        ).hashData(target_chat_id)) {
       var search_public_chat = await callApiInvoke(
         parameters: {
           "@type": "searchPublicChat",
-          "username": (target_chat_id)
-              .replaceAll(RegExp(r"@", caseSensitive: false), ""),
+          "username": (target_chat_id).replaceAll(
+            RegExp(r"@", caseSensitive: false),
+            "",
+          ),
         },
         is_invoke_no_relevance: true,
       );
@@ -68,10 +72,7 @@ extension GetUserDataOn on TelegramClient {
       }
     }
     Map get_user = await callApiInvoke(
-      parameters: {
-        "@type": "getUser",
-        "user_id": target_chat_id,
-      },
+      parameters: {"@type": "getUser", "user_id": target_chat_id},
     );
     Map newScheme = {
       "@type": "user",
@@ -88,15 +89,18 @@ extension GetUserDataOn on TelegramClient {
     if (get_user["@type"] == "user") {
       newScheme["id"] = get_user["id"];
       if (get_user["type"] is Map) {
-        newScheme["type"] = (get_user["type"]["@type"] as String)
-            .replaceAll(RegExp(r"(userType)", caseSensitive: false), "")
-            .toLowerCase();
+        newScheme["type"] =
+            (get_user["type"]["@type"] as String)
+                .replaceAll(RegExp(r"(userType)", caseSensitive: false), "")
+                .toLowerCase();
       }
 
       newScheme["id"] = get_user["id"];
       try {
-        if (RegExp("^userTypeBot\$", caseSensitive: false)
-            .hashData(get_user["type"]["@type"])) {
+        if (RegExp(
+          "^userTypeBot\$",
+          caseSensitive: false,
+        ).hashData(get_user["type"]["@type"])) {
           newScheme["is_bot"] = true;
         } else {
           newScheme["is_bot"] = false;

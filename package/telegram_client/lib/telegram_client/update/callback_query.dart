@@ -84,15 +84,10 @@ extension CallbackQueryDataDataOn on TelegramClient {
 
     if (callbackQuery["chat_id"] is int) {
       if (is_lite) {
-        message_chat_json["chat"] = {
-          "id": callbackQuery["chat_id"],
-        };
+        message_chat_json["chat"] = {"id": callbackQuery["chat_id"]};
       } else {
         final Map res = await request(
-          parameters: {
-            "@type": "getChat",
-            "chat_id": callbackQuery["chat_id"],
-          },
+          parameters: {"@type": "getChat", "chat_id": callbackQuery["chat_id"]},
           isUseCache: isUseCache,
           durationCacheExpire: durationCacheExpire,
           is_return_as_api: false,
@@ -129,8 +124,9 @@ extension CallbackQueryDataDataOn on TelegramClient {
       );
     }
     new_scheme_data["chat_instance"] = callbackQuery["chat_instance"];
-    new_scheme_data["data"] =
-        utf8.decode(base64.decode(callbackQuery["payload"]["data"]));
+    new_scheme_data["data"] = utf8.decode(
+      base64.decode(callbackQuery["payload"]["data"]),
+    );
 
     return new_scheme_data;
   }
@@ -153,10 +149,7 @@ extension CallbackQueryDataDataOn on TelegramClient {
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
       );
-      return {
-        "@type": "updateCallbackQuery",
-        "callback_query": callback_query,
-      };
+      return {"@type": "updateCallbackQuery", "callback_query": callback_query};
     }
 
     return null;

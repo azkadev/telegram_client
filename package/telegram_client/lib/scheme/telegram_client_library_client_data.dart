@@ -61,7 +61,7 @@ class TelegramClientLibraryClientData extends JsonScheme {
       "client_username": "",
       "version": "",
       "client_id": 0,
-      "client_data": "{}"
+      "client_data": "{}",
     };
   }
 
@@ -417,8 +417,9 @@ class TelegramClientLibraryClientData extends JsonScheme {
       "client_data": client_data,
     };
 
-    telegramClientLibraryClientData_data_create_json
-        .removeWhere((key, value) => value == null);
+    telegramClientLibraryClientData_data_create_json.removeWhere(
+      (key, value) => value == null,
+    );
 
     if (schemeUtilsIsSetDefaultData) {
       defaultData.forEach((key, value) {
@@ -429,6 +430,7 @@ class TelegramClientLibraryClientData extends JsonScheme {
       });
     }
     return TelegramClientLibraryClientData(
-        telegramClientLibraryClientData_data_create_json);
+      telegramClientLibraryClientData_data_create_json,
+    );
   }
 }

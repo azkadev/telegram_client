@@ -45,8 +45,5 @@ class TdlibInvokeResult {
   final Map result;
 
   /// TelegramClientUncompleDocumentation
-  const TdlibInvokeResult({
-    required this.client_id,
-    required this.result,
-  });
+  const TdlibInvokeResult({required this.client_id, required this.result});
 }

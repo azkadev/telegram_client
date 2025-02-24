@@ -48,9 +48,6 @@ extension ReportMessageDataOn on TelegramClient {
     required TelegramClientCallApiInvoke callApiInvoke,
   }) async {
     parameters["message_ids"] = parameters["message_id"];
-    return reportMessages(
-      parameters: parameters,
-      callApiInvoke: callApiInvoke,
-    );
+    return reportMessages(parameters: parameters, callApiInvoke: callApiInvoke);
   }
 }

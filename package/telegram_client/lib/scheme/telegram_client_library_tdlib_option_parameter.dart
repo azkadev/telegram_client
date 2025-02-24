@@ -64,7 +64,7 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
       "database_key": "",
       "start": true,
       "database_encryption_key": "",
-      "use_test_dc": false
+      "use_test_dc": false,
     };
   }
 
@@ -458,8 +458,9 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
       "use_test_dc": use_test_dc,
     };
 
-    telegramClientLibraryTdlibOptionParameter_data_create_json
-        .removeWhere((key, value) => value == null);
+    telegramClientLibraryTdlibOptionParameter_data_create_json.removeWhere(
+      (key, value) => value == null,
+    );
 
     if (schemeUtilsIsSetDefaultData) {
       defaultData.forEach((key, value) {
@@ -472,6 +473,7 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
       });
     }
     return TelegramClientLibraryTdlibOptionParameter(
-        telegramClientLibraryTdlibOptionParameter_data_create_json);
+      telegramClientLibraryTdlibOptionParameter_data_create_json,
+    );
   }
 }

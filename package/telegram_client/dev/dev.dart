@@ -84,9 +84,7 @@ void main(List<String> args) async {
 
             if (authorizationState["@type"] == "authorizationStateReady") {
               Map getMe = await telegramClient.invoke(
-                parameters: {
-                  "@type": "getMe",
-                },
+                parameters: {"@type": "getMe"},
                 telegramClientData: updateTelegramClient.telegramClientData,
               );
               getMe.printPretty();
@@ -103,8 +101,9 @@ void main(List<String> args) async {
     onError: (error, stackTrace) {},
   );
   await telegramClient.tdlib.closeClients();
-  final res = await telegramClient.tdlib
-      .createclient(clientId: telegramClient.tdlib.td_create_client_id());
+  final res = await telegramClient.tdlib.createclient(
+    clientId: telegramClient.tdlib.td_create_client_id(),
+  );
   res.printPretty();
 
   stdin.listen((event) async {
@@ -122,13 +121,11 @@ Future<void> telegramCommand({
   required TelegramClient telegramClient,
 }) async {
   TelegramClientData telegramClientData = TelegramClientData.tdlib(
-      tdlib_client_id: telegramClient.tdlib.first_client_id);
+    tdlib_client_id: telegramClient.tdlib.first_client_id,
+  );
   if (text == "getForumTopics") {
     final chat = await telegramClient.request(
-      parameters: {
-        "@type": "getChat",
-        "chat_id": "@DEVELOPER_GLOBAL_PUBLIC",
-      },
+      parameters: {"@type": "getChat", "chat_id": "@DEVELOPER_GLOBAL_PUBLIC"},
       telegramClientData: telegramClientData,
     );
     chat.printPretty();
@@ -142,19 +139,19 @@ Future<void> telegramCommand({
     );
     result.printPretty();
 
-    await telegramClient.request(parameters: {
-      "@type": "sendMessage",
-      "chat_id": chat["result"]["id"],
-      "message_thread_id": 45,
-      "text": "hello",
-    }, telegramClientData: telegramClientData);
+    await telegramClient.request(
+      parameters: {
+        "@type": "sendMessage",
+        "chat_id": chat["result"]["id"],
+        "message_thread_id": 45,
+        "text": "hello",
+      },
+      telegramClientData: telegramClientData,
+    );
   }
   if (text == "getForumTopic") {
     final chat = await telegramClient.request(
-      parameters: {
-        "@type": "getChat",
-        "chat_id": "@DEVELOPER_GLOBAL_PUBLIC",
-      },
+      parameters: {"@type": "getChat", "chat_id": "@DEVELOPER_GLOBAL_PUBLIC"},
       telegramClientData: telegramClientData,
     );
     chat.printPretty();
@@ -168,11 +165,14 @@ Future<void> telegramCommand({
     // );
     // result.printPretty();
 
-    await telegramClient.request(parameters: {
-      "@type": "sendMessage",
-      "chat_id": chat["result"]["id"],
-      "message_thread_id": 3637,
-      "text": "Hell New",
-    }, telegramClientData: telegramClientData);
+    await telegramClient.request(
+      parameters: {
+        "@type": "sendMessage",
+        "chat_id": chat["result"]["id"],
+        "message_thread_id": 3637,
+        "text": "Hell New",
+      },
+      telegramClientData: telegramClientData,
+    );
   }
 }

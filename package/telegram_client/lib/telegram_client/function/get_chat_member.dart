@@ -50,13 +50,17 @@ extension GetChatMemberDataOn on TelegramClient {
   }) async {
     dynamic target_chat_id = TgUtils.parse_all_chat_id(parameters: parameters);
     if (target_chat_id is String &&
-        RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-            .hashData(target_chat_id)) {
+        RegExp(
+          r"^((@)[a-z0-9_]+)$",
+          caseSensitive: false,
+        ).hashData(target_chat_id)) {
       var search_public_chat = await callApiInvoke(
         parameters: {
           "@type": "searchPublicChat",
-          "username": (target_chat_id)
-              .replaceAll(RegExp(r"@", caseSensitive: false), ""),
+          "username": (target_chat_id).replaceAll(
+            RegExp(r"@", caseSensitive: false),
+            "",
+          ),
         },
         is_invoke_no_relevance: true,
       );
@@ -74,9 +78,7 @@ extension GetChatMemberDataOn on TelegramClient {
         "user_id": parameters["user_id"],
       },
     };
-    Map request_result = await callApiInvoke(
-      parameters: request_parameters,
-    );
+    Map request_result = await callApiInvoke(parameters: request_parameters);
 
     Map message_user_json = {};
 
@@ -98,7 +100,9 @@ extension GetChatMemberDataOn on TelegramClient {
         if (request_result["status"] is Map) {
           return (request_result["status"]["@type"] as String)
               .replaceAll(
-                  RegExp(r"^(chatMemberStatus)", caseSensitive: false), "")
+                RegExp(r"^(chatMemberStatus)", caseSensitive: false),
+                "",
+              )
               .toLowerCase();
         }
         return "";

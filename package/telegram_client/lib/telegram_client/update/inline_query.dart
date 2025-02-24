@@ -112,10 +112,7 @@ extension InlineQueryDataDataOn on TelegramClient {
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
       );
-      return {
-        "@type": "updateInlineQuery",
-        "inline_query": callback_query,
-      };
+      return {"@type": "updateInlineQuery", "inline_query": callback_query};
     }
 
     return null;

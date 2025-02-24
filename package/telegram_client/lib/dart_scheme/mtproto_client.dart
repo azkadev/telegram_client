@@ -104,10 +104,7 @@ extension MtprotoClients on List<MtprotoClient> {
   }
 
   /// TelegramClientUncompleDocumentation
-  Future<bool> exitClientById(
-    int clientId, {
-    String? extra,
-  }) async {
+  Future<bool> exitClientById(int clientId, {String? extra}) async {
     MtprotoClient? tdlibClient = getClientById(clientId);
     if (tdlibClient != null) {
       tdlibClient.close();

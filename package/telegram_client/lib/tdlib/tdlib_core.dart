@@ -177,8 +177,12 @@ class Tdlib extends TdlibNative {
     if (client_id_first >= 1) {
       for (int i = 1; i <= client_id_first; i++) {
         try {
-          await invoke("close",
-              clientId: i, isInvokeThrowOnError: false, isVoid: true);
+          await invoke(
+            "close",
+            clientId: i,
+            isInvokeThrowOnError: false,
+            isVoid: true,
+          );
         } catch (e) {}
       }
     }
@@ -222,8 +226,9 @@ class Tdlib extends TdlibNative {
           return await invoke(
             "checkDatabaseEncryptionKey",
             parameters: {
-              "encryption_key":
-                  TgUtils.stringToBase64(value: client_option["database_key"]),
+              "encryption_key": TgUtils.stringToBase64(
+                value: client_option["database_key"],
+              ),
             },
             isUseCache: false,
             durationCacheExpire: null,
@@ -236,8 +241,9 @@ class Tdlib extends TdlibNative {
           return await invoke(
             "setDatabaseEncryptionKey",
             parameters: {
-              "new_encryption_key":
-                  TgUtils.stringToBase64(value: client_option["database_key"]),
+              "new_encryption_key": TgUtils.stringToBase64(
+                value: client_option["database_key"],
+              ),
             },
             clientId: clientId,
             isVoid: isVoid,
@@ -250,8 +256,10 @@ class Tdlib extends TdlibNative {
       }
 
       if (authStateType == "authorizationStateClosed") {
-        await exitClientById(update.client_id,
-            isInvokeThrowOnError: isInvokeThrowOnError);
+        await exitClientById(
+          update.client_id,
+          isInvokeThrowOnError: isInvokeThrowOnError,
+        );
 
         return {"@type": "ok"};
       }
@@ -343,16 +351,10 @@ class Tdlib extends TdlibNative {
           isInvokeThrowOnError: false,
         );
 
-        yield TdlibInvokeResult(
-          client_id: clientId,
-          result: result,
-        );
+        yield TdlibInvokeResult(client_id: clientId, result: result);
       } catch (e) {
         if (e is Map) {
-          yield TdlibInvokeResult(
-            client_id: clientId,
-            result: e,
-          );
+          yield TdlibInvokeResult(client_id: clientId, result: e);
         }
       }
     }
@@ -368,19 +370,11 @@ class Tdlib extends TdlibNative {
   }) async* {
     for (int clientId in getAllClientIds()) {
       try {
-        var result = invokeSync(
-          parameters: parameters,
-        );
-        yield TdlibInvokeResult(
-          client_id: clientId,
-          result: result,
-        );
+        var result = invokeSync(parameters: parameters);
+        yield TdlibInvokeResult(client_id: clientId, result: result);
       } catch (e) {
         if (e is Map) {
-          yield TdlibInvokeResult(
-            client_id: clientId,
-            result: e,
-          );
+          yield TdlibInvokeResult(client_id: clientId, result: e);
         }
       }
     }
@@ -407,16 +401,10 @@ class Tdlib extends TdlibNative {
           isUseCache: isUseCache,
           durationCacheExpire: durationCacheExpire,
         );
-        yield TdlibInvokeResult(
-          client_id: clientId,
-          result: result,
-        );
+        yield TdlibInvokeResult(client_id: clientId, result: result);
       } catch (e) {
         if (e is Map) {
-          yield TdlibInvokeResult(
-            client_id: clientId,
-            result: e,
-          );
+          yield TdlibInvokeResult(client_id: clientId, result: e);
         }
       }
     }
@@ -430,12 +418,12 @@ class Tdlib extends TdlibNative {
     try {
       String regexMethodSend =
           r"^(sendMessage|sendPhoto|sendVideo|sendAudio|sendVoice|sendDocument|sendSticker|sendAnimation|editMessage(Text))$";
-      if (RegExp(regexMethodSend, caseSensitive: false)
-          .hashData(parameters["@type"])) {
+      if (RegExp(
+        regexMethodSend,
+        caseSensitive: false,
+      ).hashData(parameters["@type"])) {
         jsonResult["@type"] = "sendMessage";
-        jsonResult["options"] = {
-          "@type": "messageSendOptions",
-        };
+        jsonResult["options"] = {"@type": "messageSendOptions"};
         parameters.forEach((key, value) {
           if (value is bool) {
             try {
@@ -443,8 +431,10 @@ class Tdlib extends TdlibNative {
             } catch (e) {}
           }
         });
-        if (RegExp("editMessage(Text)", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          "editMessage(Text)",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           jsonResult["@type"] = parameters["@type"];
         }
 
@@ -489,8 +479,10 @@ class Tdlib extends TdlibNative {
         if (parameters.containsKey("reply_markup")) {
           jsonResult["reply_markup"] = replyMarkup(parameters["reply_markup"]);
         }
-        if (RegExp(r"^(sendMessage|editMessageText)$", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          r"^(sendMessage|editMessageText)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           var text = parseMode(
             parameters["text"].toString(),
             parameters["parse_mode"],
@@ -499,53 +491,68 @@ class Tdlib extends TdlibNative {
           jsonResult["input_message_content"]["@type"] = "inputMessageText";
           jsonResult["input_message_content"]["text"] = text;
         }
-        if (RegExp(r"^(sendPhoto)$", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          r"^(sendPhoto)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           var getDetailFile = typeFile(parameters["photo"]);
           jsonResult["input_message_content"]["@type"] = "inputMessagePhoto";
           jsonResult["input_message_content"]["photo"] = getDetailFile;
         }
-        if (RegExp(r"^(sendVoice)$", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          r"^(sendVoice)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           var getDetailFile = typeFile(parameters["voice"]);
           jsonResult["input_message_content"]["@type"] =
               "inputMessageVoiceNote";
           jsonResult["input_message_content"]["voice_note"] = getDetailFile;
         }
-        if (RegExp(r"^(sendSticker)$", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          r"^(sendSticker)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           var getDetailFile = typeFile(parameters["sticker"]);
           jsonResult["input_message_content"]["@type"] = "inputMessageSticker";
           jsonResult["input_message_content"]["sticker"] = getDetailFile;
         }
-        if (RegExp(r"^(sendAnimation)$", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          r"^(sendAnimation)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           var getDetailFile = typeFile(parameters["animation"]);
           jsonResult["input_message_content"]["@type"] =
               "inputMessageAnimation";
           jsonResult["input_message_content"]["animation"] = getDetailFile;
         }
-        if (RegExp(r"^(sendDocument)$", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          r"^(sendDocument)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           var getDetailFile = typeFile(parameters["document"]);
           jsonResult["input_message_content"]["@type"] = "inputMessageDocument";
           jsonResult["input_message_content"]["document"] = getDetailFile;
         }
-        if (RegExp(r"^(sendAudio)$", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          r"^(sendAudio)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           var getDetailFile = typeFile(parameters["audio"]);
           jsonResult["input_message_content"]["@type"] = "inputMessageAudio";
           jsonResult["input_message_content"]["audio"] = getDetailFile;
         }
-        if (RegExp(r"^(sendVideo)$", caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (RegExp(
+          r"^(sendVideo)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           var getDetailFile = typeFile(parameters["video"]);
           jsonResult["input_message_content"]["@type"] = "inputMessageVideo";
           jsonResult["input_message_content"]["video"] = getDetailFile;
         }
-        if (!RegExp(r"^(sendMessage|sendLocation|sendSticker)$",
-                caseSensitive: false)
-            .hashData(parameters["@type"])) {
+        if (!RegExp(
+          r"^(sendMessage|sendLocation|sendSticker)$",
+          caseSensitive: false,
+        ).hashData(parameters["@type"])) {
           if (parameters["caption"] != null) {
             var caption = parseMode(
               (parameters["caption"] != null)
@@ -560,8 +567,10 @@ class Tdlib extends TdlibNative {
         return jsonResult;
       }
 
-      if (RegExp(r"^answerInlineQuery$", caseSensitive: false)
-          .hashData(parameters["@type"])) {
+      if (RegExp(
+        r"^answerInlineQuery$",
+        caseSensitive: false,
+      ).hashData(parameters["@type"])) {
         parameters["@type"] = "answerInlineQuery";
 
         if (parameters["results"] is List) {
@@ -580,8 +589,9 @@ class Tdlib extends TdlibNative {
             }
 
             if (loop_data["reply_markup"] is Map) {
-              loop_data["reply_markup"] =
-                  (replyMarkup(loop_data["reply_markup"]));
+              loop_data["reply_markup"] = (replyMarkup(
+                loop_data["reply_markup"],
+              ));
             }
             array_results.add(loop_data);
           }
@@ -600,31 +610,18 @@ class Tdlib extends TdlibNative {
   Map typeFile(dynamic content) {
     Map data = {};
     if (RegExp(r"^http", caseSensitive: false).hashData(content)) {
-      data = {
-        "@type": 'inputFileRemote',
-        "id": content,
-      };
-    } else if (RegExp(r"^(\/|\.\.?\/|~\/)", caseSensitive: false)
-        .hashData(content)) {
-      data = {
-        "@type": 'inputFileLocal',
-        "path": content,
-      };
+      data = {"@type": 'inputFileRemote', "id": content};
+    } else if (RegExp(
+      r"^(\/|\.\.?\/|~\/)",
+      caseSensitive: false,
+    ).hashData(content)) {
+      data = {"@type": 'inputFileLocal', "path": content};
     } else if (content is File) {
-      data = {
-        "@type": 'inputFileLocal',
-        "path": content.uri.toString(),
-      };
+      data = {"@type": 'inputFileLocal', "path": content.uri.toString()};
     } else if (content is int) {
-      data = {
-        "@type": 'inputFileId',
-        "id": content,
-      };
+      data = {"@type": 'inputFileId', "id": content};
     } else {
-      data = {
-        "@type": 'inputFileRemote',
-        "id": content,
-      };
+      data = {"@type": 'inputFileRemote', "id": content};
     }
     return data;
   }
@@ -643,13 +640,11 @@ class Tdlib extends TdlibNative {
     }
 
     try {
-      pesan = td_execute(
-        {
-          "@type": 'parseTextEntities',
-          "parse_mode": {"@type": parseMode},
-          "text": text
-        },
-      );
+      pesan = td_execute({
+        "@type": 'parseTextEntities',
+        "parse_mode": {"@type": parseMode},
+        "text": text,
+      });
     } catch (e) {}
 
     return pesan;
@@ -745,17 +740,15 @@ class Tdlib extends TdlibNative {
 
     try {
       if (get_me["profile_photo"] is Map) {
-        result["profile_photo"] = {
-          "id": 0,
-          "path": "",
-          "file_id": "",
-        };
+        result["profile_photo"] = {"id": 0, "path": "", "file_id": ""};
         for (final element in ["small", "big"]) {
           if (get_me["profile_photo"][element] is Map) {
             result["profile_photo"]["id"] =
                 get_me["profile_photo"][element]["id"];
-            (get_me["profile_photo"][element]["local"] as Map)
-                .forEach((key, value) {
+            (get_me["profile_photo"][element]["local"] as Map).forEach((
+              key,
+              value,
+            ) {
               if (key != "@type") {
                 result["profile_photo"][key.toString()] = value;
               }
@@ -780,18 +773,14 @@ class Tdlib extends TdlibNative {
   Map? replyMarkup(keyboard) {
     try {
       if (keyboard["remove_keyboard"] == true) {
-        Map json = {
-          "@type": "replyMarkupRemoveKeyboard",
-        };
+        Map json = {"@type": "replyMarkupRemoveKeyboard"};
         json["is_personal"] =
             (keyboard["is_personal"] is bool) ? keyboard["is_personal"] : true;
         return json;
       }
       if (keyboard["keyboard"] is List &&
           (keyboard["keyboard"] as List).isNotEmpty) {
-        Map json = {
-          "@type": "replyMarkupShowKeyboard",
-        };
+        Map json = {"@type": "replyMarkupShowKeyboard"};
         List array_rows = [];
         for (var i = 0; i < keyboard["keyboard"].length; i++) {
           var loop_array_keyboard = keyboard["keyboard"][i];
@@ -800,7 +789,7 @@ class Tdlib extends TdlibNative {
             var in_loop_array_keyboard = loop_array_keyboard[ii];
             Map in_json_keyboard = {
               "@type": "keyboardButton",
-              "type": {"@type": "keyboardButtonTypeText"}
+              "type": {"@type": "keyboardButtonTypeText"},
             };
             if (in_loop_array_keyboard is String) {
               in_json_keyboard["text"] = in_loop_array_keyboard;
@@ -822,9 +811,10 @@ class Tdlib extends TdlibNative {
           array_rows.add(array_loop);
         }
         json["rows"] = array_rows;
-        json["resize_keyboard"] = (keyboard["resize_keyboard"] is bool)
-            ? keyboard["resize_keyboard"]
-            : true;
+        json["resize_keyboard"] =
+            (keyboard["resize_keyboard"] is bool)
+                ? keyboard["resize_keyboard"]
+                : true;
         json["one_time"] =
             (keyboard["one_time"] is bool) ? keyboard["one_time"] : true;
         json["is_personal"] =
@@ -834,9 +824,7 @@ class Tdlib extends TdlibNative {
 
       if (keyboard["inline_keyboard"] is List &&
           keyboard["inline_keyboard"].length > 0) {
-        Map json = {
-          "@type": "replyMarkupInlineKeyboard",
-        };
+        Map json = {"@type": "replyMarkupInlineKeyboard"};
         List array_rows = [];
         for (var i = 0; i < keyboard["inline_keyboard"].length; i++) {
           var loop_array_keyboard = keyboard["inline_keyboard"][i];
@@ -851,7 +839,7 @@ class Tdlib extends TdlibNative {
             if (TgUtils.getBoolean(in_loop_array_keyboard["url"])) {
               in_json_keyboard["type"] = {
                 "@type": "inlineKeyboardButtonTypeUrl",
-                "url": in_loop_array_keyboard["url"]
+                "url": in_loop_array_keyboard["url"],
               };
             }
 
@@ -864,42 +852,49 @@ class Tdlib extends TdlibNative {
             if (TgUtils.getBoolean(in_loop_array_keyboard["callback_data"])) {
               in_json_keyboard["type"] = {
                 "@type": "inlineKeyboardButtonTypeCallback",
-                "data": convert.base64.encode(convert.utf8
-                    .encode(in_loop_array_keyboard["callback_data"]))
+                "data": convert.base64.encode(
+                  convert.utf8.encode(in_loop_array_keyboard["callback_data"]),
+                ),
               };
             }
             if (TgUtils.getBoolean(
-                in_loop_array_keyboard["callback_data_password"])) {
+              in_loop_array_keyboard["callback_data_password"],
+            )) {
               in_json_keyboard["type"] = {
                 "@type": "inlineKeyboardButtonTypeCallbackWithPassword",
-                "data": convert.base64.encode(convert.utf8
-                    .encode(in_loop_array_keyboard["callback_data_password"]))
+                "data": convert.base64.encode(
+                  convert.utf8.encode(
+                    in_loop_array_keyboard["callback_data_password"],
+                  ),
+                ),
               };
             }
 
             if (TgUtils.getBoolean(
-                in_loop_array_keyboard["switch_inline_query"])) {
+              in_loop_array_keyboard["switch_inline_query"],
+            )) {
               in_json_keyboard["type"] = {
                 "@type": "inlineKeyboardButtonTypeSwitchInline",
                 "query": in_loop_array_keyboard["switch_inline_query"],
-                "in_current_chat": false
+                "in_current_chat": false,
               };
             }
 
             if (TgUtils.getBoolean(
-                in_loop_array_keyboard["switch_inline_query_current_chat"])) {
+              in_loop_array_keyboard["switch_inline_query_current_chat"],
+            )) {
               in_json_keyboard["type"] = {
                 "@type": "inlineKeyboardButtonTypeSwitchInline",
                 "query":
                     in_loop_array_keyboard["switch_inline_query_current_chat"],
-                "in_current_chat": true
+                "in_current_chat": true,
               };
             }
             if (TgUtils.getBoolean(in_loop_array_keyboard["callback_game"])) {
               in_json_keyboard["type"] = {
                 "@type": "inlineKeyboardButtonTypeSwitchInline",
                 "query": in_loop_array_keyboard["callback_game"],
-                "in_current_chat": false
+                "in_current_chat": false,
               };
             }
             if (TgUtils.getBoolean(in_loop_array_keyboard["user_id"])) {
@@ -910,7 +905,7 @@ class Tdlib extends TdlibNative {
             }
             if (TgUtils.getBoolean(in_loop_array_keyboard["pay"])) {
               in_json_keyboard["type"] = {
-                "@type": "inlineKeyboardButtonTypeBuy"
+                "@type": "inlineKeyboardButtonTypeBuy",
               };
             }
             array_loop.add(in_json_keyboard);
@@ -937,9 +932,9 @@ class Tdlib extends TdlibNative {
     String? extra,
     bool? isAutoGetChat,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-        onGenerateExtraInvoke,
+    onGenerateExtraInvoke,
     FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)?
-        onGetInvokeData,
+    onGetInvokeData,
     bool? isInvokeThrowOnError,
     bool isAutoExtendMessage = false,
     bool? isUseCache,
@@ -950,14 +945,14 @@ class Tdlib extends TdlibNative {
 
     isAutoGetChat ??= false;
     if (parameters["chat_id"] is String &&
-        RegExp(r"^(@)?[a-z0-9_]+", caseSensitive: false)
-            .hashData(parameters["chat_id"])) {
+        RegExp(
+          r"^(@)?[a-z0-9_]+",
+          caseSensitive: false,
+        ).hashData(parameters["chat_id"])) {
       isAutoGetChat = false;
       var search_public_chat = await invoke(
         "searchPublicChat",
-        parameters: {
-          "username": parameters["chat_id"],
-        },
+        parameters: {"username": parameters["chat_id"]},
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         clientId: clientId,
@@ -973,14 +968,14 @@ class Tdlib extends TdlibNative {
       }
     }
     if (parameters["user_id"] is String &&
-        RegExp(r"^(@)?[a-z0-9_]+", caseSensitive: false)
-            .hashData(parameters["user_id"])) {
+        RegExp(
+          r"^(@)?[a-z0-9_]+",
+          caseSensitive: false,
+        ).hashData(parameters["user_id"])) {
       isAutoGetChat = false;
       var search_public_chat = await invoke(
         "searchPublicChat",
-        parameters: {
-          "username": parameters["user_id"],
-        },
+        parameters: {"username": parameters["user_id"]},
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         clientId: clientId,
@@ -998,19 +993,12 @@ class Tdlib extends TdlibNative {
     String regexMethodSend =
         r"^(sendMessage|sendPhoto|sendVideo|sendAudio|sendVoice|sendDocument|sendSticker|sendAnimation)$";
     if (RegExp(regexMethodSend, caseSensitive: false).hashData(method)) {
-      Map result_request = {
-        "ok": false,
-      };
+      Map result_request = {"ok": false};
       result_request = await invoke(
         (RegExp("editMessageText", caseSensitive: false).hashData(method))
             ? method
             : "sendMessage",
-        parameters: makeParametersApi(
-          {
-            "@type": method,
-            ...parameters,
-          },
-        ),
+        parameters: makeParametersApi({"@type": method, ...parameters}),
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         clientId: clientId,
@@ -1024,9 +1012,7 @@ class Tdlib extends TdlibNative {
         onGetInvokeData: onGetInvokeData,
       );
       if (isVoid) {
-        return {
-          "@type": "ok",
-        };
+        return {"@type": "ok"};
       }
       if (result_request["ok"] == false) {
         throw result_request;
@@ -1043,8 +1029,10 @@ class Tdlib extends TdlibNative {
           return;
         }
         Map updateOrigin = update.raw;
-        if (!["updateMessageSendSucceeded", "updateMessageSendFailed"]
-            .contains(updateOrigin["@type"])) {
+        if (![
+          "updateMessageSendSucceeded",
+          "updateMessageSendFailed",
+        ].contains(updateOrigin["@type"])) {
           return;
         }
 
@@ -1080,9 +1068,7 @@ class Tdlib extends TdlibNative {
       Map result = await completer.future.timeout(
         Duration(minutes: 1),
         onTimeout: () {
-          return {
-            "@type": "error",
-          };
+          return {"@type": "error"};
         },
       );
 
@@ -1115,10 +1101,7 @@ class Tdlib extends TdlibNative {
           }
         }
 
-        return {
-          "ok": true,
-          "result": result,
-        };
+        return {"ok": true, "result": result};
       }
       throw result;
     }
@@ -1148,9 +1131,10 @@ class Tdlib extends TdlibNative {
         message_id: parameters["message_id"],
         text: parameters["text"],
         inline_message_id: parameters["inline_message_id"],
-        parse_mode: (parameters["parse_mode"] is String)
-            ? parameters["parse_mode"]
-            : "html",
+        parse_mode:
+            (parameters["parse_mode"] is String)
+                ? parameters["parse_mode"]
+                : "html",
         entities:
             (parameters["entities"] is List) ? parameters["entities"] : [],
         disable_web_page_preview:
@@ -1163,16 +1147,19 @@ class Tdlib extends TdlibNative {
         durationCacheExpire: durationCacheExpire,
       );
     }
-    if (RegExp(r"^editMessageCaption$", caseSensitive: false)
-        .hashData(method)) {
+    if (RegExp(
+      r"^editMessageCaption$",
+      caseSensitive: false,
+    ).hashData(method)) {
       return await editMessageCaption(
         chat_id: parameters["chat_id"],
         message_id: parameters["message_id"],
         caption: parameters["caption"],
         inline_message_id: parameters["inline_message_id"],
-        parse_mode: (parameters["parse_mode"] is String)
-            ? parameters["parse_mode"]
-            : "html",
+        parse_mode:
+            (parameters["parse_mode"] is String)
+                ? parameters["parse_mode"]
+                : "html",
         entities:
             (parameters["entities"] is List) ? parameters["entities"] : [],
         disable_web_page_preview:
@@ -1188,9 +1175,7 @@ class Tdlib extends TdlibNative {
     if (RegExp(r"^joinChat$", caseSensitive: false).hashData(method)) {
       return await invoke(
         "joinChat",
-        parameters: {
-          "chat_id": parameters["chat_id"],
-        },
+        parameters: {"chat_id": parameters["chat_id"]},
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         clientId: clientId,
@@ -1204,13 +1189,13 @@ class Tdlib extends TdlibNative {
         onGetInvokeData: onGetInvokeData,
       );
     }
-    if (RegExp(r"^joinChatByInviteLink$", caseSensitive: false)
-        .hashData(method)) {
+    if (RegExp(
+      r"^joinChatByInviteLink$",
+      caseSensitive: false,
+    ).hashData(method)) {
       return await invoke(
         "joinChatByInviteLink",
-        parameters: {
-          "invite_link": parameters["invite_link"],
-        },
+        parameters: {"invite_link": parameters["invite_link"]},
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         clientId: clientId,
@@ -1300,8 +1285,10 @@ class Tdlib extends TdlibNative {
         durationCacheExpire: durationCacheExpire,
       );
     }
-    if (RegExp(r"^answerCallbackQuery$", caseSensitive: false)
-        .hashData(method)) {
+    if (RegExp(
+      r"^answerCallbackQuery$",
+      caseSensitive: false,
+    ).hashData(method)) {
       return await answerCallbackQuery(
         parameters["callback_query_id"],
         text: parameters["text"],
@@ -1316,19 +1303,13 @@ class Tdlib extends TdlibNative {
 
     if (parameters["is_sync"] != null) {
       return invokeSync(
-        parameters: makeParametersApi({
-          "@type": method,
-          ...parameters,
-        }),
+        parameters: makeParametersApi({"@type": method, ...parameters}),
         isThrowOnError: isInvokeThrowOnError ?? false,
       );
     } else {
       return await invoke(
         method,
-        parameters: makeParametersApi({
-          "@type": method,
-          ...parameters,
-        }),
+        parameters: makeParametersApi({"@type": method, ...parameters}),
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         delayDuration: delayDuration,
@@ -1367,9 +1348,9 @@ class Tdlib extends TdlibNative {
     String? extra,
     bool? isAutoGetChat,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-        onGenerateExtraInvoke,
+    onGenerateExtraInvoke,
     FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)?
-        onGetInvokeData,
+    onGetInvokeData,
     bool? isInvokeThrowOnError,
     bool isAutoExtendMessage = false,
     bool? isUseCache,
@@ -1389,8 +1370,10 @@ class Tdlib extends TdlibNative {
             try {
               await Future.delayed(Duration(milliseconds: 500));
               parameters["text"] = loopData;
-              if (RegExp("(editMessageText)", caseSensitive: false)
-                  .hasMatch(method)) {
+              if (RegExp(
+                "(editMessageText)",
+                caseSensitive: false,
+              ).hasMatch(method)) {
                 if (i != 0) {
                   method = "sendMessage";
                 }
@@ -1429,8 +1412,10 @@ class Tdlib extends TdlibNative {
             try {
               await Future.delayed(Duration(milliseconds: 500));
               parameters["caption"] = loopData;
-              if (RegExp("(editMessageCaption)", caseSensitive: false)
-                  .hasMatch(method)) {
+              if (RegExp(
+                "(editMessageCaption)",
+                caseSensitive: false,
+              ).hasMatch(method)) {
                 if (i != 0) {
                   parameters["text"] = loopData;
                   method = "sendMessage";
@@ -1506,10 +1491,7 @@ class Tdlib extends TdlibNative {
   }) async {
     var get_message = await invoke(
       methodName,
-      parameters: {
-        "chat_id": chat_id,
-        "message_id": message_id,
-      },
+      parameters: {"chat_id": chat_id, "message_id": message_id},
       isUseCache: isUseCache,
       durationCacheExpire: durationCacheExpire,
       clientId: clientId,
@@ -1561,7 +1543,7 @@ class Tdlib extends TdlibNative {
             "text": pesan,
             "disable_web_page_preview": disable_web_page_preview,
             "clear_draft": false,
-          }
+          },
         },
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
@@ -1580,7 +1562,7 @@ class Tdlib extends TdlibNative {
             "text": pesan,
             "disable_web_page_preview": disable_web_page_preview,
             "clear_draft": false,
-          }
+          },
         },
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
@@ -1660,9 +1642,7 @@ class Tdlib extends TdlibNative {
     if (RegExp("^@.*", caseSensitive: false).hashData(chat_id)) {
       var search_public_chat = await invoke(
         "searchPublicChat",
-        parameters: {
-          "username": chat_id,
-        },
+        parameters: {"username": chat_id},
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         clientId: clientId,
@@ -1675,9 +1655,7 @@ class Tdlib extends TdlibNative {
     if (RegExp("^@.*", caseSensitive: false).hashData(user_id)) {
       var search_public_chat = await invoke(
         "searchPublicChat",
-        parameters: {
-          "username": user_id,
-        },
+        parameters: {"username": user_id},
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         clientId: clientId,
@@ -1691,10 +1669,7 @@ class Tdlib extends TdlibNative {
       "getChatMember",
       parameters: {
         "chat_id": chat_id,
-        "member_id": {
-          "@type": "messageSenderUser",
-          "user_id": user_id,
-        }
+        "member_id": {"@type": "messageSenderUser", "user_id": user_id},
       },
       isUseCache: isUseCache,
       durationCacheExpire: durationCacheExpire,
@@ -1702,8 +1677,10 @@ class Tdlib extends TdlibNative {
       extra: extra,
     );
 
-    if (RegExp("^chatMember\$", caseSensitive: false)
-        .hashData(get_chat_member["@type"])) {
+    if (RegExp(
+      "^chatMember\$",
+      caseSensitive: false,
+    ).hashData(get_chat_member["@type"])) {
       var json = {};
 
       var get_user = await getUser(
@@ -1715,10 +1692,10 @@ class Tdlib extends TdlibNative {
       json["user"] = get_user["result"];
       json["join_date"] = get_chat_member["joined_chat_date"];
       var status = get_chat_member["status"];
-      json["status"] = status["@type"]
-          .toString()
-          .toLowerCase()
-          .replaceAll(RegExp("chatmemberstatus", caseSensitive: false), "");
+      json["status"] = status["@type"].toString().toLowerCase().replaceAll(
+        RegExp("chatmemberstatus", caseSensitive: false),
+        "",
+      );
       json["custom_title"] = status["custom_title"];
       json["can_be_edited"] = status["can_be_edited"];
       json["can_manage_chat"] = status["can_manage_chat"];
@@ -1754,13 +1731,17 @@ class Tdlib extends TdlibNative {
   }) async {
     try {
       if (chat_id is String &&
-          RegExp(r"^((@)?[a-z0-9_]+)$", caseSensitive: false)
-              .hashData(chat_id)) {
+          RegExp(
+            r"^((@)?[a-z0-9_]+)$",
+            caseSensitive: false,
+          ).hashData(chat_id)) {
         var search_public_chat = await invoke(
           "searchPublicChat",
           parameters: {
-            "username":
-                chat_id.replaceAll(RegExp(r"@", caseSensitive: false), ""),
+            "username": chat_id.replaceAll(
+              RegExp(r"@", caseSensitive: false),
+              "",
+            ),
           },
           isUseCache: isUseCache,
           durationCacheExpire: durationCacheExpire,
@@ -1773,17 +1754,17 @@ class Tdlib extends TdlibNative {
       }
       var getchat = await invoke(
         "getChat",
-        parameters: {
-          "chat_id": chat_id,
-        },
+        parameters: {"chat_id": chat_id},
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         clientId: clientId,
         extra: extra,
       );
       Map json = {};
-      if (RegExp(r"^(chat)$", caseSensitive: false)
-          .hashData(getchat["@type"])) {
+      if (RegExp(
+        r"^(chat)$",
+        caseSensitive: false,
+      ).hashData(getchat["@type"])) {
         var type_chat = getchat["type"]["@type"]
             .toString()
             .toLowerCase()
@@ -1793,9 +1774,10 @@ class Tdlib extends TdlibNative {
             "getSupergroup",
             parameters: {
               "supergroup_id": int.parse(
-                chat_id
-                    .toString()
-                    .replaceAll(RegExp("^-100", caseSensitive: false), ""),
+                chat_id.toString().replaceAll(
+                  RegExp("^-100", caseSensitive: false),
+                  "",
+                ),
               ),
             },
             isUseCache: isUseCache,
@@ -1824,7 +1806,9 @@ class Tdlib extends TdlibNative {
                 .toString()
                 .toLowerCase()
                 .replaceAll(
-                    RegExp("chatMemberStatus", caseSensitive: false), "");
+                  RegExp("chatMemberStatus", caseSensitive: false),
+                  "",
+                );
           }
           json["type"] =
               getchat["type"]["is_channel"] ? "channel" : "supergroup";
@@ -1858,7 +1842,7 @@ class Tdlib extends TdlibNative {
             "is_broadcast_group": getSupergroup["is_broadcast_group"],
             "is_verified": getSupergroup["is_verified"],
             "is_scam": getSupergroup["is_scam"],
-            "is_fake": getSupergroup["is_fake"]
+            "is_fake": getSupergroup["is_fake"],
           };
           if (getSupergroup["username"].toString().isEmpty) {
             json.remove("username");
@@ -1886,9 +1870,12 @@ class Tdlib extends TdlibNative {
               getSuperGroupFullInfo = await invoke(
                 "getSupergroupFullInfo",
                 parameters: {
-                  "supergroup_id": int.parse(chat_id
-                      .toString()
-                      .replaceAll(RegExp("^-100", caseSensitive: false), "")),
+                  "supergroup_id": int.parse(
+                    chat_id.toString().replaceAll(
+                      RegExp("^-100", caseSensitive: false),
+                      "",
+                    ),
+                  ),
                 },
                 isUseCache: isUseCache,
                 durationCacheExpire: durationCacheExpire,
@@ -1900,18 +1887,21 @@ class Tdlib extends TdlibNative {
               json["profile_photo"] = {
                 "id": getSuperGroupFullInfo["photo"]["id"],
                 "path": "",
-                "file_id": ""
+                "file_id": "",
               };
               if (getSuperGroupFullInfo["photo"]["@type"] == "chatPhoto") {
                 if (getSuperGroupFullInfo["photo"]["sizes"] is List) {
                   try {
-                    var getPhoto = getSuperGroupFullInfo["photo"]["sizes"]
-                        [getSuperGroupFullInfo["photo"]["sizes"].length - 1];
+                    var getPhoto =
+                        getSuperGroupFullInfo["photo"]["sizes"][getSuperGroupFullInfo["photo"]["sizes"]
+                                .length -
+                            1];
                     var getPathPhoto =
                         getPhoto["photo"]["local"]["path"] as String;
                     json["profile_photo"]["path"] = getPathPhoto;
-                    (json["profile_photo"] as Map)
-                        .addAll(getPhoto["photo"]["local"]);
+                    (json["profile_photo"] as Map).addAll(
+                      getPhoto["photo"]["local"],
+                    );
                     json["profile_photo"]["file_id"] =
                         getPhoto["photo"]["remote"]["id"];
                     json["profile_photo"]["file_unique_id"] =
@@ -1942,11 +1932,14 @@ class Tdlib extends TdlibNative {
             } catch (e) {}
 
             if (json["profile_photo"] is Map &&
-                RegExp(r"^([0-9]+)$", caseSensitive: false)
-                    .hashData(json["profile_photo"]["id"])) {
+                RegExp(
+                  r"^([0-9]+)$",
+                  caseSensitive: false,
+                ).hashData(json["profile_photo"]["id"])) {
               try {
-                json["profile_photo"]["id"] =
-                    (int.parse(json["profile_photo"]["id"]));
+                json["profile_photo"]["id"] = (int.parse(
+                  json["profile_photo"]["id"],
+                ));
               } catch (e) {}
             }
           }
@@ -1956,9 +1949,12 @@ class Tdlib extends TdlibNative {
           var getBasicGroup = await invoke(
             "getBasicGroup",
             parameters: {
-              "basic_group_id": int.parse(chat_id
-                  .toString()
-                  .replaceAll(RegExp("^-", caseSensitive: false), "")),
+              "basic_group_id": int.parse(
+                chat_id.toString().replaceAll(
+                  RegExp("^-", caseSensitive: false),
+                  "",
+                ),
+              ),
             },
             isUseCache: isUseCache,
             durationCacheExpire: durationCacheExpire,
@@ -1972,7 +1968,9 @@ class Tdlib extends TdlibNative {
                 .toString()
                 .toLowerCase()
                 .replaceAll(
-                    RegExp("chatMemberStatus", caseSensitive: false), "");
+                  RegExp("chatMemberStatus", caseSensitive: false),
+                  "",
+                );
           }
           json["type"] = "group";
           json["detail"] = {
@@ -2016,21 +2014,23 @@ class Tdlib extends TdlibNative {
         } else if (type_chat == "private") {
           var get_user = await invoke(
             "getUser",
-            parameters: {
-              "user_id": chat_id,
-            },
+            parameters: {"user_id": chat_id},
             isUseCache: isUseCache,
             durationCacheExpire: durationCacheExpire,
             clientId: clientId,
             extra: extra,
           );
-          if (RegExp("^user\$", caseSensitive: false)
-              .hashData(get_user["@type"])) {
+          if (RegExp(
+            "^user\$",
+            caseSensitive: false,
+          ).hashData(get_user["@type"])) {
             var json = {};
             json["id"] = get_user["id"];
             try {
-              if (RegExp("^userTypeBot\$", caseSensitive: false)
-                  .hashData(get_user["type"]["@type"])) {
+              if (RegExp(
+                "^userTypeBot\$",
+                caseSensitive: false,
+              ).hashData(get_user["type"]["@type"])) {
                 json["is_bot"] = true;
               } else {
                 json["is_bot"] = false;
@@ -2091,7 +2091,7 @@ class Tdlib extends TdlibNative {
               "is_support": get_user["is_support"],
               "is_scam": get_user["is_scam"],
               "is_fake": get_user["is_fake"],
-              "have_acces": get_user["have_access"]
+              "have_acces": get_user["have_access"],
             };
             if (is_detail) {
               if (getchat["last_message"] is Map) {
@@ -2117,9 +2117,7 @@ class Tdlib extends TdlibNative {
                 try {
                   getUserFullInfo = await invoke(
                     "getUserFullInfo",
-                    parameters: {
-                      "user_id": chat_id,
-                    },
+                    parameters: {"user_id": chat_id},
                     isUseCache: isUseCache,
                     durationCacheExpire: durationCacheExpire,
                     clientId: clientId,
@@ -2130,18 +2128,21 @@ class Tdlib extends TdlibNative {
                   json["profile_photo"] = {
                     "id": getUserFullInfo["photo"]["id"],
                     "path": "",
-                    "file_id": ""
+                    "file_id": "",
                   };
                   if (getUserFullInfo["photo"]["@type"] == "chatPhoto") {
                     if (getUserFullInfo["photo"]["sizes"] is List) {
                       try {
-                        var getPhoto = getUserFullInfo["photo"]["sizes"]
-                            [getUserFullInfo["photo"]["sizes"].length - 1];
+                        var getPhoto =
+                            getUserFullInfo["photo"]["sizes"][getUserFullInfo["photo"]["sizes"]
+                                    .length -
+                                1];
                         var getPathPhoto =
                             getPhoto["photo"]["local"]["path"] as String;
                         json["profile_photo"]["path"] = getPathPhoto;
-                        (json["profile_photo"] as Map)
-                            .addAll(getPhoto["photo"]["local"]);
+                        (json["profile_photo"] as Map).addAll(
+                          getPhoto["photo"]["local"],
+                        );
                         json["profile_photo"]["id"] =
                             getPhoto["photo"]["local"]["id"];
                         json["profile_photo"]["file_id"] =
@@ -2174,11 +2175,14 @@ class Tdlib extends TdlibNative {
                 } catch (e) {}
 
                 if (json["profile_photo"] is Map &&
-                    RegExp(r"^([0-9]+)$", caseSensitive: false)
-                        .hashData(json["profile_photo"]["id"])) {
+                    RegExp(
+                      r"^([0-9]+)$",
+                      caseSensitive: false,
+                    ).hashData(json["profile_photo"]["id"])) {
                   try {
-                    json["profile_photo"]["id"] =
-                        (int.parse(json["profile_photo"]["id"]));
+                    json["profile_photo"]["id"] = (int.parse(
+                      json["profile_photo"]["id"],
+                    ));
                   } catch (e) {}
                 }
               } catch (e) {
@@ -2190,8 +2194,10 @@ class Tdlib extends TdlibNative {
         }
       }
     } catch (e) {
-      if (RegExp("^[0-9]+\$", caseSensitive: false)
-          .hashData(chat_id.toString())) {
+      if (RegExp(
+        "^[0-9]+\$",
+        caseSensitive: false,
+      ).hashData(chat_id.toString())) {
         try {
           return await getUser(
             chat_id,
@@ -2202,14 +2208,14 @@ class Tdlib extends TdlibNative {
         } catch (e) {
           return {
             "ok": true,
-            "result": {"id": chat_id, "type": "", "detail": {}}
+            "result": {"id": chat_id, "type": "", "detail": {}},
           };
         }
       }
     }
     return {
       "ok": false,
-      "result": {"id": chat_id, "detail": {}}
+      "result": {"id": chat_id, "detail": {}},
     };
   }
 
@@ -2225,9 +2231,7 @@ class Tdlib extends TdlibNative {
     bool? isUseCache,
     Duration? durationCacheExpire,
   }) async {
-    Map<String, dynamic> data = {
-      "callback_query_id": callback_query_id,
-    };
+    Map<String, dynamic> data = {"callback_query_id": callback_query_id};
 
     if (text != null) {
       data["text"] = text;
@@ -2268,9 +2272,7 @@ class Tdlib extends TdlibNative {
   }) async {
     try {
       if (update["@type"] == "message") {
-        Map json = {
-          "id": update["id"],
-        };
+        Map json = {"id": update["id"]};
         Map chat_json = {
           "id": update["chat_id"],
           "first_name": "",
@@ -2283,12 +2285,16 @@ class Tdlib extends TdlibNative {
           chat_json["type"] = "channel";
           chat_json["title"] = "";
         } else {
-          if (RegExp("^-100", caseSensitive: false)
-              .hashData(update["chat_id"])) {
+          if (RegExp(
+            "^-100",
+            caseSensitive: false,
+          ).hashData(update["chat_id"])) {
             chat_json["type"] = "supergroup";
             chat_json["title"] = "";
-          } else if (RegExp("^-", caseSensitive: false)
-              .hashData(update["chat_id"])) {
+          } else if (RegExp(
+            "^-",
+            caseSensitive: false,
+          ).hashData(update["chat_id"])) {
             chat_json["type"] = "group";
             chat_json["title"] = "";
           } else {
@@ -2342,14 +2348,16 @@ class Tdlib extends TdlibNative {
             "title": "",
             "type": "",
             "detail": {},
-            "last_message": {}
+            "last_message": {},
           };
           if (update["sender_id"]["user_id"] != null) {
             from_json["id"] = update["sender_id"]["user_id"];
             if (update["chat_id"] == from_json["id"]) {
               from_json["type"] = chat_json["type"];
-            } else if (RegExp("^-", caseSensitive: false)
-                .hashData(from_json["chat_id"])) {
+            } else if (RegExp(
+              "^-",
+              caseSensitive: false,
+            ).hashData(from_json["chat_id"])) {
               from_json["type"] = "group";
             } else {
               from_json["type"] = "private";
@@ -2387,8 +2395,10 @@ class Tdlib extends TdlibNative {
             from_json["id"] = update["sender_id"]["chat_id"];
             if (update["chat_id"] == from_json["id"]) {
               from_json["type"] = chat_json["type"];
-            } else if (RegExp("^-", caseSensitive: false)
-                .hashData(from_json["chat_id"])) {
+            } else if (RegExp(
+              "^-",
+              caseSensitive: false,
+            ).hashData(from_json["chat_id"])) {
               from_json["type"] = "group";
             } else {
               from_json["type"] = "private";
@@ -2462,7 +2472,7 @@ class Tdlib extends TdlibNative {
                 "title": "",
                 "type": "",
                 "detail": {},
-                "last_message": {}
+                "last_message": {},
               };
               try {
                 var getchat_forward = await getChat(
@@ -2479,8 +2489,9 @@ class Tdlib extends TdlibNative {
               json["forward_from_chat"] = forward_json;
               json["forward_from_message_id"] =
                   forward_info["origin"]["message_id"] ?? 0;
-              json["api_forward_from_message_id"] =
-                  TgUtils.messageTdlibToApi(json["forward_from_message_id"]);
+              json["api_forward_from_message_id"] = TgUtils.messageTdlibToApi(
+                json["forward_from_message_id"],
+              );
               json["forward_from_author_signature"] =
                   forward_info["origin"]["author_signature"] ?? "";
             }
@@ -2491,7 +2502,7 @@ class Tdlib extends TdlibNative {
                 "title": "",
                 "type": "",
                 "detail": {},
-                "last_message": {}
+                "last_message": {},
               };
               try {
                 var getuser_forward = await getUser(
@@ -2549,7 +2560,8 @@ class Tdlib extends TdlibNative {
                   json["reply_to_message"]["message_id"];
               json["reply_to_message"]["api_message_id"] =
                   TgUtils.messageTdlibToApi(
-                      json["reply_to_message"]["message_id"]);
+                    json["reply_to_message"]["message_id"],
+                  );
             }
           } catch (e) {}
         }
@@ -2838,9 +2850,11 @@ class Tdlib extends TdlibNative {
             json["type_content"] = "new_member";
             List new_members = [];
             if (is_super_detail) {
-              for (var i = 0;
-                  i < update["content"]["member_user_ids"].length;
-                  i++) {
+              for (
+                var i = 0;
+                i < update["content"]["member_user_ids"].length;
+                i++
+              ) {
                 var loop_data = update["content"]["member_user_ids"][i];
                 try {
                   Map result_user = await getUser(
@@ -2859,7 +2873,7 @@ class Tdlib extends TdlibNative {
                     "is_bot": false,
                     "first_name": "",
                     "last_name": "",
-                    "type": "private"
+                    "type": "private",
                   });
                 }
               }
@@ -2890,7 +2904,7 @@ class Tdlib extends TdlibNative {
                   "is_bot": false,
                   "first_name": "",
                   "last_name": "",
-                  "type": "private"
+                  "type": "private",
                 });
               }
             } else {
@@ -2899,7 +2913,7 @@ class Tdlib extends TdlibNative {
                 "is_bot": false,
                 "first_name": "",
                 "last_name": "",
-                "type": "private"
+                "type": "private",
               });
             }
             json["left_member"] = left_member;
@@ -2927,13 +2941,21 @@ class Tdlib extends TdlibNative {
                     .toString()
                     .toLowerCase()
                     .replaceAll(
-                        RegExp("textEntityType", caseSensitive: false), "")
+                      RegExp("textEntityType", caseSensitive: false),
+                      "",
+                    )
                     .replaceAll(
-                        RegExp("textUrl", caseSensitive: false), "text_link")
-                    .replaceAll(RegExp("bot_command", caseSensitive: false),
-                        "bot_command")
-                    .replaceAll(RegExp("mentionname", caseSensitive: false),
-                        "text_mention");
+                      RegExp("textUrl", caseSensitive: false),
+                      "text_link",
+                    )
+                    .replaceAll(
+                      RegExp("bot_command", caseSensitive: false),
+                      "bot_command",
+                    )
+                    .replaceAll(
+                      RegExp("mentionname", caseSensitive: false),
+                      "text_mention",
+                    );
                 json_entities["type"] = type_entities;
                 if (data_entities["type"]["url"] != null) {
                   json_entities["url"] = data_entities["type"]["url"];
@@ -3046,8 +3068,11 @@ class Tdlib extends TdlibNative {
                             "inlineKeyboardButtonTypeCallback") {
                           if (raw_keyboard_data["type"]["data"] is String) {
                             jsonDataKeyboard["callback_data"] = convert.utf8
-                                .decode(convert.base64
-                                    .decode(raw_keyboard_data["type"]["data"]));
+                                .decode(
+                                  convert.base64.decode(
+                                    raw_keyboard_data["type"]["data"],
+                                  ),
+                                );
                           }
                         }
                         //
@@ -3078,12 +3103,12 @@ class Tdlib extends TdlibNative {
               if (json["chat"]["type"] == "channel") {
                 return {
                   "ok": true,
-                  "result": {"update_channel_post": json}
+                  "result": {"update_channel_post": json},
                 };
               } else {
                 return {
                   "ok": true,
-                  "result": {"update_message": json}
+                  "result": {"update_message": json},
                 };
               }
             }
@@ -3091,12 +3116,12 @@ class Tdlib extends TdlibNative {
             if (json["chat"]["type"] == "channel") {
               return {
                 "ok": true,
-                "result": {"update_channel_post": json}
+                "result": {"update_channel_post": json},
               };
             } else {
               return {
                 "ok": true,
-                "result": {"update_message": json}
+                "result": {"update_message": json},
               };
             }
           }
@@ -3156,18 +3181,20 @@ class Tdlib extends TdlibNative {
             }
           }
         } catch (e) {}
-        json["api_message_id"] =
-            TgUtils.messageTdlibToApi(update["message_id"]);
+        json["api_message_id"] = TgUtils.messageTdlibToApi(
+          update["message_id"],
+        );
         json["message_id"] = update["message_id"];
         json["from"] = from;
         json["chat"] = chat;
         json["chat_instance"] = update["chat_instance"];
-        json["data"] = convert.utf8
-            .decode(convert.base64.decode(update["payload"]["data"]));
+        json["data"] = convert.utf8.decode(
+          convert.base64.decode(update["payload"]["data"]),
+        );
         // json["data"] = Buffer.from(update["payload"]["data"], 'base64').toStringEncode('utf8');
         return {
           "ok": true,
-          "result": {"callback_query": json}
+          "result": {"callback_query": json},
         };
       }
 
@@ -3208,7 +3235,7 @@ class Tdlib extends TdlibNative {
           if (update["old_chat_member"]["member_id"]["@type"] ==
               "messageSenderUser") {
             Map json_data_user = {
-              "id": update["old_chat_member"]["member_id"]["user_id"]
+              "id": update["old_chat_member"]["member_id"]["user_id"],
             };
             if (is_super_detail) {
               try {
@@ -3226,11 +3253,14 @@ class Tdlib extends TdlibNative {
             json_new_member["user"] = json_data_user;
           }
 
-          json_new_member["status"] = update["old_chat_member"]["status"]
-                  ["@type"]
-              .toString()
-              .replaceAll(RegExp(r"chatMemberStatus", caseSensitive: false), "")
-              .toLowerCase();
+          json_new_member["status"] =
+              update["old_chat_member"]["status"]["@type"]
+                  .toString()
+                  .replaceAll(
+                    RegExp(r"chatMemberStatus", caseSensitive: false),
+                    "",
+                  )
+                  .toLowerCase();
           json["old_member"] = json_new_member;
         }
         if (update["new_chat_member"]["@type"] == "chatMember") {
@@ -3239,7 +3269,7 @@ class Tdlib extends TdlibNative {
           if (update["new_chat_member"]["member_id"]["@type"] ==
               "messageSenderUser") {
             Map json_data_user = {
-              "id": update["new_chat_member"]["member_id"]["user_id"]
+              "id": update["new_chat_member"]["member_id"]["user_id"],
             };
             if (is_super_detail) {
               try {
@@ -3257,17 +3287,20 @@ class Tdlib extends TdlibNative {
             json_new_member["user"] = json_data_user;
           }
 
-          json_new_member["status"] = update["new_chat_member"]["status"]
-                  ["@type"]
-              .toString()
-              .replaceAll(RegExp(r"chatMemberStatus", caseSensitive: false), "")
-              .toLowerCase();
+          json_new_member["status"] =
+              update["new_chat_member"]["status"]["@type"]
+                  .toString()
+                  .replaceAll(
+                    RegExp(r"chatMemberStatus", caseSensitive: false),
+                    "",
+                  )
+                  .toLowerCase();
           json["new_member"] = json_new_member;
         }
 
         return {
           "ok": true,
-          "result": {"chat_member": json}
+          "result": {"chat_member": json},
         };
       }
 
@@ -3287,10 +3320,11 @@ class Tdlib extends TdlibNative {
           }
         } catch (e) {}
         json["from"] = from;
-        json["chat_type"] = update["chat_type"]["@type"]
-            .toString()
-            .replaceAll(RegExp("chatType", caseSensitive: false), "")
-            .toLowerCase();
+        json["chat_type"] =
+            update["chat_type"]["@type"]
+                .toString()
+                .replaceAll(RegExp("chatType", caseSensitive: false), "")
+                .toLowerCase();
         try {
           if (json["chat_type"] == "supergroup" &&
               update["chat_type"]["is_channel"]) {
@@ -3301,7 +3335,7 @@ class Tdlib extends TdlibNative {
         json["offset"] = update["offset"];
         return {
           "ok": true,
-          "result": {"inline_query": json}
+          "result": {"inline_query": json},
         };
       }
     } catch (e) {
@@ -3330,9 +3364,7 @@ class Tdlib extends TdlibNative {
   }) async {
     var get_user = await invoke(
       "getUser",
-      parameters: {
-        "user_id": user_id,
-      },
+      parameters: {"user_id": user_id},
       isUseCache: isUseCache,
       durationCacheExpire: durationCacheExpire,
       clientId: clientId,
@@ -3342,8 +3374,10 @@ class Tdlib extends TdlibNative {
       var json = {};
       json["id"] = get_user["id"];
       try {
-        if (RegExp(r"^userTypeBot$", caseSensitive: false)
-            .hashData(get_user["type"]["@type"])) {
+        if (RegExp(
+          r"^userTypeBot$",
+          caseSensitive: false,
+        ).hashData(get_user["type"]["@type"])) {
           json["is_bot"] = true;
         } else {
           json["is_bot"] = false;
@@ -3395,7 +3429,7 @@ class Tdlib extends TdlibNative {
         "is_support": get_user["is_support"],
         "is_scam": get_user["is_scam"],
         "is_fake": get_user["is_fake"],
-        "have_acces": get_user["have_access"]
+        "have_acces": get_user["have_access"],
       };
       return {"ok": true, "result": json};
     }

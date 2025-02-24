@@ -202,9 +202,7 @@ class TelegramClient {
 
           if (authorization_state["@type"] == "authorizationStateReady") {
             final Map user = await invoke(
-              parameters: {
-                "@type": "getMe",
-              },
+              parameters: {"@type": "getMe"},
               isUseCache: false,
               durationCacheExpire: null,
               telegramClientData: updateTelegramClient.telegramClientData,
@@ -219,8 +217,10 @@ class TelegramClient {
               return "";
             }();
 
-            TdlibClient? tdlibClient = tdlib.clients[
-                updateTelegramClient.telegramClientData.tdlib_client_id];
+            TdlibClient? tdlibClient =
+                tdlib.clients[updateTelegramClient
+                    .telegramClientData
+                    .tdlib_client_id];
             if (tdlibClient == null) {
               tdlibClient ??= TdlibClient(
                 client_id:
@@ -228,7 +228,9 @@ class TelegramClient {
                 client_option: updateTelegramClient.client_option,
               );
               tdlib.clients[updateTelegramClient
-                  .telegramClientData.tdlib_client_id] = tdlibClient;
+                      .telegramClientData
+                      .tdlib_client_id] =
+                  tdlibClient;
             }
 
             bool is_constain_update = false;
@@ -276,8 +278,9 @@ class TelegramClient {
 
             if (is_constain_update) {
               await tdlib.updateClientById(
-                  updateTelegramClient.telegramClientData.tdlib_client_id,
-                  newTdlibClient: tdlibClient);
+                updateTelegramClient.telegramClientData.tdlib_client_id,
+                newTdlibClient: tdlibClient,
+              );
             }
           }
         }
@@ -299,8 +302,10 @@ class TelegramClient {
               return "";
             }();
 
-            TdlibClient? tdlibClient = tdlib.clients[
-                updateTelegramClient.telegramClientData.tdlib_client_id];
+            TdlibClient? tdlibClient =
+                tdlib.clients[updateTelegramClient
+                    .telegramClientData
+                    .tdlib_client_id];
 
             bool is_constain_update = false;
             if (tdlibClient == null) {
@@ -310,7 +315,9 @@ class TelegramClient {
                 client_option: updateTelegramClient.client_option,
               );
               tdlib.clients[updateTelegramClient
-                  .telegramClientData.tdlib_client_id] = tdlibClient;
+                      .telegramClientData
+                      .tdlib_client_id] =
+                  tdlibClient;
               is_constain_update = true;
             }
 
@@ -355,8 +362,9 @@ class TelegramClient {
 
             if (is_constain_update) {
               await tdlib.updateClientById(
-                  updateTelegramClient.telegramClientData.tdlib_client_id,
-                  newTdlibClient: tdlibClient);
+                updateTelegramClient.telegramClientData.tdlib_client_id,
+                newTdlibClient: tdlibClient,
+              );
             }
           }
         }
@@ -368,97 +376,99 @@ class TelegramClient {
   EventEmitterListener on({
     required String event_name,
     required FutureOr<dynamic> Function(
-            UpdateTelegramClient updateTelegramClient)
-        onUpdate,
+      UpdateTelegramClient updateTelegramClient,
+    )
+    onUpdate,
     required FutureOr<dynamic> Function(Object error, StackTrace stackTrace)
-        onError,
+    onError,
   }) {
     return event_emitter.on(
-        eventName: event_name,
-        onCallback: (listener, update) async {
-          try {
-            if (update is UpdateTelegramClientTelegramBotApi) {
-              await onUpdate(
-                UpdateTelegramClient(
-                  uri: update.uri,
-                  rawData: update.body,
-                  query: update.query,
-                  client_option: {},
-                  tg: this,
-                  telegramClientData: TelegramClientData(
-                    tdlib_client_id: 0,
-                    telegram_bot_api_token_bot: "",
-                    telegramClientType: TelegramClientType.telegam_bot_api,
-                  ),
+      eventName: event_name,
+      onCallback: (listener, update) async {
+        try {
+          if (update is UpdateTelegramClientTelegramBotApi) {
+            await onUpdate(
+              UpdateTelegramClient(
+                uri: update.uri,
+                rawData: update.body,
+                query: update.query,
+                client_option: {},
+                tg: this,
+                telegramClientData: TelegramClientData(
+                  tdlib_client_id: 0,
+                  telegram_bot_api_token_bot: "",
+                  telegramClientType: TelegramClientType.telegam_bot_api,
                 ),
-              );
-            }
-
-            if (update is TdlibIsolateReceiveData) {
-              final TdlibClient? tdlibClient = tdlib.clients[update.clientId];
-
-              final UpdateTelegramClientTdlib updateTd =
-                  UpdateTelegramClientTdlib(
-                update: update.updateData,
-                client_id: update.clientId,
-                client_option: () {
-                  try {
-                    if (tdlibClient != null) {
-                      return tdlibClient.client_option;
-                    }
-                  } catch (e) {}
-                  return {};
-                }(),
-              );
-              await onUpdate(
-                UpdateTelegramClient(
-                  rawData: updateTd.raw,
-                  uri: Uri.base,
-                  query: {},
-                  tg: this,
-                  client_option: updateTd.client_option,
-                  telegramClientData: TelegramClientData(
-                    tdlib_client_id: updateTd.client_id,
-                    telegram_bot_api_token_bot: "",
-                    telegramClientType: TelegramClientType.tdlib,
-                    client_user_name: () {
-                      try {
-                        if (tdlibClient != null) {
-                          if (tdlibClient.client_option["client_username"]
-                              is String) {
-                            return tdlibClient.client_option["client_username"];
-                          }
-                        }
-                      } catch (e) {}
-
-                      return "";
-                    }(),
-                    client_tg_user_id: () {
-                      try {
-                        if (tdlibClient != null) {
-                          return tdlibClient.client_tg_user_id;
-                        }
-                      } catch (e) {}
-                      return 0;
-                    }(),
-                    is_bot: () {
-                      try {
-                        if (tdlibClient != null) {
-                          return tdlibClient.is_bot;
-                        }
-                      } catch (e) {}
-                      return false;
-                    }(),
-                  ),
-                ),
-              );
-            }
-          } catch (e, stack) {
-            try {
-              await onError(e, stack);
-            } catch (e) {}
+              ),
+            );
           }
-        });
+
+          if (update is TdlibIsolateReceiveData) {
+            final TdlibClient? tdlibClient = tdlib.clients[update.clientId];
+
+            final UpdateTelegramClientTdlib updateTd =
+                UpdateTelegramClientTdlib(
+                  update: update.updateData,
+                  client_id: update.clientId,
+                  client_option: () {
+                    try {
+                      if (tdlibClient != null) {
+                        return tdlibClient.client_option;
+                      }
+                    } catch (e) {}
+                    return {};
+                  }(),
+                );
+            await onUpdate(
+              UpdateTelegramClient(
+                rawData: updateTd.raw,
+                uri: Uri.base,
+                query: {},
+                tg: this,
+                client_option: updateTd.client_option,
+                telegramClientData: TelegramClientData(
+                  tdlib_client_id: updateTd.client_id,
+                  telegram_bot_api_token_bot: "",
+                  telegramClientType: TelegramClientType.tdlib,
+                  client_user_name: () {
+                    try {
+                      if (tdlibClient != null) {
+                        if (tdlibClient.client_option["client_username"]
+                            is String) {
+                          return tdlibClient.client_option["client_username"];
+                        }
+                      }
+                    } catch (e) {}
+
+                    return "";
+                  }(),
+                  client_tg_user_id: () {
+                    try {
+                      if (tdlibClient != null) {
+                        return tdlibClient.client_tg_user_id;
+                      }
+                    } catch (e) {}
+                    return 0;
+                  }(),
+                  is_bot: () {
+                    try {
+                      if (tdlibClient != null) {
+                        return tdlibClient.is_bot;
+                      }
+                    } catch (e) {}
+                    return false;
+                  }(),
+                ),
+              ),
+            );
+          }
+        } catch (e, stack) {
+          try {
+            await onError(e, stack);
+          } catch (e) {}
+        }
+      },
+    );
   }
 
   /// return original data json
@@ -479,10 +489,13 @@ class TelegramClient {
     bool isInvokeThrowOnError = true,
     bool isAutoExtendMessage = false,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-        onGenerateExtraInvoke,
+    onGenerateExtraInvoke,
     FutureOr<Map<dynamic, dynamic>> Function(
-            String, int client_id, TdlibBase libTdJson)?
-        onGetInvokeData,
+      String,
+      int client_id,
+      TdlibBase libTdJson,
+    )?
+    onGetInvokeData,
   }) async {
     // telegramClientLib ??= telegram_client_lib;
     if (telegramClientData.telegramClientType ==
@@ -539,9 +552,7 @@ class TelegramClient {
     if (is_return_as_api == false) {
       return result;
     }
-    final Map result_data = {
-      "ok": (result["@type"] == "error") ? false : true,
-    };
+    final Map result_data = {"ok": (result["@type"] == "error") ? false : true};
 
     if (result_data["ok"] == false) {
       result_data.addAll(result);
@@ -575,10 +586,13 @@ class TelegramClient {
     bool isInvokeThrowOnError = true,
     bool isAutoExtendMessage = false,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-        onGenerateExtraInvoke,
+    onGenerateExtraInvoke,
     FutureOr<Map<dynamic, dynamic>> Function(
-            String, int client_id, TdlibBase libTdJson)?
-        onGetInvokeData,
+      String,
+      int client_id,
+      TdlibBase libTdJson,
+    )?
+    onGetInvokeData,
   }) async {
     if (telegramClientData.telegramClientType != TelegramClientType.tdlib) {
       return await invoke(
@@ -631,8 +645,10 @@ class TelegramClient {
       );
     }
 
-    if (RegExp(r"^(answerCallbackQuery)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(answerCallbackQuery)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await answerCallbackQuery(
@@ -642,8 +658,10 @@ class TelegramClient {
       );
     }
 
-    if (RegExp(r"^(answerInlineQuery)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(answerInlineQuery)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await answerInlineQuery(
@@ -662,8 +680,10 @@ class TelegramClient {
         ),
       );
     }
-    if (RegExp(r"^(banChatSenderChat)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(banChatSenderChat)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await banChatSenderChat(
@@ -682,8 +702,10 @@ class TelegramClient {
         ),
       );
     }
-    if (RegExp(r"^(createInvoiceLink)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(createInvoiceLink)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await createInvoiceLink(
@@ -720,8 +742,10 @@ class TelegramClient {
         ),
       );
     }
-    if (RegExp(r"^(editMessageCaption)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(editMessageCaption)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await editMessageCaption(
@@ -731,8 +755,10 @@ class TelegramClient {
         ),
       );
     }
-    if (RegExp(r"^(editMessageMedia)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(editMessageMedia)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await editMessageMedia(
@@ -742,8 +768,10 @@ class TelegramClient {
         ),
       );
     }
-    if (RegExp(r"^(editMessageReplyMarkup)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(editMessageReplyMarkup)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await editMessageReplyMarkup(
@@ -764,8 +792,10 @@ class TelegramClient {
         ),
       );
     }
-    if (RegExp(r"^(getChatAdministrators)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(getChatAdministrators)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await getChatAdministrators(
@@ -867,8 +897,10 @@ class TelegramClient {
         ),
       );
     }
-    if (RegExp(r"^(sendChatScreenshotTakenNotification)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(sendChatScreenshotTakenNotification)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await sendChatScreenshotTakenNotification(
@@ -1048,8 +1080,10 @@ class TelegramClient {
       );
     }
 
-    if (RegExp(r"^(unPinAllChatMessages)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(unPinAllChatMessages)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await unPinAllChatMessages(
@@ -1058,8 +1092,10 @@ class TelegramClient {
         ),
       );
     }
-    if (RegExp(r"^(unPinChatMessage)$", caseSensitive: false)
-        .hasMatch(method)) {
+    if (RegExp(
+      r"^(unPinChatMessage)$",
+      caseSensitive: false,
+    ).hasMatch(method)) {
       return requestReturnAsApi(
         is_return_as_api: is_return_as_api,
         result: await unPinChatMessage(

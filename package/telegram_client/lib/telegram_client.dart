@@ -39,7 +39,7 @@ export "package:telegram_client/telegram_bot_api/telegram_bot_api.dart";
 export "package:telegram_client/telegram_bot_api/extension/telegram_bot_api.dart";
 export "package:telegram_client/extensions/extensions.dart";
 export "package:telegram_client/util/util.dart";
-export "package:telegram_client/dart_scheme/scheme.dart";
+export "package:telegram_client/dart_scheme/dart_scheme.dart";
 export "package:telegram_client/mtproto/mtproto.dart";
 export "package:telegram_client/telegram_login_widget/telegram_login_widget.dart";
 export "package:telegram_client/telegram_client/telegram_client.dart";

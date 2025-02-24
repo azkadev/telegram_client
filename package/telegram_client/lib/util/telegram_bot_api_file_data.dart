@@ -45,8 +45,5 @@ class TelegramBotApiFileData {
   final Uint8List buffer_data;
 
   /// TelegramClientUncompleDocumentation
-  const TelegramBotApiFileData({
-    required this.name,
-    required this.buffer_data,
-  });
+  const TelegramBotApiFileData({required this.name, required this.buffer_data});
 }

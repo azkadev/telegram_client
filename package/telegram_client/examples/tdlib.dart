@@ -52,11 +52,13 @@ void main(List<String> args) async {
       // api_id: 0,
       // api_hash: "",
       database_directory:
-          Directory(path.join(Directory.current.uri.toFilePath(), "temp", "db"))
-              .path,
-      files_directory: Directory(
-              path.join(Directory.current.uri.toFilePath(), "temp", "file"))
-          .path,
+          Directory(
+            path.join(Directory.current.uri.toFilePath(), "temp", "db"),
+          ).path,
+      files_directory:
+          Directory(
+            path.join(Directory.current.uri.toFilePath(), "temp", "file"),
+          ).path,
     ),
   );
   await tdlib.ensureInitialized();
@@ -71,9 +73,7 @@ void main(List<String> args) async {
             "authorizationStateWaitPhoneNumber") {
           Map res = await tdlib.invoke(
             "setAuthenticationPhoneNumber",
-            parameters: {
-              "phone_number": "62xxx",
-            },
+            parameters: {"phone_number": "62xxx"},
             clientId: updateTd.client_id,
           );
           print(res);
@@ -82,19 +82,14 @@ void main(List<String> args) async {
         if (authorizationState["@type"] == "authorizationStateWaitCode") {
           Map res = await tdlib.invoke(
             "checkAuthenticationCode",
-            parameters: {
-              "code": "xxxxx",
-            },
+            parameters: {"code": "xxxxx"},
             clientId: updateTd.client_id,
           );
           print(res);
         }
 
         if (authorizationState["@type"] == "authorizationStateReady") {
-          Map getMe = await tdlib.invoke(
-            "getMe",
-            clientId: updateTd.client_id,
-          );
+          Map getMe = await tdlib.invoke("getMe", clientId: updateTd.client_id);
           getMe.printPretty();
         }
       }
@@ -107,8 +102,9 @@ void main(List<String> args) async {
   for (var i = 1; i <= 1000; i++) {
     print(i);
     await Future.delayed(Duration(microseconds: 10));
-    Directory directory =
-        Directory(path.join(Directory.current.path, "temp", "lp_${i}"));
+    Directory directory = Directory(
+      path.join(Directory.current.path, "temp", "lp_${i}"),
+    );
     Map res = await tdlib.createclient(
       clientId: tdlib.td_create_client_id(),
       clientOption: TelegramClientLibraryTdlibOptionParameter.create(
@@ -118,8 +114,11 @@ void main(List<String> args) async {
     );
     res.printPretty();
   }
-  print(DateTime.now()
-      .extension_general_lib_countAgoFromDateTime(dateTime: dateTime));
+  print(
+    DateTime.now().extension_general_lib_countAgoFromDateTime(
+      dateTime: dateTime,
+    ),
+  );
   stdin.listen((e) async {
     try {
       DateTime dateTime = DateTime.now();
@@ -140,8 +139,11 @@ void main(List<String> args) async {
       } else {
         return;
       }
-      print(DateTime.now()
-          .extension_general_lib_countAgoFromDateTime(dateTime: dateTime));
+      print(
+        DateTime.now().extension_general_lib_countAgoFromDateTime(
+          dateTime: dateTime,
+        ),
+      );
     } catch (e) {
       print(e);
     }

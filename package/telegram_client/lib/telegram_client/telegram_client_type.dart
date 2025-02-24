@@ -40,7 +40,7 @@ enum TelegramClientType {
   tdlib,
 
   /// TelegramClientUncompleDocumentation
-  telegam_bot_api;
+  telegam_bot_api,
 }
 
 /// TelegramClientUncompleDocumentation

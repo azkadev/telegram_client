@@ -65,10 +65,7 @@ List<Map<String, dynamic>> telegram_client_schemes = () {
       "description": "",
       "@extra": "",
     },
-    {
-      "@type": "telegramClientLibraryOk",
-      "@extra": "",
-    },
+    {"@type": "telegramClientLibraryOk", "@extra": ""},
     {
       "@type": "telegramClientLibraryTelegramLoginWidgetUser",
       "id": "0",

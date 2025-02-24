@@ -51,13 +51,17 @@ extension ReportMessagesDataOn on TelegramClient {
   }) async {
     dynamic target_chat_id = TgUtils.parse_all_chat_id(parameters: parameters);
     if (target_chat_id is String &&
-        RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-            .hashData(target_chat_id)) {
+        RegExp(
+          r"^((@)[a-z0-9_]+)$",
+          caseSensitive: false,
+        ).hashData(target_chat_id)) {
       var search_public_chat = await callApiInvoke(
         parameters: {
           "@type": "searchPublicChat",
-          "username": (target_chat_id)
-              .replaceAll(RegExp(r"@", caseSensitive: false), ""),
+          "username": (target_chat_id).replaceAll(
+            RegExp(r"@", caseSensitive: false),
+            "",
+          ),
         },
         is_invoke_no_relevance: true,
       );
@@ -70,12 +74,11 @@ extension ReportMessagesDataOn on TelegramClient {
     Map request_parameters = {
       "@type": "reportChat",
       "chat_id": parameters["chat_id"],
-      "message_ids": (parameters["message_ids"] as List)
-          .map((e) => TgUtils.messageApiToTdlib(e))
-          .toList(),
-      "reason": {
-        "@type": "reportReasonCustom",
-      },
+      "message_ids":
+          (parameters["message_ids"] as List)
+              .map((e) => TgUtils.messageApiToTdlib(e))
+              .toList(),
+      "reason": {"@type": "reportReasonCustom"},
     };
     String reason_report = () {
       if (parameters["reason"] is String) {
@@ -121,9 +124,7 @@ extension ReportMessagesDataOn on TelegramClient {
     if (parameters["text"] is String) {
       request_parameters["text"] = parameters["text"];
     }
-    Map request_result = await callApiInvoke(
-      parameters: request_parameters,
-    );
+    Map request_result = await callApiInvoke(parameters: request_parameters);
     return request_result;
   }
 }

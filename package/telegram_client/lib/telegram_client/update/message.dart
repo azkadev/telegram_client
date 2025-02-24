@@ -59,8 +59,9 @@ extension MessageDataDataOn on TelegramClient {
         message_thread_json["is_topic_message"] = message["is_topic_message"];
         message_thread_json["message_tdlib_thread_id"] =
             message["message_thread_id"];
-        message_thread_json["message_thread_id"] =
-            TgUtils.messageTdlibToApi(message["message_thread_id"]);
+        message_thread_json["message_thread_id"] = TgUtils.messageTdlibToApi(
+          message["message_thread_id"],
+        );
 
         if (is_skip_reply_message && is_in_thread) {
           if (is_lite) {
@@ -83,7 +84,7 @@ extension MessageDataDataOn on TelegramClient {
               message_thread_json["forum_topic_created"] = {
                 "name": getForumTopic["info"]["name"],
                 if (getForumTopic["info"]["icon"] is Map)
-                  "icon_color": getForumTopic["info"]["icon"]["color"]
+                  "icon_color": getForumTopic["info"]["icon"]["color"],
               };
             }
           }
@@ -152,10 +153,7 @@ extension MessageDataDataOn on TelegramClient {
 
       // } else {
       final Map res = await request(
-        parameters: {
-          "@type": "getChat",
-          "chat_id": message_chat_json["id"],
-        },
+        parameters: {"@type": "getChat", "chat_id": message_chat_json["id"]},
         isUseCache: isUseCache,
         durationCacheExpire: durationCacheExpire,
         telegramClientData: telegramClientData,
@@ -176,10 +174,7 @@ extension MessageDataDataOn on TelegramClient {
           } else {
             try {
               final Map res = await request(
-                parameters: {
-                  "@type": "getUser",
-                  "user_id": 1087968824,
-                },
+                parameters: {"@type": "getUser", "user_id": 1087968824},
                 isUseCache: isUseCache,
                 durationCacheExpire: durationCacheExpire,
                 telegramClientData: telegramClientData,
@@ -197,8 +192,9 @@ extension MessageDataDataOn on TelegramClient {
 
     if (telegramClientData.is_bot == false) {
       if ((message_from_json["from"] is Map)) {
-        (message_from_json["from"] as Map)
-            .removeWhere((key, value) => key == "phone_number");
+        (message_from_json["from"] as Map).removeWhere(
+          (key, value) => key == "phone_number",
+        );
       }
       message_chat_json.removeWhere((key, value) => key == "phone_number");
     }
@@ -608,11 +604,12 @@ extension MessageDataDataOn on TelegramClient {
             jsonContent["is_anonymous"] = contentUpdate["is_anonymous"] == true;
             if (contentUpdate["type"] is Map) {
               if (contentUpdate["type"]["@type"] is String) {
-                jsonContent["type"] = contentUpdate["type"]["@type"]
-                    .toString()
-                    .replaceAll(RegExp("(pollType)"), "")
-                    .trim()
-                    .toLowerCase();
+                jsonContent["type"] =
+                    contentUpdate["type"]["@type"]
+                        .toString()
+                        .replaceAll(RegExp("(pollType)"), "")
+                        .trim()
+                        .toLowerCase();
               }
               jsonContent["allow_multiple_answers"] =
                   contentUpdate["type"]["allow_multiple_answers"] == true;
@@ -661,7 +658,8 @@ extension MessageDataDataOn on TelegramClient {
               final Map res = await invoke(
                 parameters: {
                   "@type": "getStickerSet",
-                  "set_id": int.tryParse(contentUpdate["set_id"]) ??
+                  "set_id":
+                      int.tryParse(contentUpdate["set_id"]) ??
                       contentUpdate["set_id"],
                 },
                 isUseCache: isUseCache,
@@ -795,9 +793,13 @@ extension MessageDataDataOn on TelegramClient {
               .replaceAll(RegExp("textEntityType", caseSensitive: false), "")
               .replaceAll(RegExp("textUrl", caseSensitive: false), "text_link")
               .replaceAll(
-                  RegExp("bot_command", caseSensitive: false), "bot_command")
+                RegExp("bot_command", caseSensitive: false),
+                "bot_command",
+              )
               .replaceAll(
-                  RegExp("mentionname", caseSensitive: false), "text_mention");
+                RegExp("mentionname", caseSensitive: false),
+                "text_mention",
+              );
           jsonEntities["type"] = typeEntities;
           if (dataEntities["type"]["url"] != null) {
             jsonEntities["url"] = dataEntities["type"]["url"];
@@ -806,16 +808,13 @@ extension MessageDataDataOn on TelegramClient {
               dataEntities["type"]["user_id"] != null) {
             final int entitiesUserId = dataEntities["type"]["user_id"];
             Map<dynamic, dynamic> fromJson = <dynamic, dynamic>{
-              "id": entitiesUserId
+              "id": entitiesUserId,
             };
             if (is_lite) {
             } else {
               try {
                 final Map res = await request(
-                  parameters: {
-                    "@type": "getUser",
-                    "user_id": entitiesUserId,
-                  },
+                  parameters: {"@type": "getUser", "user_id": entitiesUserId},
                   isUseCache: isUseCache,
                   durationCacheExpire: durationCacheExpire,
                   is_return_as_api: false,
@@ -868,17 +867,22 @@ extension MessageDataDataOn on TelegramClient {
         }
         if (chat_type.isNotEmpty &&
             updataOptionTelegramClient
-                .updataMessageTelegramClient.skip_old_chat_types
+                .updataMessageTelegramClient
+                .skip_old_chat_types
                 .contains(chat_type)) {
-          final DateTime dateTime =
-              DateTime.now().copyWith(microsecond: 0, millisecond: 0);
-          final DateTime dateTimeMessage =
-              DateTime.fromMillisecondsSinceEpoch((message["date"] * 1000));
+          final DateTime dateTime = DateTime.now().copyWith(
+            microsecond: 0,
+            millisecond: 0,
+          );
+          final DateTime dateTimeMessage = DateTime.fromMillisecondsSinceEpoch(
+            (message["date"] * 1000),
+          );
           final Duration duration = dateTime.difference(dateTimeMessage);
 
           if (duration >
               updataOptionTelegramClient
-                  .updataMessageTelegramClient.duration_old_message_skip) {
+                  .updataMessageTelegramClient
+                  .duration_old_message_skip) {
             return true;
           }
         }
@@ -888,7 +892,8 @@ extension MessageDataDataOn on TelegramClient {
       // check user
       if (telegramClientData.is_bot == false) {
         if (updataOptionTelegramClient
-            .updataMessageTelegramClient.user_is_skip_old_message) {
+            .updataMessageTelegramClient
+            .user_is_skip_old_message) {
           final bool is_skip_update = isSkipUpdate();
           if (is_skip_update) {
             return null;
@@ -896,7 +901,8 @@ extension MessageDataDataOn on TelegramClient {
         }
       } else {
         if (updataOptionTelegramClient
-            .updataMessageTelegramClient.bot_is_skip_old_message) {
+            .updataMessageTelegramClient
+            .bot_is_skip_old_message) {
           final bool is_skip_update = isSkipUpdate();
           if (is_skip_update) {
             return null;
@@ -913,15 +919,9 @@ extension MessageDataDataOn on TelegramClient {
       );
 
       if (msg["chat"]["type"] == "channel") {
-        return {
-          "@type": "updateChannelPost",
-          "channel_post": msg,
-        };
+        return {"@type": "updateChannelPost", "channel_post": msg};
       } else {
-        return {
-          "@type": "updateMessage",
-          "message": msg,
-        };
+        return {"@type": "updateMessage", "message": msg};
       }
     }
 

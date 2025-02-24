@@ -49,7 +49,7 @@ class TelegramClientLibraryError extends JsonScheme {
       "code": 500,
       "message": "",
       "description": "",
-      "@extra": ""
+      "@extra": "",
     };
   }
 
@@ -177,8 +177,9 @@ class TelegramClientLibraryError extends JsonScheme {
       "@extra": special_extra,
     };
 
-    telegramClientLibraryError_data_create_json
-        .removeWhere((key, value) => value == null);
+    telegramClientLibraryError_data_create_json.removeWhere(
+      (key, value) => value == null,
+    );
 
     if (schemeUtilsIsSetDefaultData) {
       defaultData.forEach((key, value) {
@@ -189,6 +190,7 @@ class TelegramClientLibraryError extends JsonScheme {
       });
     }
     return TelegramClientLibraryError(
-        telegramClientLibraryError_data_create_json);
+      telegramClientLibraryError_data_create_json,
+    );
   }
 }

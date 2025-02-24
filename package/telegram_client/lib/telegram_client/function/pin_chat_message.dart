@@ -51,13 +51,17 @@ extension PinChatMessageDataOn on TelegramClient {
   }) async {
     dynamic target_chat_id = TgUtils.parse_all_chat_id(parameters: parameters);
     if (target_chat_id is String &&
-        RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-            .hashData(target_chat_id)) {
+        RegExp(
+          r"^((@)[a-z0-9_]+)$",
+          caseSensitive: false,
+        ).hashData(target_chat_id)) {
       var search_public_chat = await callApiInvoke(
         parameters: {
           "@type": "searchPublicChat",
-          "username": (target_chat_id)
-              .replaceAll(RegExp(r"@", caseSensitive: false), ""),
+          "username": (target_chat_id).replaceAll(
+            RegExp(r"@", caseSensitive: false),
+            "",
+          ),
         },
         is_invoke_no_relevance: true,
       );
@@ -82,9 +86,7 @@ extension PinChatMessageDataOn on TelegramClient {
         request_parameters[optional_parameter] = parameters[optional_parameter];
       }
     }
-    Map request_result = await callApiInvoke(
-      parameters: request_parameters,
-    );
+    Map request_result = await callApiInvoke(parameters: request_parameters);
 
     return request_result;
   }

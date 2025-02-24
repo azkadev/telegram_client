@@ -37,7 +37,8 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 import 'package:general_lib/general_lib.dart';
 
 void main(List<String> args) async {
-  String params = """
+  String params =
+      """
  
 string 	system_language_code_
  	IETF language tag of the user's operating system language; must be non-empty.
@@ -50,18 +51,21 @@ string 	system_version_
  
 string 	application_version_
  	Application version; must be non-empty.
-"""
-      .trim();
+""".trim();
 
   Map parameters_data = {};
 
-  List<RegExpMatch> parameters_regex = params
-      .split("\n")
-      .map((e) =>
-          RegExp("^(([a-z0-9]+)([ \t])+((.*)(_)))", caseSensitive: false)
-              .firstMatch(e))
-      .whereType<RegExpMatch>()
-      .toList();
+  List<RegExpMatch> parameters_regex =
+      params
+          .split("\n")
+          .map(
+            (e) => RegExp(
+              "^(([a-z0-9]+)([ \t])+((.*)(_)))",
+              caseSensitive: false,
+            ).firstMatch(e),
+          )
+          .whereType<RegExpMatch>()
+          .toList();
   for (var i = 0; i < parameters_regex.length; i++) {
     RegExpMatch regExpMatch = parameters_regex[i];
     String value = regExpMatch.group(2) ?? "";

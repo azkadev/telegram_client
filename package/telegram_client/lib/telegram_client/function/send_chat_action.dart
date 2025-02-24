@@ -50,13 +50,17 @@ extension SendChatActionDataOn on TelegramClient {
   }) async {
     dynamic target_chat_id = TgUtils.parse_all_chat_id(parameters: parameters);
     if (target_chat_id is String &&
-        RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-            .hashData(target_chat_id)) {
+        RegExp(
+          r"^((@)[a-z0-9_]+)$",
+          caseSensitive: false,
+        ).hashData(target_chat_id)) {
       var search_public_chat = await callApiInvoke(
         parameters: {
           "@type": "searchPublicChat",
-          "username": (target_chat_id)
-              .replaceAll(RegExp(r"@", caseSensitive: false), ""),
+          "username": (target_chat_id).replaceAll(
+            RegExp(r"@", caseSensitive: false),
+            "",
+          ),
         },
         is_invoke_no_relevance: true,
       );
@@ -69,9 +73,7 @@ extension SendChatActionDataOn on TelegramClient {
     Map request_parameters = {
       "@type": "sendChatAction",
       "chat_id": parameters["chat_id"],
-      "action": {
-        "@type": "chatActionTyping",
-      }
+      "action": {"@type": "chatActionTyping"},
     };
     if (parameters["action"] is String == false) {
       parameters["action"] = "";
@@ -111,9 +113,7 @@ extension SendChatActionDataOn on TelegramClient {
       request_parameters["message_thread_id"] =
           (parameters["message_thread_id"]);
     }
-    Map message_send = await callApiInvoke(
-      parameters: request_parameters,
-    );
+    Map message_send = await callApiInvoke(parameters: request_parameters);
 
     return message_send;
   }

@@ -72,10 +72,7 @@ void main(List<String> args) async {
 
           if (authorization_state["@type"] == "authorizationStateWaitCode") {
             Map res = await tg.invoke(
-              parameters: {
-                "@type": "checkAuthenticationCode",
-                "code": "xxxxx",
-              },
+              parameters: {"@type": "checkAuthenticationCode", "code": "xxxxx"},
               telegramClientData: updateTelegramClient.telegramClientData,
             );
             print(res);
@@ -83,9 +80,7 @@ void main(List<String> args) async {
 
           if (authorization_state["@type"] == "authorizationStateReady") {
             Map get_me = await tg.invoke(
-              parameters: {
-                "@type": "getMe",
-              },
+              parameters: {"@type": "getMe"},
               telegramClientData: updateTelegramClient.telegramClientData,
             );
             get_me.printPretty();
@@ -98,9 +93,7 @@ void main(List<String> args) async {
     },
   );
 
-  await tg.tdlib.createclient(
-    clientId: tg.tdlib.td_create_client_id(),
-  );
+  await tg.tdlib.createclient(clientId: tg.tdlib.td_create_client_id());
 
   print("Client running...");
 }

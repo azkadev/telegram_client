@@ -41,7 +41,7 @@ import 'dart:async';
 
 import 'package:general_lib/general_lib.dart';
 import 'package:telegram_client/isolate/isolate.dart';
-import 'package:telegram_client/dart_scheme/scheme.dart';
+import 'package:telegram_client/dart_scheme/dart_scheme.dart';
 import 'package:telegram_client/scheme/telegram_client_library_tdlib_option_parameter.dart';
 import 'package:telegram_client/tdlib/tdlib_isolate_data.dart';
 import 'package:telegram_client/tdlib/tdlib_isolate_receive_data.dart';
@@ -51,16 +51,16 @@ import 'package:telegram_client/tdlib/update_td.dart';
 import 'package:io_universe/io_universe.dart';
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnReceiveUpdate = FutureOr<void> Function(
-    dynamic update, TdlibBase libTdJson);
+typedef TdlibOnReceiveUpdate =
+    FutureOr<void> Function(dynamic update, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnGenerateExtraInvoke = FutureOr<String> Function(
-    int client_id, TdlibBase libTdJson);
+typedef TdlibOnGenerateExtraInvoke =
+    FutureOr<String> Function(int client_id, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnGetInvokeData = FutureOr<Map> Function(
-    String extra, int client_id, TdlibBase libTdJson);
+typedef TdlibOnGetInvokeData =
+    FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
 abstract class TdlibBaseCore {
@@ -110,9 +110,7 @@ abstract class TdlibBaseCore {
   // }
 
   /// fetch update
-  static Map<String, dynamic>? td_receive_static({
-    double timeout = 1.0,
-  }) {
+  static Map<String, dynamic>? td_receive_static({double timeout = 1.0}) {
     return null;
   }
 }
@@ -140,26 +138,28 @@ abstract class TdlibBase implements TdlibBaseCore {
   /// TelegramClientUncompleDocumentation
   final TelegramClientLibraryTdlibOptionParameter client_option =
       TelegramClientLibraryTdlibOptionParameter.create(
-    api_id: num.tryParse("OTQ1NzU=".general_lib_utils_decryptFromBase64()),
-    api_hash: 'YTM0MDZkZThkMTcxYmI0MjJiYjZkZGYzYmJkODAwZTI='
-        .general_lib_utils_decryptFromBase64(),
-    database_directory: "tg_db",
-    files_directory: "tg_file",
-    use_file_database: true,
-    use_chat_info_database: true,
-    use_message_database: true,
-    use_secret_chats: true,
-    enable_storage_optimizer: true,
-    system_language_code: 'en',
-    new_verbosity_level: 0,
-    application_version: 'v1',
-    device_model: 'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
-        .general_lib_utils_decryptFromBase64(),
-    system_version: Platform.operatingSystemVersion,
-    database_key: "",
-    start: true,
-    database_encryption_key: "",
-  );
+        api_id: num.tryParse("OTQ1NzU=".general_lib_utils_decryptFromBase64()),
+        api_hash:
+            'YTM0MDZkZThkMTcxYmI0MjJiYjZkZGYzYmJkODAwZTI='
+                .general_lib_utils_decryptFromBase64(),
+        database_directory: "tg_db",
+        files_directory: "tg_file",
+        use_file_database: true,
+        use_chat_info_database: true,
+        use_message_database: true,
+        use_secret_chats: true,
+        enable_storage_optimizer: true,
+        system_language_code: 'en',
+        new_verbosity_level: 0,
+        application_version: 'v1',
+        device_model:
+            'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
+                .general_lib_utils_decryptFromBase64(),
+        system_version: Platform.operatingSystemVersion,
+        database_key: "",
+        start: true,
+        database_encryption_key: "",
+      );
   // late SendPort sendPort;
   /// TelegramClientUncompleDocumentation
   late Isolate isolate;
@@ -268,18 +268,21 @@ abstract class TdlibBase implements TdlibBaseCore {
         TdlibIsolateReceiveData tdlibIsolateReceiveData = update;
         try {
           if (tdlibIsolateReceiveData.updateData["@extra"] is String) {
-            this
-                .eventEmitter
-                .emit(eventName: event_invoke, value: tdlibIsolateReceiveData);
+            this.eventEmitter.emit(
+              eventName: event_invoke,
+              value: tdlibIsolateReceiveData,
+            );
           } else {
-            this
-                .eventEmitter
-                .emit(eventName: event_update, value: tdlibIsolateReceiveData);
+            this.eventEmitter.emit(
+              eventName: event_update,
+              value: tdlibIsolateReceiveData,
+            );
           }
         } catch (e) {
-          this
-              .eventEmitter
-              .emit(eventName: event_update, value: tdlibIsolateReceiveData);
+          this.eventEmitter.emit(
+            eventName: event_update,
+            value: tdlibIsolateReceiveData,
+          );
         }
       } else if (update is TdlibIsolateReceiveDataError) {
         is_init_isolate = false;
@@ -327,9 +330,7 @@ abstract class TdlibBase implements TdlibBaseCore {
   }
 
   /// TelegramClientUncompleDocumentation
-  static void opentdLib({
-    required String pathTdlib,
-  }) {}
+  static void opentdLib({required String pathTdlib}) {}
 
   /// fetch update
   static Map<String, dynamic>? td_receive_static({
@@ -408,7 +409,7 @@ abstract class TdlibBase implements TdlibBaseCore {
         }
       });
       final Map<String, num> tdlib_option_should_not_empty_num = {
-        "api_id": client_option.api_id ?? 0
+        "api_id": client_option.api_id ?? 0,
       };
       tdlib_option_should_not_empty_num.forEach((key, value) {
         try {
@@ -537,19 +538,21 @@ abstract class TdlibBase implements TdlibBaseCore {
         try {
           if (update is TdlibIsolateReceiveData) {
             // final TdlibIsolateReceiveData tdlibIsolateReceiveData = update;
-            await callback(UpdateTelegramClientTdlib(
-              update: update.updateData,
-              client_id: update.clientId,
-              client_option: () {
-                try {
-                  final TdlibClient? tdlibClient = clients[update.clientId];
-                  if (tdlibClient != null) {
-                    return tdlibClient.client_option;
-                  }
-                } catch (e) {}
-                return {};
-              }(),
-            ));
+            await callback(
+              UpdateTelegramClientTdlib(
+                update: update.updateData,
+                client_id: update.clientId,
+                client_option: () {
+                  try {
+                    final TdlibClient? tdlibClient = clients[update.clientId];
+                    if (tdlibClient != null) {
+                      return tdlibClient.client_option;
+                    }
+                  } catch (e) {}
+                  return {};
+                }(),
+              ),
+            );
             return;
           }
         } catch (e) {
@@ -585,10 +588,13 @@ abstract class TdlibBase implements TdlibBaseCore {
     required bool isAutoGetChat,
     required bool isInvokeThrowOnError,
     required FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-        onGenerateExtraInvoke,
+    onGenerateExtraInvoke,
     required FutureOr<Map> Function(
-            String extra, int client_id, TdlibBase libTdJson)?
-        onGetInvokeData,
+      String extra,
+      int client_id,
+      TdlibBase libTdJson,
+    )?
+    onGetInvokeData,
   }) async {
     final Completer<Map> completer = Completer<Map>();
     late final EventEmitterListener listener;
@@ -610,8 +616,10 @@ abstract class TdlibBase implements TdlibBaseCore {
             if (extra.isEmpty) {
               parameters["@extra"] = extra;
             } else if (onGenerateExtraInvoke != null) {
-              parameters["@extra"] =
-                  await onGenerateExtraInvoke(clientId, this);
+              parameters["@extra"] = await onGenerateExtraInvoke(
+                clientId,
+                this,
+              );
             } else {
               parameters["@extra"] = generateUuid(15);
             }
@@ -625,8 +633,10 @@ abstract class TdlibBase implements TdlibBaseCore {
         }();
 
         if (isAutoGetChat &&
-            RegExp(r"^(sendMessage|getChatMember)$", caseSensitive: false)
-                .hashData(parameters["@type"])) {
+            RegExp(
+              r"^(sendMessage|getChatMember)$",
+              caseSensitive: false,
+            ).hashData(parameters["@type"])) {
           if (parameters["chat_id"] is int) {
             td_send(clientId, {
               "@type": "getChat",
@@ -641,20 +651,11 @@ abstract class TdlibBase implements TdlibBaseCore {
           }
         }
         if (isVoid) {
-          td_send(
-            clientId,
-            parameters,
-          );
-          return {
-            "@type": "ok",
-            "@extra": extra,
-          };
+          td_send(clientId, parameters);
+          return {"@type": "ok", "@extra": extra};
         }
         if (onGetInvokeData != null) {
-          td_send(
-            clientId,
-            parameters,
-          );
+          td_send(clientId, parameters);
           return await onGetInvokeData(extra_id, clientId, this);
         }
         listener = on(event_invoke, (UpdateTelegramClientTdlib update) async {
@@ -672,10 +673,7 @@ abstract class TdlibBase implements TdlibBaseCore {
             // result["@type"] = "error";
           }
         });
-        td_send(
-          clientId,
-          parameters,
-        );
+        td_send(clientId, parameters);
         task_increase();
         final Map result = await completer.future.timeout(
           invokeTimeOut,
@@ -688,18 +686,12 @@ abstract class TdlibBase implements TdlibBaseCore {
         if (e is Map) {
           return e;
         }
-        return {
-          "@type": "error",
-          "message": "crash",
-        };
+        return {"@type": "error", "message": "crash"};
       }
     }).timeout(
       functionTimeOut,
       onTimeout: () {
-        return {
-          "@type": "error",
-          "message": "timeout",
-        };
+        return {"@type": "error", "message": "timeout"};
       },
     );
     task_decrease();
@@ -749,9 +741,7 @@ abstract class TdlibBase implements TdlibBaseCore {
     TdlibOnGetInvokeData? onGetInvokeData,
   }) async {
     isUseCache ??= false;
-    durationCacheExpire ??= Duration(
-      minutes: 1,
-    );
+    durationCacheExpire ??= Duration(minutes: 1);
     isInvokeThrowOnError ??= is_invoke_throw_on_error;
     onGetInvokeData ??= this.onGetInvokeData;
     onGenerateExtraInvoke ??= this.onGenerateExtraInvoke;
@@ -790,9 +780,9 @@ abstract class TdlibBase implements TdlibBaseCore {
     Duration? durationCacheExpire,
     bool? isAutoGetChat,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-        onGenerateExtraInvoke,
+    onGenerateExtraInvoke,
     FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)?
-        onGetInvokeData,
+    onGetInvokeData,
     bool? isInvokeThrowOnError,
   }) async {
     return await invoke(
@@ -828,10 +818,7 @@ abstract class TdlibBase implements TdlibBaseCore {
   ///   clientId: tg.client_id,
   /// );
   /// ```
-  Map invokeSync({
-    required Map parameters,
-    bool isThrowOnError = true,
-  }) {
+  Map invokeSync({required Map parameters, bool isThrowOnError = true}) {
     Map result = td_execute(parameters);
     if (result["@type"] == "error") {
       if (!isThrowOnError) {

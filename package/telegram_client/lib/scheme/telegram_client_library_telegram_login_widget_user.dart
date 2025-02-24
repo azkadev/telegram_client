@@ -50,7 +50,7 @@ class TelegramClientLibraryTelegramLoginWidgetUser extends JsonScheme {
       "first_name": "",
       "username": "",
       "hash": "",
-      "@extra": ""
+      "@extra": "",
     };
   }
 
@@ -197,8 +197,9 @@ class TelegramClientLibraryTelegramLoginWidgetUser extends JsonScheme {
       "@extra": special_extra,
     };
 
-    telegramClientLibraryTelegramLoginWidgetUser_data_create_json
-        .removeWhere((key, value) => value == null);
+    telegramClientLibraryTelegramLoginWidgetUser_data_create_json.removeWhere(
+      (key, value) => value == null,
+    );
 
     if (schemeUtilsIsSetDefaultData) {
       defaultData.forEach((key, value) {
@@ -211,6 +212,7 @@ class TelegramClientLibraryTelegramLoginWidgetUser extends JsonScheme {
       });
     }
     return TelegramClientLibraryTelegramLoginWidgetUser(
-        telegramClientLibraryTelegramLoginWidgetUser_data_create_json);
+      telegramClientLibraryTelegramLoginWidgetUser_data_create_json,
+    );
   }
 }

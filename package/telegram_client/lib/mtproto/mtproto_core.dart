@@ -41,7 +41,7 @@ import 'dart:async' show Future, FutureOr;
 
 import 'package:general_lib/general_lib.dart';
 import 'package:telegram_client/isolate/isolate.dart';
-import 'package:telegram_client/dart_scheme/scheme.dart';
+import 'package:telegram_client/dart_scheme/dart_scheme.dart';
 import 'package:io_universe/io_universe.dart';
 
 import 'mtproto_isolate_receive_data.dart';
@@ -81,8 +81,9 @@ class Mtproto {
     'system_language_code': 'en',
     'new_verbosity_level': 0,
     'application_version': 'v1',
-    'device_model': 'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
-        .general_lib_utils_decryptFromBase64(),
+    'device_model':
+        'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
+            .general_lib_utils_decryptFromBase64(),
     'system_version': Platform.operatingSystemVersion,
     "database_key": "",
     "start": true,
@@ -132,11 +133,11 @@ class Mtproto {
 
   /// TelegramClientUncompleDocumentation
   FutureOr<String> Function(int client_id, Mtproto Mtproto)?
-      on_generate_extra_invoke;
+  on_generate_extra_invoke;
 
   /// TelegramClientUncompleDocumentation
   FutureOr<Map> Function(String extra, int client_id, Mtproto Mtproto)?
-      on_get_invoke_data;
+  on_get_invoke_data;
 
   /// TelegramClientUncompleDocumentation
   Mtproto({
@@ -178,8 +179,9 @@ class Mtproto {
       } else if (update is MtprotoIsolateReceiveDataError) {
         MtprotoIsolateReceiveDataError tdlibIsolateReceiveDataError = update;
         try {
-          MtprotoClient? tdlibClient =
-              clients.getClientById(tdlibIsolateReceiveDataError.clientId);
+          MtprotoClient? tdlibClient = clients.getClientById(
+            tdlibIsolateReceiveDataError.clientId,
+          );
           if (tdlibClient != null) {
             tdlibClient.close();
           }
@@ -258,10 +260,7 @@ class Mtproto {
   }) async {
     await initIsolate(
       clientId: clientId,
-      clientOption: {
-        ...client_option,
-        ...clientOption,
-      },
+      clientOption: {...client_option, ...clientOption},
       clientUserId: clientUserId,
     );
   }
@@ -310,11 +309,7 @@ class Mtproto {
     if (tdlibClient != null) {
       if (isClose) {
         try {
-          await invoke(
-            "close",
-            clientId: clientId,
-            extra: extra,
-          );
+          await invoke("close", clientId: clientId, extra: extra);
         } catch (e) {}
       }
       tdlibClient.close();
@@ -339,8 +334,10 @@ class Mtproto {
 
   /// receive all update data
   EventEmitterListener on(
-      String type_update, FutureOr<dynamic> Function(UpdateMt update) callback,
-      {void Function(Object data)? onError}) {
+    String type_update,
+    FutureOr<dynamic> Function(UpdateMt update) callback, {
+    void Function(Object data)? onError,
+  }) {
     return event_emitter.on(
       eventName: type_update,
       onCallback: (listener, update) {
@@ -388,9 +385,9 @@ class Mtproto {
     String? extra,
     bool? iSAutoGetChat,
     FutureOr<String> Function(int client_id, Mtproto Mtproto)?
-        onGenerateExtraInvoke,
+    onGenerateExtraInvoke,
     FutureOr<Map> Function(String extra, int client_id, Mtproto Mtproto)?
-        onGetInvokeData,
+    onGetInvokeData,
     bool isThrowOnError = true,
   }) async {
     onGetInvokeData ??= on_get_invoke_data;
@@ -432,52 +429,35 @@ class Mtproto {
     }
 
     if (iSAutoGetChat &&
-        RegExp(r"^(sendMessage|getChatMember)$", caseSensitive: false)
-            .hashData(method)) {
+        RegExp(
+          r"^(sendMessage|getChatMember)$",
+          caseSensitive: false,
+        ).hashData(method)) {
       if (parameters["chat_id"] is int) {
-        client_send(
-          clientId,
-          {
-            "@type": "getChat",
-            "chat_id": parameters["chat_id"],
-          },
-        );
+        client_send(clientId, {
+          "@type": "getChat",
+          "chat_id": parameters["chat_id"],
+        });
       }
       if (parameters["user_id"] is int) {
-        client_send(
-          clientId,
-          {
-            "@type": "getUser",
-            "user_id": parameters["user_id"],
-          },
-        );
+        client_send(clientId, {
+          "@type": "getUser",
+          "user_id": parameters["user_id"],
+        });
       }
     }
 
-    Map requestMethod = {
-      "@type": method,
-      "client_id": clientId,
-      ...parameters,
-    };
+    Map requestMethod = {"@type": method, "client_id": clientId, ...parameters};
 
     if (isVoid) {
-      client_send(
-        clientId,
-        requestMethod,
-      );
-      return {
-        "@type": "ok",
-        "@extra": extra,
-      };
+      client_send(clientId, requestMethod);
+      return {"@type": "ok", "@extra": extra};
     }
     Map result = {};
     Duration timeOut = invokeTimeOut;
     DateTime.now().add(timeOut);
     if (onGetInvokeData != null) {
-      client_send(
-        clientId,
-        requestMethod,
-      );
+      client_send(clientId, requestMethod);
       return await onGetInvokeData(extra_id, clientId, this);
     }
     on(event_invoke, (UpdateMt update) async {
@@ -493,10 +473,7 @@ class Mtproto {
         result["@type"] = "error";
       }
     });
-    client_send(
-      clientId,
-      requestMethod,
-    );
+    client_send(clientId, requestMethod);
     throw result;
   }
 
@@ -532,11 +509,7 @@ class Mtproto {
       parameters["@extra"] = random;
     }
 
-    var requestMethod = {
-      "@type": method,
-      "client_id": clientId,
-      ...parameters,
-    };
+    var requestMethod = {"@type": method, "client_id": clientId, ...parameters};
 
     Map result = client_execute(clientId, requestMethod);
     if (result["@type"] == "error") {

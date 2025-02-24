@@ -51,13 +51,17 @@ extension GetChatDataOn on TelegramClient {
   }) async {
     dynamic target_chat_id = TgUtils.parse_all_chat_id(parameters: parameters);
     if (target_chat_id is String &&
-        RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-            .hashData(target_chat_id)) {
+        RegExp(
+          r"^((@)[a-z0-9_]+)$",
+          caseSensitive: false,
+        ).hashData(target_chat_id)) {
       var search_public_chat = await callApiInvoke(
         parameters: {
           "@type": "searchPublicChat",
-          "username": (target_chat_id)
-              .replaceAll(RegExp(r"@", caseSensitive: false), ""),
+          "username": (target_chat_id).replaceAll(
+            RegExp(r"@", caseSensitive: false),
+            "",
+          ),
         },
         is_invoke_no_relevance: true,
       );
@@ -68,10 +72,7 @@ extension GetChatDataOn on TelegramClient {
       }
     }
     Map get_chat = await callApiInvoke(
-      parameters: {
-        "@type": "getChat",
-        "chat_id": parameters["chat_id"],
-      },
+      parameters: {"@type": "getChat", "chat_id": parameters["chat_id"]},
     );
 
     Map newScheme = {
@@ -89,9 +90,10 @@ extension GetChatDataOn on TelegramClient {
     if (get_chat["@type"] == "chat") {
       newScheme["id"] = get_chat["id"];
       if (get_chat["type"] is Map) {
-        newScheme["type"] = (get_chat["type"]["@type"] as String)
-            .replaceAll(RegExp(r"(chatType)", caseSensitive: false), "")
-            .toLowerCase();
+        newScheme["type"] =
+            (get_chat["type"]["@type"] as String)
+                .replaceAll(RegExp(r"(chatType)", caseSensitive: false), "")
+                .toLowerCase();
       }
 
       var type_chat = newScheme["type"].toString().toLowerCase();
@@ -100,9 +102,10 @@ extension GetChatDataOn on TelegramClient {
           parameters: {
             "@type": "getSupergroup",
             "supergroup_id": int.parse(
-              newScheme["id"]
-                  .toString()
-                  .replaceAll(RegExp("^-100", caseSensitive: false), ""),
+              newScheme["id"].toString().replaceAll(
+                RegExp("^-100", caseSensitive: false),
+                "",
+              ),
             ),
           },
         );
@@ -224,17 +227,21 @@ extension GetChatDataOn on TelegramClient {
         });
         if (getSupergroup["username"].toString().isEmpty) {
           newScheme.remove("username");
-          newScheme["type"] = (get_chat["type"]["is_channel"] == true)
-              ? "channel"
-              : "supergroup";
+          newScheme["type"] =
+              (get_chat["type"]["is_channel"] == true)
+                  ? "channel"
+                  : "supergroup";
         }
       } else if (type_chat == "basicgroup") {
         var getBasicGroup = await callApiInvoke(
           parameters: {
             "@type": "getBasicGroup",
-            "basic_group_id": int.parse(parameters["chat_id"]
-                .toString()
-                .replaceAll(RegExp("^-", caseSensitive: false), "")),
+            "basic_group_id": int.parse(
+              parameters["chat_id"].toString().replaceAll(
+                RegExp("^-", caseSensitive: false),
+                "",
+              ),
+            ),
           },
         );
         newScheme["title"] = get_chat["title"];
@@ -279,10 +286,13 @@ extension GetChatDataOn on TelegramClient {
                 if (value is Map) {
                 } else {
                   try {
-                    if (RegExp(r"(message_id)", caseSensitive: false)
-                        .hasMatch(key)) {
-                      newScheme["detail"][key] =
-                          TgUtils.messageTdlibToApi(value);
+                    if (RegExp(
+                      r"(message_id)",
+                      caseSensitive: false,
+                    ).hasMatch(key)) {
+                      newScheme["detail"][key] = TgUtils.messageTdlibToApi(
+                        value,
+                      );
                     } else {
                       newScheme["detail"][key] = value;
                     }
@@ -337,17 +347,18 @@ extension GetChatDataOn on TelegramClient {
         });
       } else if (type_chat == "private") {
         var get_user = await callApiInvoke(
-          parameters: {
-            "@type": "getUser",
-            "user_id": parameters["chat_id"],
-          },
+          parameters: {"@type": "getUser", "user_id": parameters["chat_id"]},
         );
-        if (RegExp(r"^(user)$", caseSensitive: false)
-            .hashData(get_user["@type"])) {
+        if (RegExp(
+          r"^(user)$",
+          caseSensitive: false,
+        ).hashData(get_user["@type"])) {
           newScheme["id"] = get_user["id"];
           try {
-            if (RegExp("^userTypeBot\$", caseSensitive: false)
-                .hashData(get_user["type"]["@type"])) {
+            if (RegExp(
+              "^userTypeBot\$",
+              caseSensitive: false,
+            ).hashData(get_user["type"]["@type"])) {
               newScheme["is_bot"] = true;
             } else {
               newScheme["is_bot"] = false;
@@ -420,8 +431,10 @@ extension GetChatDataOn on TelegramClient {
             if (value is Map || value is List) {
             } else {
               try {
-                if (RegExp(r"(message_id)", caseSensitive: false)
-                    .hasMatch(key)) {
+                if (RegExp(
+                  r"(message_id)",
+                  caseSensitive: false,
+                ).hasMatch(key)) {
                   newScheme["detail"][key] = TgUtils.messageTdlibToApi(value);
                 } else {
                   newScheme["detail"][key] = value;
@@ -442,8 +455,10 @@ extension GetChatDataOn on TelegramClient {
             if (value is Map || value is List) {
             } else {
               try {
-                if (RegExp(r"(message_id)", caseSensitive: false)
-                    .hasMatch(key)) {
+                if (RegExp(
+                  r"(message_id)",
+                  caseSensitive: false,
+                ).hasMatch(key)) {
                   print("ay");
                   newScheme["detail"][key] = TgUtils.messageTdlibToApi(value);
                 } else {

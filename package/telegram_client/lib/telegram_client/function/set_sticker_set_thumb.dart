@@ -46,9 +46,7 @@ extension SetStickerSetThumbDataOn on TelegramClient {
     required Map parameters,
     required TelegramClientCallApiInvoke callApiInvoke,
   }) async {
-    Map newScheme = {
-      "@type": "template",
-    };
+    Map newScheme = {"@type": "template"};
     return newScheme;
   }
 }
