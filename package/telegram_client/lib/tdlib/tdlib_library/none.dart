@@ -79,7 +79,7 @@ class TdlibNative extends TdlibBase {
   });
   @override
   int td_create_client_id() {
-    // TODO: implement td_create_client_id
+    //  td_create_client_id
     return 0;
   }
 
@@ -90,7 +90,7 @@ class TdlibNative extends TdlibBase {
 
   @override
   void td_send(int clientId, Map parameters) {
-    // TODO: implement td_send
+    //  td_send
   }
 
   @override

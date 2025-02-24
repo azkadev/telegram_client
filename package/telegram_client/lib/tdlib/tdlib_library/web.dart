@@ -41,8 +41,8 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 import 'dart:async';
 
+import 'package:ffi_universe/ffi_universe.dart';
 import 'package:telegram_client/tdlib/tdlib_library/base.dart';
-import 'package:ffi_universe/wasm/ffi.dart';
 
 /// TelegramClientUncompleDocumentation
 typedef TdCharNative = Pointer<Char>;
@@ -139,7 +139,7 @@ class TdlibNative extends TdlibBase {
 
   @override
   int td_create_client_id() {
-    // TODO: implement td_create_client_id
+    //  td_create_client_id
     return 0;
   }
 
@@ -150,7 +150,7 @@ class TdlibNative extends TdlibBase {
 
   @override
   void td_send(int clientId, Map parameters) {
-    // TODO: implement td_send
+    //  td_send
   }
 
   @override
@@ -173,16 +173,11 @@ Future<void> opentdLib({
     return;
   }
 
-  TdlibNative.tdLib = await DynamicLibrary.open(pathTdlib);
+  TdlibNative.tdLib = await FFIUniverse.open(path: pathTdlib);
   TdlibNative.is_open_tdlib = true;
-  TdlibNative.td_execute_native_function = TdlibNative.tdLib
-      .lookupFunction<TdExecuteNative, TdExecuteNative>('td_execute');
-  TdlibNative.td_send_function =
-      TdlibNative.tdLib.lookupFunction<TdSendNative, TdSendDart>('td_send');
-  TdlibNative.td_pointer_native_function = TdlibNative.tdLib
-      .lookupFunction<TdCreateClientIdNative, TdCreateClientIdDart>(
-          'td_create_client_id');
-  TdlibNative.td_receive_function = TdlibNative.tdLib
-      .lookupFunction<TdReceiveNative, TdReceiveDart>('td_receive');
+  TdlibNative.td_execute_native_function = TdlibNative.tdLib.lookupFunction<TdExecuteNative, TdExecuteNative>('td_execute');
+  TdlibNative.td_send_function = TdlibNative.tdLib.lookupFunction<TdSendNative, TdSendDart>('td_send');
+  TdlibNative.td_pointer_native_function = TdlibNative.tdLib.lookupFunction<TdCreateClientIdNative, TdCreateClientIdDart>('td_create_client_id');
+  TdlibNative.td_receive_function = TdlibNative.tdLib.lookupFunction<TdReceiveNative, TdReceiveDart>('td_receive');
   TdlibNative._td_completer.complete(true);
 }
