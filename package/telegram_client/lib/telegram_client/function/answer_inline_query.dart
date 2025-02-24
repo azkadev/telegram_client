@@ -97,7 +97,8 @@ extension AnswerInlineQueryDataOn on TelegramClient {
 
             if (value is Map) {
               if (key == "reply_markup") {
-                jsonData[key] = TgUtils.replyMarkupTgApiToTdlib(replyMarkup: value);
+                jsonData[key] =
+                    TgUtils.replyMarkupTgApiToTdlib(replyMarkup: value);
               }
               if (key == "input_message_content") {
                 jsonData[key] = TgUtils.inputMessageContentInlineQueryTgToTdlib(

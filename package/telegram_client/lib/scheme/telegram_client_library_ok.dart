@@ -114,11 +114,13 @@ class TelegramClientLibraryOk extends JsonScheme {
       "@extra": special_extra,
     };
 
-    telegramClientLibraryOk_data_create_json.removeWhere((key, value) => value == null);
+    telegramClientLibraryOk_data_create_json
+        .removeWhere((key, value) => value == null);
 
     if (schemeUtilsIsSetDefaultData) {
       defaultData.forEach((key, value) {
-        if (telegramClientLibraryOk_data_create_json.containsKey(key) == false) {
+        if (telegramClientLibraryOk_data_create_json.containsKey(key) ==
+            false) {
           telegramClientLibraryOk_data_create_json[key] = value;
         }
       });

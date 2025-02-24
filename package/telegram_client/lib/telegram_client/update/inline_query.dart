@@ -82,7 +82,10 @@ extension InlineQueryDataDataOn on TelegramClient {
     };
 
     if (inlineQuery["chat_type"] is Map) {
-      new_scheme_data["chat_type"] = (inlineQuery["chat_type"]["@type"] as String).replaceAll(RegExp(r"(chatType)", caseSensitive: false), "").toLowerCase();
+      new_scheme_data["chat_type"] =
+          (inlineQuery["chat_type"]["@type"] as String)
+              .replaceAll(RegExp(r"(chatType)", caseSensitive: false), "")
+              .toLowerCase();
     }
     new_scheme_data["query"] = inlineQuery["query"];
     new_scheme_data["offset"] = inlineQuery["offset"];

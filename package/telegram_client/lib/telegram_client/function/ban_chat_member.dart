@@ -53,11 +53,14 @@ extension BanChatMemberDataOn on TelegramClient {
     Duration? durationCacheExpire,
   }) async {
     dynamic target_chat_id = TgUtils.parse_all_chat_id(parameters: parameters);
-    if (target_chat_id is String && RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false).hashData(target_chat_id)) {
+    if (target_chat_id is String &&
+        RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
+            .hashData(target_chat_id)) {
       var search_public_chat = await callApiInvoke(
         parameters: {
           "@type": "searchPublicChat",
-          "username": (target_chat_id).replaceAll(RegExp(r"@", caseSensitive: false), ""),
+          "username": (target_chat_id)
+              .replaceAll(RegExp(r"@", caseSensitive: false), ""),
         },
         is_invoke_no_relevance: true,
       );
@@ -83,9 +86,11 @@ extension BanChatMemberDataOn on TelegramClient {
     for (var optional_parameter in optional_parameters) {
       if (parameters.containsKey(optional_parameter)) {
         if (optional_parameter == "until_date") {
-          request_parameters["banned_until_date"] = parameters[optional_parameter];
+          request_parameters["banned_until_date"] =
+              parameters[optional_parameter];
         } else {
-          request_parameters[optional_parameter] = parameters[optional_parameter];
+          request_parameters[optional_parameter] =
+              parameters[optional_parameter];
         }
       }
     }

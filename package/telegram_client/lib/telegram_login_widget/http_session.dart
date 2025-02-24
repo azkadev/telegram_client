@@ -78,7 +78,10 @@ class HttpSession {
         continue;
       }
       var name = s.split('=')[0];
-      if (!(name.contains("path")) && !(name.contains("samesite")) && !(name.contains("secure")) && !(name.contains("expires"))) {
+      if (!(name.contains("path")) &&
+          !(name.contains("samesite")) &&
+          !(name.contains("secure")) &&
+          !(name.contains("expires"))) {
         s = s.replaceAll('HttpOnly,', '');
         cookies = '$cookies$s;';
       }

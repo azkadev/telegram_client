@@ -48,6 +48,9 @@ extension SendMediaGroupDataOn on TelegramClient {
     required TelegramClientCallApiInvoke callApiInvoke,
     required TelegramClientData telegramClientData,
   }) async {
-    return await sendMediaGroupRaw(parameters: parameters, callApiInvoke: callApiInvoke, telegramClientData: telegramClientData);
+    return await sendMediaGroupRaw(
+        parameters: parameters,
+        callApiInvoke: callApiInvoke,
+        telegramClientData: telegramClientData);
   }
 }

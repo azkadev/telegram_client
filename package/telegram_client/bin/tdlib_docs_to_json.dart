@@ -55,7 +55,13 @@ string 	application_version_
 
   Map parameters_data = {};
 
-  List<RegExpMatch> parameters_regex = params.split("\n").map((e) => RegExp("^(([a-z0-9]+)([ \t])+((.*)(_)))", caseSensitive: false).firstMatch(e)).whereType<RegExpMatch>().toList();
+  List<RegExpMatch> parameters_regex = params
+      .split("\n")
+      .map((e) =>
+          RegExp("^(([a-z0-9]+)([ \t])+((.*)(_)))", caseSensitive: false)
+              .firstMatch(e))
+      .whereType<RegExpMatch>()
+      .toList();
   for (var i = 0; i < parameters_regex.length; i++) {
     RegExpMatch regExpMatch = parameters_regex[i];
     String value = regExpMatch.group(2) ?? "";

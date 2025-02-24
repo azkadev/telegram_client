@@ -55,7 +55,8 @@ Future<void> tdlibIsolate(TdlibIsolateData tdlibIsolateData) async {
         timeout: tdlibIsolateData.timeOutUpdate,
       );
       if (new_update != null) {
-        if (new_update["@client_id"] is num == false || new_update["@client_id"] is int == false) {
+        if (new_update["@client_id"] is num == false ||
+            new_update["@client_id"] is int == false) {
           continue;
         }
         tdlibIsolateData.sendPort.send(

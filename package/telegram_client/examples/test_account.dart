@@ -72,8 +72,10 @@ void main(List<String> args) async {
         if (update["@type"] == "updateAuthorizationState") {
           if (update["authorization_state"] is Map) {
             Map authorization_state = update["authorization_state"];
-            if (authorization_state["@type"] == "authorizationStateWaitPhoneNumber") {
-              final String phone_numbers = updateTelegramClient.client_option["phone_number"];
+            if (authorization_state["@type"] ==
+                "authorizationStateWaitPhoneNumber") {
+              final String phone_numbers =
+                  updateTelegramClient.client_option["phone_number"];
               Map res = await tg.invoke(
                 parameters: {
                   "@type": "setAuthenticationPhoneNumber",
@@ -104,7 +106,13 @@ void main(List<String> args) async {
               ))["result"];
               get_me.removeByKeys(["phone_number"]);
               get_me.printPretty(2);
-              File(path.join(TelegramClientLibraryTdlibOptionParameter(updateTelegramClient.client_option).database_directory ?? "", "login.txt")).writeAsStringSync("test_account_login");
+              File(path.join(
+                      TelegramClientLibraryTdlibOptionParameter(
+                                  updateTelegramClient.client_option)
+                              .database_directory ??
+                          "",
+                      "login.txt"))
+                  .writeAsStringSync("test_account_login");
             }
 
             return null;
@@ -130,7 +138,9 @@ void main(List<String> args) async {
           }();
 
           // ignore: unused_local_variable
-          Map parameters_request = {"@type": (is_outgoing) ? "editMessageText" : "sendMessage"};
+          Map parameters_request = {
+            "@type": (is_outgoing) ? "editMessageText" : "sendMessage"
+          };
 
           RegExp regExpCommand = RegExp(r"^(/|\.|!)", caseSensitive: false);
           if (regExpCommand.hashData(text_command)) {
@@ -138,7 +148,11 @@ void main(List<String> args) async {
 
             if (RegExp(r"^(ping)$", caseSensitive: false).hasMatch(command)) {
               return await tg.request(
-                parameters: {"@type": "sendMessage", "chat_id": chat_id, "text": "PONG"},
+                parameters: {
+                  "@type": "sendMessage",
+                  "chat_id": chat_id,
+                  "text": "PONG"
+                },
                 telegramClientData: updateTelegramClient.telegramClientData,
               );
             }
@@ -170,9 +184,12 @@ void main(List<String> args) async {
     final phone_number = TgUtils.generate_test_dc_phone_number(
       dc: dc,
     );
-    Directory database_directory = Directory(join(directory_tg.path, "client_${phone_number}"));
+    Directory database_directory =
+        Directory(join(directory_tg.path, "client_${phone_number}"));
 
-    final TelegramClientLibraryTdlibOptionParameter telegramClientLibraryTdlibOptionParameter = TelegramClientLibraryTdlibOptionParameter.create(
+    final TelegramClientLibraryTdlibOptionParameter
+        telegramClientLibraryTdlibOptionParameter =
+        TelegramClientLibraryTdlibOptionParameter.create(
       database_directory: database_directory.path,
       files_directory: database_directory.path,
       use_test_dc: true,

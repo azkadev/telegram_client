@@ -48,6 +48,9 @@ extension SendVideoNoteDataOn on TelegramClient {
     required TelegramClientCallApiInvoke callApiInvoke,
     required TelegramClientData telegramClientData,
   }) async {
-    return await sendMessageRaw(parameters: parameters, callApiInvoke: callApiInvoke, telegramClientData: telegramClientData);
+    return await sendMessageRaw(
+        parameters: parameters,
+        callApiInvoke: callApiInvoke,
+        telegramClientData: telegramClientData);
   }
 }

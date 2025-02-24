@@ -61,7 +61,8 @@ void main(List<String> args) async {
       if (update["@type"] == "updateAuthorizationState") {
         if (update["authorization_state"] is Map) {
           Map authorization_state = update["authorization_state"];
-          if (authorization_state["@type"] == "authorizationStateWaitPhoneNumber") {
+          if (authorization_state["@type"] ==
+              "authorizationStateWaitPhoneNumber") {
             Map res = await tg.invoke(
               parameters: {
                 "@type": "setAuthenticationPhoneNumber",

@@ -52,7 +52,8 @@ class TelegramLogin {
   Map<String, String> userData = {};
 
   /// TelegramClientUncompleDocumentation
-  String user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36";
+  String user_agent =
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36";
 
   /// TelegramClientUncompleDocumentation
   late http.Client http_client;
@@ -78,11 +79,13 @@ class TelegramLogin {
     http.Client? httpClient,
   }) async {
     httpClient ??= http_client;
-    phoneNumber = phoneNumber.replaceAll(RegExp('\\+'), '').replaceAll(RegExp(' '), '');
+    phoneNumber =
+        phoneNumber.replaceAll(RegExp('\\+'), '').replaceAll(RegExp(' '), '');
     Map<String, String> headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       "origin": "https://oauth.telegram.org",
-      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+      "User-Agent":
+          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     };
     Uri uri = Uri.parse("https://oauth.telegram.org").replace(
       pathSegments: [
@@ -119,7 +122,8 @@ class TelegramLogin {
       "Content-length": "0",
       "Content-Type": "application/x-www-form-urlencoded",
       "origin": "https://oauth.telegram.org",
-      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+      "User-Agent":
+          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     };
     Uri uri_api = Uri.parse("https://oauth.telegram.org").replace(
       pathSegments: [
@@ -133,7 +137,11 @@ class TelegramLogin {
         "embed": "1",
       },
     );
-    String ans = await session.post(url: uri_api.toString(), headers: headers, body: "", httpClient: httpClient);
+    String ans = await session.post(
+        url: uri_api.toString(),
+        headers: headers,
+        body: "",
+        httpClient: httpClient);
 
     return ans == 'true';
   }
@@ -147,7 +155,8 @@ class TelegramLogin {
       "Content-length": "0",
       "Content-Type": "application/x-www-form-urlencoded",
       "origin": "https://oauth.telegram.org",
-      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+      "User-Agent":
+          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     };
     Uri uri_api = Uri.parse("https://oauth.telegram.org").replace(
       pathSegments: [
@@ -181,7 +190,10 @@ class TelegramLogin {
       }
       return "";
     }();
-    String hash_confirm = (RegExp("hash=([a-z0-9_]+)").stringMatch(searchData) ?? "").replaceAll(RegExp(r"^(hash=)", caseSensitive: false), "").trim();
+    String hash_confirm =
+        (RegExp("hash=([a-z0-9_]+)").stringMatch(searchData) ?? "")
+            .replaceAll(RegExp(r"^(hash=)", caseSensitive: false), "")
+            .trim();
 
     if (hash_confirm.isNotEmpty) {
       uri_api = uri_api.replace(
@@ -235,7 +247,8 @@ class TelegramLogin {
       // "Content-length": "69",
       "Content-Type": "application/x-www-form-urlencoded",
       "origin": "https://oauth.telegram.org",
-      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+      "User-Agent":
+          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     };
     // Uri uri_api = Uri.parse("https://oauth.telegram.org").replace(
     //   pathSegments: [
@@ -251,7 +264,8 @@ class TelegramLogin {
     // );
 
     String ans = await session.get(
-      url: "https://oauth.telegram.org/auth?bot_id=${botId}&origin=${botDomain}&embed=1",
+      url:
+          "https://oauth.telegram.org/auth?bot_id=${botId}&origin=${botDomain}&embed=1",
       headers: headers,
       httpClient: httpClient,
     );
