@@ -1,3 +1,7 @@
+## 0.8.42
+
+- New Version 0.8.42
+- Update Dependencies
 ## 0.8.41
 
 - New Version 0.8.41
