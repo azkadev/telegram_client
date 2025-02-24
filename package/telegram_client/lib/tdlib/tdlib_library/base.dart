@@ -51,16 +51,13 @@ import 'package:telegram_client/tdlib/update_td.dart';
 import 'package:io_universe/io_universe.dart';
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnReceiveUpdate = FutureOr<void> Function(
-    dynamic update, TdlibBase libTdJson);
+typedef TdlibOnReceiveUpdate = FutureOr<void> Function(dynamic update, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnGenerateExtraInvoke = FutureOr<String> Function(
-    int client_id, TdlibBase libTdJson);
+typedef TdlibOnGenerateExtraInvoke = FutureOr<String> Function(int client_id, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnGetInvokeData = FutureOr<Map> Function(
-    String extra, int client_id, TdlibBase libTdJson);
+typedef TdlibOnGetInvokeData = FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
 abstract class TdlibBaseCore {
@@ -138,11 +135,9 @@ abstract class TdlibBase implements TdlibBaseCore {
   final ReceivePort receivePort = ReceivePort();
 
   /// TelegramClientUncompleDocumentation
-  final TelegramClientLibraryTdlibOptionParameter client_option =
-      TelegramClientLibraryTdlibOptionParameter.create(
+  final TelegramClientLibraryTdlibOptionParameter client_option = TelegramClientLibraryTdlibOptionParameter.create(
     api_id: num.tryParse("OTQ1NzU=".general_lib_utils_decryptFromBase64()),
-    api_hash: 'YTM0MDZkZThkMTcxYmI0MjJiYjZkZGYzYmJkODAwZTI='
-        .general_lib_utils_decryptFromBase64(),
+    api_hash: 'YTM0MDZkZThkMTcxYmI0MjJiYjZkZGYzYmJkODAwZTI='.general_lib_utils_decryptFromBase64(),
     database_directory: "tg_db",
     files_directory: "tg_file",
     use_file_database: true,
@@ -153,8 +148,7 @@ abstract class TdlibBase implements TdlibBaseCore {
     system_language_code: 'en',
     new_verbosity_level: 0,
     application_version: 'v1',
-    device_model: 'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
-        .general_lib_utils_decryptFromBase64(),
+    device_model: 'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'.general_lib_utils_decryptFromBase64(),
     system_version: Platform.operatingSystemVersion,
     database_key: "",
     start: true,
@@ -268,18 +262,12 @@ abstract class TdlibBase implements TdlibBaseCore {
         TdlibIsolateReceiveData tdlibIsolateReceiveData = update;
         try {
           if (tdlibIsolateReceiveData.updateData["@extra"] is String) {
-            this
-                .eventEmitter
-                .emit(eventName: event_invoke, value: tdlibIsolateReceiveData);
+            this.eventEmitter.emit(eventName: event_invoke, value: tdlibIsolateReceiveData);
           } else {
-            this
-                .eventEmitter
-                .emit(eventName: event_update, value: tdlibIsolateReceiveData);
+            this.eventEmitter.emit(eventName: event_update, value: tdlibIsolateReceiveData);
           }
         } catch (e) {
-          this
-              .eventEmitter
-              .emit(eventName: event_update, value: tdlibIsolateReceiveData);
+          this.eventEmitter.emit(eventName: event_update, value: tdlibIsolateReceiveData);
         }
       } else if (update is TdlibIsolateReceiveDataError) {
         is_init_isolate = false;
@@ -407,9 +395,7 @@ abstract class TdlibBase implements TdlibBaseCore {
           client_new_option[key] = value;
         }
       });
-      final Map<String, num> tdlib_option_should_not_empty_num = {
-        "api_id": client_option.api_id ?? 0
-      };
+      final Map<String, num> tdlib_option_should_not_empty_num = {"api_id": client_option.api_id ?? 0};
       tdlib_option_should_not_empty_num.forEach((key, value) {
         try {
           if (client_new_option[key] is num == false) {
@@ -584,11 +570,8 @@ abstract class TdlibBase implements TdlibBaseCore {
     required String extra,
     required bool isAutoGetChat,
     required bool isInvokeThrowOnError,
-    required FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-        onGenerateExtraInvoke,
-    required FutureOr<Map> Function(
-            String extra, int client_id, TdlibBase libTdJson)?
-        onGetInvokeData,
+    required FutureOr<String> Function(int client_id, TdlibBase libTdJson)? onGenerateExtraInvoke,
+    required FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)? onGetInvokeData,
   }) async {
     final Completer<Map> completer = Completer<Map>();
     late final EventEmitterListener listener;
@@ -610,8 +593,7 @@ abstract class TdlibBase implements TdlibBaseCore {
             if (extra.isEmpty) {
               parameters["@extra"] = extra;
             } else if (onGenerateExtraInvoke != null) {
-              parameters["@extra"] =
-                  await onGenerateExtraInvoke(clientId, this);
+              parameters["@extra"] = await onGenerateExtraInvoke(clientId, this);
             } else {
               parameters["@extra"] = generateUuid(15);
             }
@@ -624,9 +606,7 @@ abstract class TdlibBase implements TdlibBaseCore {
           return extra_procces;
         }();
 
-        if (isAutoGetChat &&
-            RegExp(r"^(sendMessage|getChatMember)$", caseSensitive: false)
-                .hashData(parameters["@type"])) {
+        if (isAutoGetChat && RegExp(r"^(sendMessage|getChatMember)$", caseSensitive: false).hashData(parameters["@type"])) {
           if (parameters["chat_id"] is int) {
             td_send(clientId, {
               "@type": "getChat",
@@ -710,9 +690,7 @@ abstract class TdlibBase implements TdlibBaseCore {
       eventEmitter.off(listener: listener);
     } catch (e) {}
 
-    if (result.isEmpty ||
-        result["@type"] is String == false ||
-        result["@type"] == "error") {
+    if (result.isEmpty || result["@type"] is String == false || result["@type"] == "error") {
       if (isInvokeThrowOnError) {
         result["@type"] = "error";
         throw result;
@@ -789,10 +767,8 @@ abstract class TdlibBase implements TdlibBaseCore {
     bool? isUseCache,
     Duration? durationCacheExpire,
     bool? isAutoGetChat,
-    FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-        onGenerateExtraInvoke,
-    FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)?
-        onGetInvokeData,
+    FutureOr<String> Function(int client_id, TdlibBase libTdJson)? onGenerateExtraInvoke,
+    FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)? onGetInvokeData,
     bool? isInvokeThrowOnError,
   }) async {
     return await invoke(

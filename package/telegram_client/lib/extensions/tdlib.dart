@@ -118,12 +118,9 @@ extension TdlibMethodExtensions on Tdlib {
               isUseCache: isUseCache,
               durationCacheExpire: durationCacheExpire,
             );
-            List<Map> administrators =
-                (getChatAdministrators['administrators'] as List).cast<Map>();
+            List<Map> administrators = (getChatAdministrators['administrators'] as List).cast<Map>();
             late bool isNotOwned = true;
-            for (var admin_index = 0;
-                admin_index < administrators.length;
-                admin_index++) {
+            for (var admin_index = 0; admin_index < administrators.length; admin_index++) {
               try {
                 Map admin = administrators[admin_index];
 
@@ -150,8 +147,7 @@ extension TdlibMethodExtensions on Tdlib {
         var chat = target_ban_chats[chatIndex];
         if (chat["username"] is String) {
           var chatUsername = "@${chat["username"]}";
-          var msg_text =
-              "start gban: ${chatUsername} ${chatIndex} ${target_ban_chats.length}";
+          var msg_text = "start gban: ${chatUsername} ${chatIndex} ${target_ban_chats.length}";
           await Future.delayed(Duration(seconds: 2));
           await request(
             "sendMessage",
@@ -179,8 +175,7 @@ extension TdlibMethodExtensions on Tdlib {
           }
         } else {
           var chatUsername = "@${chat["id"]}";
-          var msg_text =
-              "start gban: ${chatUsername} ${chatIndex} ${target_ban_chats.length}";
+          var msg_text = "start gban: ${chatUsername} ${chatIndex} ${target_ban_chats.length}";
           await Future.delayed(Duration(seconds: 2));
           await request(
             "sendMessage",
@@ -228,8 +223,7 @@ extension TdlibMethodExtensions on Tdlib {
             );
           } catch (e) {
             if (e is Map) {
-              if (e["parameters"] is Map &&
-                  e["parameters"]["retry_after"] is int) {
+              if (e["parameters"] is Map && e["parameters"]["retry_after"] is int) {
                 failed.add(gban_user_id);
               } else {
                 if (e["message"] != "PARTICIPANT_ID_INVALID") {}
@@ -284,8 +278,7 @@ extension TdlibMethodExtensions on Tdlib {
         int user_id = member_user_ids[i];
         await Future.delayed(delayLoop);
         try {
-          Map toggle_message_sender_is_blocked =
-              await toggleMessageSenderIsBlocked(
+          Map toggle_message_sender_is_blocked = await toggleMessageSenderIsBlocked(
             user_id: user_id,
             is_blocked: is_blocked,
             clientId: clientId,
@@ -413,8 +406,7 @@ extension TdlibMethodExtensions on Tdlib {
       var getSupergroupMembers = await request(
         "getSupergroupMembers",
         parameters: {
-          "supergroup_id": int.parse("${chat["id"]}"
-              .replaceAll(RegExp(r"^-100", caseSensitive: false), "")),
+          "supergroup_id": int.parse("${chat["id"]}".replaceAll(RegExp(r"^-100", caseSensitive: false), "")),
           "offset": loop_data,
           "limit": 200,
         },

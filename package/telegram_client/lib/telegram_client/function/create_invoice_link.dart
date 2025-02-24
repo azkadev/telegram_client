@@ -69,9 +69,7 @@ extension CreateInvoiceLinkDataOn on TelegramClient {
         "@type": "inputMessageInvoice",
         "title": parameters["title"],
         "description": parameters["description"],
-        "payload": parameters["payload"]
-            .toString()
-            .general_lib_utils_encryptToBase64(),
+        "payload": parameters["payload"].toString().general_lib_utils_encryptToBase64(),
         "invoice": <dynamic, dynamic>{
           "@type": "invoice",
           "currency": parameters["currency"],

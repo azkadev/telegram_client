@@ -50,14 +50,11 @@ extension GetChatDataOn on TelegramClient {
     required TelegramClientCallApiInvoke callApiInvoke,
   }) async {
     dynamic target_chat_id = TgUtils.parse_all_chat_id(parameters: parameters);
-    if (target_chat_id is String &&
-        RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false)
-            .hashData(target_chat_id)) {
+    if (target_chat_id is String && RegExp(r"^((@)[a-z0-9_]+)$", caseSensitive: false).hashData(target_chat_id)) {
       var search_public_chat = await callApiInvoke(
         parameters: {
           "@type": "searchPublicChat",
-          "username": (target_chat_id)
-              .replaceAll(RegExp(r"@", caseSensitive: false), ""),
+          "username": (target_chat_id).replaceAll(RegExp(r"@", caseSensitive: false), ""),
         },
         is_invoke_no_relevance: true,
       );
@@ -89,9 +86,7 @@ extension GetChatDataOn on TelegramClient {
     if (get_chat["@type"] == "chat") {
       newScheme["id"] = get_chat["id"];
       if (get_chat["type"] is Map) {
-        newScheme["type"] = (get_chat["type"]["@type"] as String)
-            .replaceAll(RegExp(r"(chatType)", caseSensitive: false), "")
-            .toLowerCase();
+        newScheme["type"] = (get_chat["type"]["@type"] as String).replaceAll(RegExp(r"(chatType)", caseSensitive: false), "").toLowerCase();
       }
 
       var type_chat = newScheme["type"].toString().toLowerCase();
@@ -100,9 +95,7 @@ extension GetChatDataOn on TelegramClient {
           parameters: {
             "@type": "getSupergroup",
             "supergroup_id": int.parse(
-              newScheme["id"]
-                  .toString()
-                  .replaceAll(RegExp("^-100", caseSensitive: false), ""),
+              newScheme["id"].toString().replaceAll(RegExp("^-100", caseSensitive: false), ""),
             ),
           },
         );
@@ -116,21 +109,15 @@ extension GetChatDataOn on TelegramClient {
           // newScheme["usernames"] = getSupergroup["usernames"];
           if (get_user_usernames["active_usernames"] is List) {
             if ((get_user_usernames["active_usernames"] as List).isNotEmpty) {
-              newScheme["active_usernames"] =
-                  (get_user_usernames["active_usernames"] as List);
-              newScheme["username"] =
-                  (get_user_usernames["active_usernames"] as List).first;
+              newScheme["active_usernames"] = (get_user_usernames["active_usernames"] as List);
+              newScheme["username"] = (get_user_usernames["active_usernames"] as List).first;
             }
           }
         }
         if (getSupergroup["status"] is Map) {
-          newScheme["status"] = getSupergroup["status"]["@type"]
-              .toString()
-              .toLowerCase()
-              .replaceAll(RegExp("chatMemberStatus", caseSensitive: false), "");
+          newScheme["status"] = getSupergroup["status"]["@type"].toString().toLowerCase().replaceAll(RegExp("chatMemberStatus", caseSensitive: false), "");
         }
-        newScheme["type"] =
-            (get_chat["type"]["is_channel"]) ? "channel" : "supergroup";
+        newScheme["type"] = (get_chat["type"]["is_channel"]) ? "channel" : "supergroup";
         newScheme["detail"] = {
           "member_count": getSupergroup["member_count"],
           "administrator_count": 0,
@@ -140,18 +127,13 @@ extension GetChatDataOn on TelegramClient {
           "is_marked_as_unread": get_chat["is_marked_as_unread"] ?? false,
           "is_blocked": get_chat["is_blocked"] ?? false,
           "has_scheduled_messages": get_chat["has_scheduled_messages"] ?? false,
-          "can_be_deleted_only_for_self":
-              get_chat["can_be_deleted_only_for_self"] ?? false,
-          "can_be_deleted_for_all_users":
-              get_chat["can_be_deleted_for_all_users"] ?? false,
+          "can_be_deleted_only_for_self": get_chat["can_be_deleted_only_for_self"] ?? false,
+          "can_be_deleted_for_all_users": get_chat["can_be_deleted_for_all_users"] ?? false,
           "can_be_reported": get_chat["can_be_reported"] ?? false,
-          "default_disable_notification":
-              get_chat["default_disable_notification"] ?? false,
+          "default_disable_notification": get_chat["default_disable_notification"] ?? false,
           "unread_count": get_chat["unread_count"] ?? 0,
-          "last_read_inbox_message_id":
-              get_chat["last_read_inbox_message_id"] ?? 0,
-          "last_read_outbox_message_id":
-              get_chat["last_read_outbox_message_id"] ?? 0,
+          "last_read_inbox_message_id": get_chat["last_read_inbox_message_id"] ?? 0,
+          "last_read_outbox_message_id": get_chat["last_read_outbox_message_id"] ?? 0,
           "unread_mention_count": get_chat["unread_mention_count"] ?? 0,
           "has_linked_chat": getSupergroup["has_linked_chat"],
           "has_location": getSupergroup["has_location"],
@@ -224,25 +206,18 @@ extension GetChatDataOn on TelegramClient {
         });
         if (getSupergroup["username"].toString().isEmpty) {
           newScheme.remove("username");
-          newScheme["type"] = (get_chat["type"]["is_channel"] == true)
-              ? "channel"
-              : "supergroup";
+          newScheme["type"] = (get_chat["type"]["is_channel"] == true) ? "channel" : "supergroup";
         }
       } else if (type_chat == "basicgroup") {
         var getBasicGroup = await callApiInvoke(
           parameters: {
             "@type": "getBasicGroup",
-            "basic_group_id": int.parse(parameters["chat_id"]
-                .toString()
-                .replaceAll(RegExp("^-", caseSensitive: false), "")),
+            "basic_group_id": int.parse(parameters["chat_id"].toString().replaceAll(RegExp("^-", caseSensitive: false), "")),
           },
         );
         newScheme["title"] = get_chat["title"];
         if (getBasicGroup["status"] is Map) {
-          newScheme["status"] = getBasicGroup["status"]["@type"]
-              .toString()
-              .toLowerCase()
-              .replaceAll(RegExp("chatMemberStatus", caseSensitive: false), "");
+          newScheme["status"] = getBasicGroup["status"]["@type"].toString().toLowerCase().replaceAll(RegExp("chatMemberStatus", caseSensitive: false), "");
         }
         newScheme["type"] = "group";
         newScheme["detail"] = {
@@ -251,18 +226,13 @@ extension GetChatDataOn on TelegramClient {
           "is_marked_as_unread": get_chat["is_marked_as_unread"] ?? false,
           "is_blocked": get_chat["is_blocked"] ?? false,
           "has_scheduled_messages": get_chat["has_scheduled_messages"] ?? false,
-          "can_be_deleted_only_for_self":
-              get_chat["can_be_deleted_only_for_self"] ?? false,
-          "can_be_deleted_for_all_users":
-              get_chat["can_be_deleted_for_all_users"] ?? false,
+          "can_be_deleted_only_for_self": get_chat["can_be_deleted_only_for_self"] ?? false,
+          "can_be_deleted_for_all_users": get_chat["can_be_deleted_for_all_users"] ?? false,
           "can_be_reported": get_chat["can_be_reported"] ?? false,
-          "default_disable_notification":
-              get_chat["default_disable_notification"] ?? false,
+          "default_disable_notification": get_chat["default_disable_notification"] ?? false,
           "unread_count": get_chat["unread_count"] ?? 0,
-          "last_read_inbox_message_id":
-              get_chat["last_read_inbox_message_id"] ?? 0,
-          "last_read_outbox_message_id":
-              get_chat["last_read_outbox_message_id"] ?? 0,
+          "last_read_inbox_message_id": get_chat["last_read_inbox_message_id"] ?? 0,
+          "last_read_outbox_message_id": get_chat["last_read_outbox_message_id"] ?? 0,
           "unread_mention_count": get_chat["unread_mention_count"] ?? 0,
         };
 
@@ -279,10 +249,8 @@ extension GetChatDataOn on TelegramClient {
                 if (value is Map) {
                 } else {
                   try {
-                    if (RegExp(r"(message_id)", caseSensitive: false)
-                        .hasMatch(key)) {
-                      newScheme["detail"][key] =
-                          TgUtils.messageTdlibToApi(value);
+                    if (RegExp(r"(message_id)", caseSensitive: false).hasMatch(key)) {
+                      newScheme["detail"][key] = TgUtils.messageTdlibToApi(value);
                     } else {
                       newScheme["detail"][key] = value;
                     }
@@ -342,12 +310,10 @@ extension GetChatDataOn on TelegramClient {
             "user_id": parameters["chat_id"],
           },
         );
-        if (RegExp(r"^(user)$", caseSensitive: false)
-            .hashData(get_user["@type"])) {
+        if (RegExp(r"^(user)$", caseSensitive: false).hashData(get_user["@type"])) {
           newScheme["id"] = get_user["id"];
           try {
-            if (RegExp("^userTypeBot\$", caseSensitive: false)
-                .hashData(get_user["type"]["@type"])) {
+            if (RegExp("^userTypeBot\$", caseSensitive: false).hashData(get_user["type"]["@type"])) {
               newScheme["is_bot"] = true;
             } else {
               newScheme["is_bot"] = false;
@@ -368,10 +334,8 @@ extension GetChatDataOn on TelegramClient {
             // newScheme["usernames"] = get_user["usernames"];
             if (get_user_usernames["active_usernames"] is List) {
               if ((get_user_usernames["active_usernames"] as List).isNotEmpty) {
-                newScheme["active_usernames"] =
-                    (get_user_usernames["active_usernames"] as List);
-                newScheme["username"] =
-                    (get_user_usernames["active_usernames"] as List).first;
+                newScheme["active_usernames"] = (get_user_usernames["active_usernames"] as List);
+                newScheme["username"] = (get_user_usernames["active_usernames"] as List).first;
               }
             }
           }
@@ -387,20 +351,14 @@ extension GetChatDataOn on TelegramClient {
             "has_protected_content": get_chat["has_protected_content"] ?? false,
             "is_marked_as_unread": get_chat["is_marked_as_unread"] ?? false,
             "is_blocked": get_chat["is_blocked"] ?? false,
-            "has_scheduled_messages":
-                get_chat["has_scheduled_messages"] ?? false,
-            "can_be_deleted_only_for_self":
-                get_chat["can_be_deleted_only_for_self"] ?? false,
-            "can_be_deleted_for_all_users":
-                get_chat["can_be_deleted_for_all_users"] ?? false,
+            "has_scheduled_messages": get_chat["has_scheduled_messages"] ?? false,
+            "can_be_deleted_only_for_self": get_chat["can_be_deleted_only_for_self"] ?? false,
+            "can_be_deleted_for_all_users": get_chat["can_be_deleted_for_all_users"] ?? false,
             "can_be_reported": get_chat["can_be_reported"] ?? false,
-            "default_disable_notification":
-                get_chat["default_disable_notification"] ?? false,
+            "default_disable_notification": get_chat["default_disable_notification"] ?? false,
             "unread_count": get_chat["unread_count"] ?? 0,
-            "last_read_inbox_message_id":
-                get_chat["last_read_inbox_message_id"] ?? 0,
-            "last_read_outbox_message_id":
-                get_chat["last_read_outbox_message_id"] ?? 0,
+            "last_read_inbox_message_id": get_chat["last_read_inbox_message_id"] ?? 0,
+            "last_read_outbox_message_id": get_chat["last_read_outbox_message_id"] ?? 0,
             "unread_mention_count": get_chat["unread_mention_count"] ?? 0,
             "is_contact": get_user["is_contact"],
             "is_mutual_contact": get_user["is_mutual_contact"],
@@ -420,8 +378,7 @@ extension GetChatDataOn on TelegramClient {
             if (value is Map || value is List) {
             } else {
               try {
-                if (RegExp(r"(message_id)", caseSensitive: false)
-                    .hasMatch(key)) {
+                if (RegExp(r"(message_id)", caseSensitive: false).hasMatch(key)) {
                   newScheme["detail"][key] = TgUtils.messageTdlibToApi(value);
                 } else {
                   newScheme["detail"][key] = value;
@@ -442,8 +399,7 @@ extension GetChatDataOn on TelegramClient {
             if (value is Map || value is List) {
             } else {
               try {
-                if (RegExp(r"(message_id)", caseSensitive: false)
-                    .hasMatch(key)) {
+                if (RegExp(r"(message_id)", caseSensitive: false).hasMatch(key)) {
                   print("ay");
                   newScheme["detail"][key] = TgUtils.messageTdlibToApi(value);
                 } else {

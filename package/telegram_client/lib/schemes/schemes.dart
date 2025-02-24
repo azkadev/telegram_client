@@ -51,8 +51,7 @@ List<Map<String, dynamic>> telegram_client_schemes = () {
       "new_verbosity_level": 0,
       "application_version": "v1",
       "device_model": "Telegram Client",
-      "system_version":
-          "Linux 6.8.0-31-generic #31-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 20 00:40:06 UTC 2024",
+      "system_version": "Linux 6.8.0-31-generic #31-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 20 00:40:06 UTC 2024",
       "database_key": "",
       "start": true,
       "database_encryption_key": "",

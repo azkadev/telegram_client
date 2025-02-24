@@ -48,14 +48,10 @@ extension TelegramBotApiTypeFileMethodExtensions on TelegramBotApi {
     if (content is String) {
       if (RegExp(r"^http", caseSensitive: false).hasMatch(content)) {
         return {"@type": 'inputFileRemote', "data": content};
-      } else if (RegExp(r"^(\/|\.\.?\/|~\/)", caseSensitive: false)
-          .hasMatch(content)) {
+      } else if (RegExp(r"^(\/|\.\.?\/|~\/)", caseSensitive: false).hasMatch(content)) {
         File file = File(content);
         // file.uri.;
-        return {
-          "@type": 'inputFileLocal',
-          "data": TgUtils.telegram_bot_api_file(file: file)
-        };
+        return {"@type": 'inputFileLocal', "data": TgUtils.telegram_bot_api_file(file: file)};
       } else if (content is int) {
         return {"@type": 'inputFileId', "data": content};
       } else {

@@ -54,9 +54,6 @@ typedef TgClientInvokeFunction = FutureOr<Map> Function({
   String? extra,
   bool? isAutoGetChat,
   bool? isInvokeThrowOnError,
-  FutureOr<String> Function(int client_id, TdlibNative libTdJson)?
-      onGenerateExtraInvoke,
-  FutureOr<Map<dynamic, dynamic>> Function(
-          String, int client_id, TdlibNative libTdJson)?
-      onGetInvokeData,
+  FutureOr<String> Function(int client_id, TdlibNative libTdJson)? onGenerateExtraInvoke,
+  FutureOr<Map<dynamic, dynamic>> Function(String, int client_id, TdlibNative libTdJson)? onGetInvokeData,
 });

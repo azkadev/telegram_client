@@ -66,8 +66,7 @@ updateActiveNotifications, updateAnimatedEmojiMessageClicked, updateAnimationSea
 
   for (var i = 0; i < methods.length; i++) {
     String method = methods[i];
-    File file = File(join(Directory.current.path, "lib", "telegram_client",
-        "update", "$method.dart"));
+    File file = File(join(Directory.current.path, "lib", "telegram_client", "update", "$method.dart"));
     if (file.existsSync()) {
       continue;
     }

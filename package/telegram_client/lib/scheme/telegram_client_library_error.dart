@@ -44,13 +44,7 @@ class TelegramClientLibraryError extends JsonScheme {
   /// return default data
   ///
   static Map get defaultData {
-    return {
-      "@type": "telegramClientLibraryError",
-      "code": 500,
-      "message": "",
-      "description": "",
-      "@extra": ""
-    };
+    return {"@type": "telegramClientLibraryError", "code": 500, "message": "", "description": "", "@extra": ""};
   }
 
   /// check data
@@ -177,18 +171,15 @@ class TelegramClientLibraryError extends JsonScheme {
       "@extra": special_extra,
     };
 
-    telegramClientLibraryError_data_create_json
-        .removeWhere((key, value) => value == null);
+    telegramClientLibraryError_data_create_json.removeWhere((key, value) => value == null);
 
     if (schemeUtilsIsSetDefaultData) {
       defaultData.forEach((key, value) {
-        if (telegramClientLibraryError_data_create_json.containsKey(key) ==
-            false) {
+        if (telegramClientLibraryError_data_create_json.containsKey(key) == false) {
           telegramClientLibraryError_data_create_json[key] = value;
         }
       });
     }
-    return TelegramClientLibraryError(
-        telegramClientLibraryError_data_create_json);
+    return TelegramClientLibraryError(telegramClientLibraryError_data_create_json);
   }
 }

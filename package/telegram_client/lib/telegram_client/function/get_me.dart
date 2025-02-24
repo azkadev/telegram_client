@@ -67,15 +67,12 @@ extension GetMeDataOn on TelegramClient {
     if (get_user["@type"] == "user") {
       newScheme["id"] = get_user["id"];
       if (get_user["type"] is Map) {
-        newScheme["type"] = (get_user["type"]["@type"] as String)
-            .replaceAll(RegExp(r"(userType)", caseSensitive: false), "")
-            .toLowerCase();
+        newScheme["type"] = (get_user["type"]["@type"] as String).replaceAll(RegExp(r"(userType)", caseSensitive: false), "").toLowerCase();
       }
 
       newScheme["id"] = get_user["id"];
       try {
-        if (RegExp("^userTypeBot\$", caseSensitive: false)
-            .hashData(get_user["type"]["@type"])) {
+        if (RegExp("^userTypeBot\$", caseSensitive: false).hashData(get_user["type"]["@type"])) {
           newScheme["is_bot"] = true;
         } else {
           newScheme["is_bot"] = false;
@@ -96,10 +93,8 @@ extension GetMeDataOn on TelegramClient {
         // newScheme["usernames"] = get_user["usernames"];
         if (get_user_usernames["active_usernames"] is List) {
           if ((get_user_usernames["active_usernames"] as List).isNotEmpty) {
-            newScheme["active_usernames"] =
-                (get_user_usernames["active_usernames"] as List);
-            newScheme["username"] =
-                (get_user_usernames["active_usernames"] as List).first;
+            newScheme["active_usernames"] = (get_user_usernames["active_usernames"] as List);
+            newScheme["username"] = (get_user_usernames["active_usernames"] as List).first;
           }
         }
       }

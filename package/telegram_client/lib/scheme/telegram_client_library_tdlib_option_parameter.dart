@@ -44,28 +44,7 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
   /// return default data
   ///
   static Map get defaultData {
-    return {
-      "@type": "telegramClientLibraryTdlibOptionParameter",
-      "api_id": 0,
-      "api_hash": "",
-      "database_directory": "tg_db",
-      "files_directory": "tg_file",
-      "use_file_database": true,
-      "use_chat_info_database": true,
-      "use_message_database": true,
-      "use_secret_chats": true,
-      "enable_storage_optimizer": true,
-      "system_language_code": "en",
-      "new_verbosity_level": 0,
-      "application_version": "v1",
-      "device_model": "Telegram Client",
-      "system_version":
-          "Linux 6.8.0-31-generic #31-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 20 00:40:06 UTC 2024",
-      "database_key": "",
-      "start": true,
-      "database_encryption_key": "",
-      "use_test_dc": false
-    };
+    return {"@type": "telegramClientLibraryTdlibOptionParameter", "api_id": 0, "api_hash": "", "database_directory": "tg_db", "files_directory": "tg_file", "use_file_database": true, "use_chat_info_database": true, "use_message_database": true, "use_secret_chats": true, "enable_storage_optimizer": true, "system_language_code": "en", "new_verbosity_level": 0, "application_version": "v1", "device_model": "Telegram Client", "system_version": "Linux 6.8.0-31-generic #31-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 20 00:40:06 UTC 2024", "database_key": "", "start": true, "database_encryption_key": "", "use_test_dc": false};
   }
 
   /// check data
@@ -458,20 +437,15 @@ class TelegramClientLibraryTdlibOptionParameter extends JsonScheme {
       "use_test_dc": use_test_dc,
     };
 
-    telegramClientLibraryTdlibOptionParameter_data_create_json
-        .removeWhere((key, value) => value == null);
+    telegramClientLibraryTdlibOptionParameter_data_create_json.removeWhere((key, value) => value == null);
 
     if (schemeUtilsIsSetDefaultData) {
       defaultData.forEach((key, value) {
-        if (telegramClientLibraryTdlibOptionParameter_data_create_json
-                .containsKey(key) ==
-            false) {
-          telegramClientLibraryTdlibOptionParameter_data_create_json[key] =
-              value;
+        if (telegramClientLibraryTdlibOptionParameter_data_create_json.containsKey(key) == false) {
+          telegramClientLibraryTdlibOptionParameter_data_create_json[key] = value;
         }
       });
     }
-    return TelegramClientLibraryTdlibOptionParameter(
-        telegramClientLibraryTdlibOptionParameter_data_create_json);
+    return TelegramClientLibraryTdlibOptionParameter(telegramClientLibraryTdlibOptionParameter_data_create_json);
   }
 }

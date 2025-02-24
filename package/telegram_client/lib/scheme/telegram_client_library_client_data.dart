@@ -44,25 +44,7 @@ class TelegramClientLibraryClientData extends JsonScheme {
   /// return default data
   ///
   static Map get defaultData {
-    return {
-      "@type": "telegramClientLibraryClientData",
-      "id": 0,
-      "created_at": "2022-12-26T05:26:40.500935+00:00",
-      "client_tg_user_id": 0,
-      "client_title": "",
-      "client_token": "",
-      "owner_user_id": 0,
-      "client_type": "",
-      "from_bot_type": null,
-      "can_join_groups": false,
-      "can_read_all_group_messages": false,
-      "from_bot_user_id": 0,
-      "expire_date": 0,
-      "client_username": "",
-      "version": "",
-      "client_id": 0,
-      "client_data": "{}"
-    };
+    return {"@type": "telegramClientLibraryClientData", "id": 0, "created_at": "2022-12-26T05:26:40.500935+00:00", "client_tg_user_id": 0, "client_title": "", "client_token": "", "owner_user_id": 0, "client_type": "", "from_bot_type": null, "can_join_groups": false, "can_read_all_group_messages": false, "from_bot_user_id": 0, "expire_date": 0, "client_username": "", "version": "", "client_id": 0, "client_data": "{}"};
   }
 
   /// check data
@@ -417,18 +399,15 @@ class TelegramClientLibraryClientData extends JsonScheme {
       "client_data": client_data,
     };
 
-    telegramClientLibraryClientData_data_create_json
-        .removeWhere((key, value) => value == null);
+    telegramClientLibraryClientData_data_create_json.removeWhere((key, value) => value == null);
 
     if (schemeUtilsIsSetDefaultData) {
       defaultData.forEach((key, value) {
-        if (telegramClientLibraryClientData_data_create_json.containsKey(key) ==
-            false) {
+        if (telegramClientLibraryClientData_data_create_json.containsKey(key) == false) {
           telegramClientLibraryClientData_data_create_json[key] = value;
         }
       });
     }
-    return TelegramClientLibraryClientData(
-        telegramClientLibraryClientData_data_create_json);
+    return TelegramClientLibraryClientData(telegramClientLibraryClientData_data_create_json);
   }
 }
