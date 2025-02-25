@@ -66,7 +66,7 @@ Future<void> pubspecUpdate({
         "repository": "https://github.com/azkadev/telegram_client.git",
         "homepage": "https://github.com/azkadev/telegram_client",
         "issue_tracker": "https://t.me/DEVELOPER_GLOBAL_PUBLIC",
-        "documentation": "https://github.com/azkadev/telegram_client/tree/main/docs",
+        "documentation": "https://www.youtube.com/@GENERAL_DEV",
         "funding": [
           "https://github.com/sponsors/azkadev",
           "https://github.com/sponsors/generalfoss",
