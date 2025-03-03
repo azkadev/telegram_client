@@ -381,7 +381,8 @@ class TelegramBotApi {
       }
     }
     String url = Uri.parse((urlApi ?? "")).replace(
-        pathSegments: [(clientType ?? "bot") + tokenBot, method]).toString();
+      pathSegments: [(clientType ?? "bot") + tokenBot, method],
+    ).toString();
     if (!is_form) {
       List<String> methodForm = [
         "sendDocument",
@@ -557,9 +558,12 @@ class TelegramBotApi {
         var statusCode = httpResponse.statusCode;
         var completer = Completer<String>();
         var contents = StringBuffer();
-        httpResponse.transform(convert.utf8.decoder).listen((String data) {
-          contents.write(data);
-        }, onDone: () => completer.complete(contents.toString()));
+        httpResponse.transform(convert.utf8.decoder).listen(
+          (String data) {
+            contents.write(data);
+          },
+          onDone: () => completer.complete(contents.toString()),
+        );
         var body = convert.json.decode(await completer.future);
         if (statusCode == 200) {
           return body;

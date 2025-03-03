@@ -52,15 +52,22 @@ import 'package:io_universe/io_universe.dart';
 
 /// TelegramClientUncompleDocumentation
 typedef TdlibOnReceiveUpdate = FutureOr<void> Function(
-    dynamic update, TdlibBase libTdJson);
+  dynamic update,
+  TdlibBase libTdJson,
+);
 
 /// TelegramClientUncompleDocumentation
 typedef TdlibOnGenerateExtraInvoke = FutureOr<String> Function(
-    int client_id, TdlibBase libTdJson);
+  int client_id,
+  TdlibBase libTdJson,
+);
 
 /// TelegramClientUncompleDocumentation
 typedef TdlibOnGetInvokeData = FutureOr<Map> Function(
-    String extra, int client_id, TdlibBase libTdJson);
+  String extra,
+  int client_id,
+  TdlibBase libTdJson,
+);
 
 /// TelegramClientUncompleDocumentation
 abstract class TdlibBaseCore {
