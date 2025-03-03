@@ -161,20 +161,20 @@ class TdlibNative extends TdlibBase {
       tdLib = DynamicLibrary.open(pathTdlib);
     }
     is_open_tdlib = true;
-    td_execute_native_function = tdLib
-        .lookupFunction<TdExecuteNative, TdExecuteNative>(
-          'td_execute',
-          isLeaf: false,
-        );
+    td_execute_native_function =
+        tdLib.lookupFunction<TdExecuteNative, TdExecuteNative>(
+      'td_execute',
+      isLeaf: false,
+    );
     td_send_function = tdLib.lookupFunction<TdSendNative, TdSendDart>(
       'td_send',
       isLeaf: false,
     );
-    td_pointer_native_function = tdLib
-        .lookupFunction<TdCreateClientIdNative, TdCreateClientIdDart>(
-          'td_create_client_id',
-          isLeaf: false,
-        );
+    td_pointer_native_function =
+        tdLib.lookupFunction<TdCreateClientIdNative, TdCreateClientIdDart>(
+      'td_create_client_id',
+      isLeaf: false,
+    );
     td_receive_function = tdLib.lookupFunction<TdReceiveNative, TdReceiveDart>(
       'td_receive',
       isLeaf: false,

@@ -76,10 +76,9 @@ extension DeleteMessagesDataOn on TelegramClient {
     Map request_parameters = {
       "@type": "deleteMessages",
       "chat_id": parameters["chat_id"],
-      "message_ids":
-          (parameters["message_ids"] as List)
-              .map((e) => TgUtils.messageApiToTdlib(e))
-              .toList(),
+      "message_ids": (parameters["message_ids"] as List)
+          .map((e) => TgUtils.messageApiToTdlib(e))
+          .toList(),
       "revoke": (parameters["revoke"] is bool) ? parameters["revoke"] : true,
     };
     Map message_send = await callApiInvoke(parameters: request_parameters);

@@ -89,10 +89,9 @@ extension GetUserDataOn on TelegramClient {
     if (get_user["@type"] == "user") {
       newScheme["id"] = get_user["id"];
       if (get_user["type"] is Map) {
-        newScheme["type"] =
-            (get_user["type"]["@type"] as String)
-                .replaceAll(RegExp(r"(userType)", caseSensitive: false), "")
-                .toLowerCase();
+        newScheme["type"] = (get_user["type"]["@type"] as String)
+            .replaceAll(RegExp(r"(userType)", caseSensitive: false), "")
+            .toLowerCase();
       }
 
       newScheme["id"] = get_user["id"];

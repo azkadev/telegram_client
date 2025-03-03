@@ -40,10 +40,10 @@ import 'package:io_universe/io_universe.dart';
 
 // import ;
 void main(List<String> args) async {
-  String data =
-      """
+  String data = """
 updateActiveNotifications, updateAnimatedEmojiMessageClicked, updateAnimationSearchParameters, updateAuthorizationState, updateBasicGroup, updateBasicGroupFullInfo, updateCall, updateChatAction, updateChatActionBar, updateChatDefaultDisableNotification, updateChatDraftMessage, updateChatFilters, updateChatHasProtectedContent, updateChatHasScheduledMessages, updateChatIsBlocked, updateChatIsMarkedAsUnread, updateChatLastMessage, updateChatMember, updateChatMessageSender, updateChatMessageTtl, updateChatNotificationSettings, updateChatOnlineMemberCount, updateChatPendingJoinRequests, updateChatPermissions, updateChatPhoto, updateChatPosition, updateChatReadInbox, updateChatReadOutbox, updateChatReplyMarkup, updateChatTheme, updateChatThemes, updateChatTitle, updateChatUnreadMentionCount, updateChatVideoChat, updateConnectionState, updateDeleteMessages, updateDiceEmojis, updateFavoriteStickers, updateFile, updateFileGenerationStart, updateFileGenerationStop, updateGroupCall, updateGroupCallParticipant, updateHavePendingNotifications, updateInstalledStickerSets, updateLanguagePackStrings, updateMessageContent, updateMessageContentOpened, updateMessageEdited, updateMessageInteractionInfo, updateMessageIsPinned, updateMessageLiveLocationViewed, updateMessageMentionRead, updateMessageSendAcknowledged, updateMessageSendFailed, updateMessageSendSucceeded, updateNewCallbackQuery, updateNewCallSignalingData, updateNewChat, updateNewChatJoinRequest, updateNewChosenInlineResult, updateNewCustomEvent, updateNewCustomQuery, updateNewInlineCallbackQuery, updateNewInlineQuery, updateNewMessage, updateNewPreCheckoutQuery, updateNewShippingQuery, updateNotification, updateNotificationGroup, updateOption, updatePoll, updatePollAnswer, updateRecentStickers, updateSavedAnimations, updateScopeNotificationSettings, updateSecretChat, updateSelectedBackground, updateServiceNotification, updateStickerSet, updateSuggestedActions, updateSupergroup, updateSupergroupFullInfo, updateTermsOfService, updateTrendingStickerSets, updateUnreadChatCount, updateUnreadMessageCount, updateUser, updateUserFullInfo, updateUserPrivacySettingRules, updateUsersNearby, updateUserStatus
-""".trim();
+"""
+      .trim();
 
   List<String> datas = data.split(",");
   List<String> methods = [];

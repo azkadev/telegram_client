@@ -114,11 +114,9 @@ extension TdlibMethodExtensions on Tdlib {
             List<Map> administrators =
                 (getChatAdministrators['administrators'] as List).cast<Map>();
             late bool isNotOwned = true;
-            for (
-              var admin_index = 0;
-              admin_index < administrators.length;
-              admin_index++
-            ) {
+            for (var admin_index = 0;
+                admin_index < administrators.length;
+                admin_index++) {
               try {
                 Map admin = administrators[admin_index];
 
@@ -264,13 +262,13 @@ extension TdlibMethodExtensions on Tdlib {
         try {
           Map toggle_message_sender_is_blocked =
               await toggleMessageSenderIsBlocked(
-                user_id: user_id,
-                is_blocked: is_blocked,
-                clientId: clientId,
-                isVoid: isVoid,
-                isUseCache: isUseCache,
-                durationCacheExpire: durationCacheExpire,
-              );
+            user_id: user_id,
+            is_blocked: is_blocked,
+            clientId: clientId,
+            isVoid: isVoid,
+            isUseCache: isUseCache,
+            durationCacheExpire: durationCacheExpire,
+          );
           toggle_message_sender_is_blocked["user_id"] = user_id;
           users.add(toggle_message_sender_is_blocked);
           if (is_delete_chat_history) {

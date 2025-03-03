@@ -90,10 +90,9 @@ extension GetChatDataOn on TelegramClient {
     if (get_chat["@type"] == "chat") {
       newScheme["id"] = get_chat["id"];
       if (get_chat["type"] is Map) {
-        newScheme["type"] =
-            (get_chat["type"]["@type"] as String)
-                .replaceAll(RegExp(r"(chatType)", caseSensitive: false), "")
-                .toLowerCase();
+        newScheme["type"] = (get_chat["type"]["@type"] as String)
+            .replaceAll(RegExp(r"(chatType)", caseSensitive: false), "")
+            .toLowerCase();
       }
 
       var type_chat = newScheme["type"].toString().toLowerCase();
@@ -103,9 +102,9 @@ extension GetChatDataOn on TelegramClient {
             "@type": "getSupergroup",
             "supergroup_id": int.parse(
               newScheme["id"].toString().replaceAll(
-                RegExp("^-100", caseSensitive: false),
-                "",
-              ),
+                    RegExp("^-100", caseSensitive: false),
+                    "",
+                  ),
             ),
           },
         );
@@ -227,10 +226,9 @@ extension GetChatDataOn on TelegramClient {
         });
         if (getSupergroup["username"].toString().isEmpty) {
           newScheme.remove("username");
-          newScheme["type"] =
-              (get_chat["type"]["is_channel"] == true)
-                  ? "channel"
-                  : "supergroup";
+          newScheme["type"] = (get_chat["type"]["is_channel"] == true)
+              ? "channel"
+              : "supergroup";
         }
       } else if (type_chat == "basicgroup") {
         var getBasicGroup = await callApiInvoke(
@@ -238,9 +236,9 @@ extension GetChatDataOn on TelegramClient {
             "@type": "getBasicGroup",
             "basic_group_id": int.parse(
               parameters["chat_id"].toString().replaceAll(
-                RegExp("^-", caseSensitive: false),
-                "",
-              ),
+                    RegExp("^-", caseSensitive: false),
+                    "",
+                  ),
             ),
           },
         );

@@ -217,10 +217,8 @@ class TelegramClient {
               return "";
             }();
 
-            TdlibClient? tdlibClient =
-                tdlib.clients[updateTelegramClient
-                    .telegramClientData
-                    .tdlib_client_id];
+            TdlibClient? tdlibClient = tdlib.clients[
+                updateTelegramClient.telegramClientData.tdlib_client_id];
             if (tdlibClient == null) {
               tdlibClient ??= TdlibClient(
                 client_id:
@@ -228,9 +226,7 @@ class TelegramClient {
                 client_option: updateTelegramClient.client_option,
               );
               tdlib.clients[updateTelegramClient
-                      .telegramClientData
-                      .tdlib_client_id] =
-                  tdlibClient;
+                  .telegramClientData.tdlib_client_id] = tdlibClient;
             }
 
             bool is_constain_update = false;
@@ -302,10 +298,8 @@ class TelegramClient {
               return "";
             }();
 
-            TdlibClient? tdlibClient =
-                tdlib.clients[updateTelegramClient
-                    .telegramClientData
-                    .tdlib_client_id];
+            TdlibClient? tdlibClient = tdlib.clients[
+                updateTelegramClient.telegramClientData.tdlib_client_id];
 
             bool is_constain_update = false;
             if (tdlibClient == null) {
@@ -315,9 +309,7 @@ class TelegramClient {
                 client_option: updateTelegramClient.client_option,
               );
               tdlib.clients[updateTelegramClient
-                      .telegramClientData
-                      .tdlib_client_id] =
-                  tdlibClient;
+                  .telegramClientData.tdlib_client_id] = tdlibClient;
               is_constain_update = true;
             }
 
@@ -377,10 +369,9 @@ class TelegramClient {
     required String event_name,
     required FutureOr<dynamic> Function(
       UpdateTelegramClient updateTelegramClient,
-    )
-    onUpdate,
+    ) onUpdate,
     required FutureOr<dynamic> Function(Object error, StackTrace stackTrace)
-    onError,
+        onError,
   }) {
     return event_emitter.on(
       eventName: event_name,
@@ -408,17 +399,17 @@ class TelegramClient {
 
             final UpdateTelegramClientTdlib updateTd =
                 UpdateTelegramClientTdlib(
-                  update: update.updateData,
-                  client_id: update.clientId,
-                  client_option: () {
-                    try {
-                      if (tdlibClient != null) {
-                        return tdlibClient.client_option;
-                      }
-                    } catch (e) {}
-                    return {};
-                  }(),
-                );
+              update: update.updateData,
+              client_id: update.clientId,
+              client_option: () {
+                try {
+                  if (tdlibClient != null) {
+                    return tdlibClient.client_option;
+                  }
+                } catch (e) {}
+                return {};
+              }(),
+            );
             await onUpdate(
               UpdateTelegramClient(
                 rawData: updateTd.raw,
@@ -489,13 +480,12 @@ class TelegramClient {
     bool isInvokeThrowOnError = true,
     bool isAutoExtendMessage = false,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-    onGenerateExtraInvoke,
+        onGenerateExtraInvoke,
     FutureOr<Map<dynamic, dynamic>> Function(
       String,
       int client_id,
       TdlibBase libTdJson,
-    )?
-    onGetInvokeData,
+    )? onGetInvokeData,
   }) async {
     // telegramClientLib ??= telegram_client_lib;
     if (telegramClientData.telegramClientType ==
@@ -586,13 +576,12 @@ class TelegramClient {
     bool isInvokeThrowOnError = true,
     bool isAutoExtendMessage = false,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-    onGenerateExtraInvoke,
+        onGenerateExtraInvoke,
     FutureOr<Map<dynamic, dynamic>> Function(
       String,
       int client_id,
       TdlibBase libTdJson,
-    )?
-    onGetInvokeData,
+    )? onGetInvokeData,
   }) async {
     if (telegramClientData.telegramClientType != TelegramClientType.tdlib) {
       return await invoke(

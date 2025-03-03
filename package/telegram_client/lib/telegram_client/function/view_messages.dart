@@ -78,10 +78,9 @@ extension ViewMessagesDataOn on TelegramClient {
     final Map request_parameters = {
       "@type": "viewMessages",
       "chat_id": parameters["chat_id"],
-      "message_ids":
-          (parameters["message_ids"] as List)
-              .map((e) => TgUtils.messageApiToTdlib(e))
-              .toList(),
+      "message_ids": (parameters["message_ids"] as List)
+          .map((e) => TgUtils.messageApiToTdlib(e))
+          .toList(),
     };
     if (parameters["force_read"] is bool) {
       request_parameters["force_read"] = parameters["force_read"];

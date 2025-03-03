@@ -51,14 +51,12 @@ void main(List<String> args) async {
     clientOption: TelegramClientLibraryTdlibOptionParameter.create(
       // api_id: 0,
       // api_hash: "",
-      database_directory:
-          Directory(
-            path.join(Directory.current.uri.toFilePath(), "temp", "db"),
-          ).path,
-      files_directory:
-          Directory(
-            path.join(Directory.current.uri.toFilePath(), "temp", "file"),
-          ).path,
+      database_directory: Directory(
+        path.join(Directory.current.uri.toFilePath(), "temp", "db"),
+      ).path,
+      files_directory: Directory(
+        path.join(Directory.current.uri.toFilePath(), "temp", "file"),
+      ).path,
     ),
   );
   await tdlib.ensureInitialized();

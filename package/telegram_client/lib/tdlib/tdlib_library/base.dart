@@ -51,16 +51,16 @@ import 'package:telegram_client/tdlib/update_td.dart';
 import 'package:io_universe/io_universe.dart';
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnReceiveUpdate =
-    FutureOr<void> Function(dynamic update, TdlibBase libTdJson);
+typedef TdlibOnReceiveUpdate = FutureOr<void> Function(
+    dynamic update, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnGenerateExtraInvoke =
-    FutureOr<String> Function(int client_id, TdlibBase libTdJson);
+typedef TdlibOnGenerateExtraInvoke = FutureOr<String> Function(
+    int client_id, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
-typedef TdlibOnGetInvokeData =
-    FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson);
+typedef TdlibOnGetInvokeData = FutureOr<Map> Function(
+    String extra, int client_id, TdlibBase libTdJson);
 
 /// TelegramClientUncompleDocumentation
 abstract class TdlibBaseCore {
@@ -138,28 +138,26 @@ abstract class TdlibBase implements TdlibBaseCore {
   /// TelegramClientUncompleDocumentation
   final TelegramClientLibraryTdlibOptionParameter client_option =
       TelegramClientLibraryTdlibOptionParameter.create(
-        api_id: num.tryParse("OTQ1NzU=".general_lib_utils_decryptFromBase64()),
-        api_hash:
-            'YTM0MDZkZThkMTcxYmI0MjJiYjZkZGYzYmJkODAwZTI='
-                .general_lib_utils_decryptFromBase64(),
-        database_directory: "tg_db",
-        files_directory: "tg_file",
-        use_file_database: true,
-        use_chat_info_database: true,
-        use_message_database: true,
-        use_secret_chats: true,
-        enable_storage_optimizer: true,
-        system_language_code: 'en',
-        new_verbosity_level: 0,
-        application_version: 'v1',
-        device_model:
-            'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
-                .general_lib_utils_decryptFromBase64(),
-        system_version: Platform.operatingSystemVersion,
-        database_key: "",
-        start: true,
-        database_encryption_key: "",
-      );
+    api_id: num.tryParse("OTQ1NzU=".general_lib_utils_decryptFromBase64()),
+    api_hash: 'YTM0MDZkZThkMTcxYmI0MjJiYjZkZGYzYmJkODAwZTI='
+        .general_lib_utils_decryptFromBase64(),
+    database_directory: "tg_db",
+    files_directory: "tg_file",
+    use_file_database: true,
+    use_chat_info_database: true,
+    use_message_database: true,
+    use_secret_chats: true,
+    enable_storage_optimizer: true,
+    system_language_code: 'en',
+    new_verbosity_level: 0,
+    application_version: 'v1',
+    device_model: 'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
+        .general_lib_utils_decryptFromBase64(),
+    system_version: Platform.operatingSystemVersion,
+    database_key: "",
+    start: true,
+    database_encryption_key: "",
+  );
   // late SendPort sendPort;
   /// TelegramClientUncompleDocumentation
   late Isolate isolate;
@@ -269,20 +267,20 @@ abstract class TdlibBase implements TdlibBaseCore {
         try {
           if (tdlibIsolateReceiveData.updateData["@extra"] is String) {
             this.eventEmitter.emit(
-              eventName: event_invoke,
-              value: tdlibIsolateReceiveData,
-            );
+                  eventName: event_invoke,
+                  value: tdlibIsolateReceiveData,
+                );
           } else {
             this.eventEmitter.emit(
-              eventName: event_update,
-              value: tdlibIsolateReceiveData,
-            );
+                  eventName: event_update,
+                  value: tdlibIsolateReceiveData,
+                );
           }
         } catch (e) {
           this.eventEmitter.emit(
-            eventName: event_update,
-            value: tdlibIsolateReceiveData,
-          );
+                eventName: event_update,
+                value: tdlibIsolateReceiveData,
+              );
         }
       } else if (update is TdlibIsolateReceiveDataError) {
         is_init_isolate = false;
@@ -588,13 +586,12 @@ abstract class TdlibBase implements TdlibBaseCore {
     required bool isAutoGetChat,
     required bool isInvokeThrowOnError,
     required FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-    onGenerateExtraInvoke,
+        onGenerateExtraInvoke,
     required FutureOr<Map> Function(
       String extra,
       int client_id,
       TdlibBase libTdJson,
-    )?
-    onGetInvokeData,
+    )? onGetInvokeData,
   }) async {
     final Completer<Map> completer = Completer<Map>();
     late final EventEmitterListener listener;
@@ -780,9 +777,9 @@ abstract class TdlibBase implements TdlibBaseCore {
     Duration? durationCacheExpire,
     bool? isAutoGetChat,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-    onGenerateExtraInvoke,
+        onGenerateExtraInvoke,
     FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)?
-    onGetInvokeData,
+        onGetInvokeData,
     bool? isInvokeThrowOnError,
   }) async {
     return await invoke(

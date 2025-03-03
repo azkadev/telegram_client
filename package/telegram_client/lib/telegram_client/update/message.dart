@@ -604,12 +604,11 @@ extension MessageDataDataOn on TelegramClient {
             jsonContent["is_anonymous"] = contentUpdate["is_anonymous"] == true;
             if (contentUpdate["type"] is Map) {
               if (contentUpdate["type"]["@type"] is String) {
-                jsonContent["type"] =
-                    contentUpdate["type"]["@type"]
-                        .toString()
-                        .replaceAll(RegExp("(pollType)"), "")
-                        .trim()
-                        .toLowerCase();
+                jsonContent["type"] = contentUpdate["type"]["@type"]
+                    .toString()
+                    .replaceAll(RegExp("(pollType)"), "")
+                    .trim()
+                    .toLowerCase();
               }
               jsonContent["allow_multiple_answers"] =
                   contentUpdate["type"]["allow_multiple_answers"] == true;
@@ -658,8 +657,7 @@ extension MessageDataDataOn on TelegramClient {
               final Map res = await invoke(
                 parameters: {
                   "@type": "getStickerSet",
-                  "set_id":
-                      int.tryParse(contentUpdate["set_id"]) ??
+                  "set_id": int.tryParse(contentUpdate["set_id"]) ??
                       contentUpdate["set_id"],
                 },
                 isUseCache: isUseCache,
@@ -867,8 +865,7 @@ extension MessageDataDataOn on TelegramClient {
         }
         if (chat_type.isNotEmpty &&
             updataOptionTelegramClient
-                .updataMessageTelegramClient
-                .skip_old_chat_types
+                .updataMessageTelegramClient.skip_old_chat_types
                 .contains(chat_type)) {
           final DateTime dateTime = DateTime.now().copyWith(
             microsecond: 0,
@@ -881,8 +878,7 @@ extension MessageDataDataOn on TelegramClient {
 
           if (duration >
               updataOptionTelegramClient
-                  .updataMessageTelegramClient
-                  .duration_old_message_skip) {
+                  .updataMessageTelegramClient.duration_old_message_skip) {
             return true;
           }
         }
@@ -892,8 +888,7 @@ extension MessageDataDataOn on TelegramClient {
       // check user
       if (telegramClientData.is_bot == false) {
         if (updataOptionTelegramClient
-            .updataMessageTelegramClient
-            .user_is_skip_old_message) {
+            .updataMessageTelegramClient.user_is_skip_old_message) {
           final bool is_skip_update = isSkipUpdate();
           if (is_skip_update) {
             return null;
@@ -901,8 +896,7 @@ extension MessageDataDataOn on TelegramClient {
         }
       } else {
         if (updataOptionTelegramClient
-            .updataMessageTelegramClient
-            .bot_is_skip_old_message) {
+            .updataMessageTelegramClient.bot_is_skip_old_message) {
           final bool is_skip_update = isSkipUpdate();
           if (is_skip_update) {
             return null;

@@ -51,21 +51,20 @@ void main(List<String> args) async {
   }
 
   String name = () {
-    List<Directory> clients =
-        directory_tg
-            .listSync()
-            .where((e) {
-              print(basenameWithoutExtension(e.path));
-              if (RegExp(
-                r"^(client_)",
-                caseSensitive: false,
-              ).hasMatch(basenameWithoutExtension(e.path))) {
-                return true;
-              }
-              return false;
-            })
-            .map((e) => Directory(e.path))
-            .toList();
+    List<Directory> clients = directory_tg
+        .listSync()
+        .where((e) {
+          print(basenameWithoutExtension(e.path));
+          if (RegExp(
+            r"^(client_)",
+            caseSensitive: false,
+          ).hasMatch(basenameWithoutExtension(e.path))) {
+            return true;
+          }
+          return false;
+        })
+        .map((e) => Directory(e.path))
+        .toList();
     if (clients.isNotEmpty) {
       Directory result = logger.chooseOne(
         "Pilih Clients",
@@ -86,7 +85,9 @@ void main(List<String> args) async {
         return res;
       }
     }
-  }().toLowerCase().replaceAll(RegExp(r"([ \+]+)", caseSensitive: false), "");
+  }()
+      .toLowerCase()
+      .replaceAll(RegExp(r"([ \+]+)", caseSensitive: false), "");
 
   Directory database_directory = Directory(
     join(directory_tg.path, "client_${name}"),
@@ -124,7 +125,8 @@ void main(List<String> args) async {
                     return res;
                   }
                 }
-              }().replaceAll(RegExp(r"([ \+]+)", caseSensitive: false), "");
+              }()
+                  .replaceAll(RegExp(r"([ \+]+)", caseSensitive: false), "");
 
               if (RegExp(
                 r"^([0-9]+:AA[a-z0-9_-]+)$",
@@ -160,10 +162,12 @@ void main(List<String> args) async {
                     return res;
                   }
                 }
-              }().toLowerCase().replaceAll(
-                RegExp(r"([ \+]+)", caseSensitive: false),
-                "",
-              );
+              }()
+                  .toLowerCase()
+                  .replaceAll(
+                    RegExp(r"([ \+]+)", caseSensitive: false),
+                    "",
+                  );
 
               Map res = await tg.invoke(
                 parameters: {"@type": "checkAuthenticationCode", "code": code},
@@ -174,11 +178,10 @@ void main(List<String> args) async {
             }
 
             if (authorization_state["@type"] == "authorizationStateReady") {
-              Map get_me =
-                  (await tg.request(
-                    parameters: {"@type": "getMe"},
-                    telegramClientData: updateTelegramClient.telegramClientData,
-                  ))["result"];
+              Map get_me = (await tg.request(
+                parameters: {"@type": "getMe"},
+                telegramClientData: updateTelegramClient.telegramClientData,
+              ))["result"];
               get_me.removeByKeys(["phone_number"]);
               get_me.printPretty(2);
             }

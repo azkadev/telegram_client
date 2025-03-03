@@ -299,18 +299,16 @@ class TgUtils {
     required dynamic chat_id,
     required dynamic message_id,
   }) {
-    return Uri.parse("https://t.me/")
-        .replace(
-          pathSegments: [
-            "c",
-            chat_id.toString().replaceAll(
+    return Uri.parse("https://t.me/").replace(
+      pathSegments: [
+        "c",
+        chat_id.toString().replaceAll(
               RegExp(r"^(-100|-)", caseSensitive: false),
               "",
             ),
-            message_id.toString(),
-          ],
-        )
-        .toString();
+        message_id.toString(),
+      ],
+    ).toString();
   }
 
   /// convert messages_api to messages_api_tdlib
@@ -323,14 +321,12 @@ class TgUtils {
     required String chat_username,
     required String text,
   }) {
-    return Uri.parse("https://t.me/")
-        .replace(
-          pathSegments: [
-            "${chat_username.toString().replaceAll(RegExp(r"(@)", caseSensitive: false), "").trim()}",
-          ],
-          queryParameters: {"text": text},
-        )
-        .toString();
+    return Uri.parse("https://t.me/").replace(
+      pathSegments: [
+        "${chat_username.toString().replaceAll(RegExp(r"(@)", caseSensitive: false), "").trim()}",
+      ],
+      queryParameters: {"text": text},
+    ).toString();
   }
 
   /// TelegramClientUncompleDocumentation
@@ -349,7 +345,8 @@ class TgUtils {
     return """
 ```${language}
 ${text}
-```""".trim();
+```"""
+        .trim();
   }
 
   /// TelegramClientUncompleDocumentation

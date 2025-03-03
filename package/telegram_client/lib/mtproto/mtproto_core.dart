@@ -81,9 +81,8 @@ class Mtproto {
     'system_language_code': 'en',
     'new_verbosity_level': 0,
     'application_version': 'v1',
-    'device_model':
-        'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
-            .general_lib_utils_decryptFromBase64(),
+    'device_model': 'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
+        .general_lib_utils_decryptFromBase64(),
     'system_version': Platform.operatingSystemVersion,
     "database_key": "",
     "start": true,
@@ -133,11 +132,11 @@ class Mtproto {
 
   /// TelegramClientUncompleDocumentation
   FutureOr<String> Function(int client_id, Mtproto Mtproto)?
-  on_generate_extra_invoke;
+      on_generate_extra_invoke;
 
   /// TelegramClientUncompleDocumentation
   FutureOr<Map> Function(String extra, int client_id, Mtproto Mtproto)?
-  on_get_invoke_data;
+      on_get_invoke_data;
 
   /// TelegramClientUncompleDocumentation
   Mtproto({
@@ -385,9 +384,9 @@ class Mtproto {
     String? extra,
     bool? iSAutoGetChat,
     FutureOr<String> Function(int client_id, Mtproto Mtproto)?
-    onGenerateExtraInvoke,
+        onGenerateExtraInvoke,
     FutureOr<Map> Function(String extra, int client_id, Mtproto Mtproto)?
-    onGetInvokeData,
+        onGetInvokeData,
     bool isThrowOnError = true,
   }) async {
     onGetInvokeData ??= on_get_invoke_data;

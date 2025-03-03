@@ -69,27 +69,25 @@ extension CreateInvoiceLinkDataOn on TelegramClient {
         "@type": "inputMessageInvoice",
         "title": parameters["title"],
         "description": parameters["description"],
-        "payload":
-            parameters["payload"]
-                .toString()
-                .general_lib_utils_encryptToBase64(),
+        "payload": parameters["payload"]
+            .toString()
+            .general_lib_utils_encryptToBase64(),
         "invoice": <dynamic, dynamic>{
           "@type": "invoice",
           "currency": parameters["currency"],
-          "price_parts":
-              (parameters["prices"] as List)
-                  .map((e) {
-                    if (e is Map == false) {
-                      return null;
-                    }
-                    Map<dynamic, dynamic> json_data_price = <dynamic, dynamic>{
-                      "@type": "labeledPricePart",
-                      ...e,
-                    };
-                    return json_data_price;
-                  })
-                  .whereType<Map>()
-                  .toList(),
+          "price_parts": (parameters["prices"] as List)
+              .map((e) {
+                if (e is Map == false) {
+                  return null;
+                }
+                Map<dynamic, dynamic> json_data_price = <dynamic, dynamic>{
+                  "@type": "labeledPricePart",
+                  ...e,
+                };
+                return json_data_price;
+              })
+              .whereType<Map>()
+              .toList(),
         },
       },
     };

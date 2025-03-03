@@ -79,9 +79,8 @@ class TelegramLogin {
     http.Client? httpClient,
   }) async {
     httpClient ??= http_client;
-    phoneNumber = phoneNumber
-        .replaceAll(RegExp('\\+'), '')
-        .replaceAll(RegExp(' '), '');
+    phoneNumber =
+        phoneNumber.replaceAll(RegExp('\\+'), '').replaceAll(RegExp(' '), '');
     Map<String, String> headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       "origin": "https://oauth.telegram.org",

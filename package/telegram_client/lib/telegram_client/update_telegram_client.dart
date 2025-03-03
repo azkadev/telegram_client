@@ -139,8 +139,8 @@ class UpdateTelegramClient {
       is_lite: true,
       updataOptionTelegramClient: UpdataOptionTelegramClient(
         updataMessageTelegramClient: UpdataMessageTelegramClient(
-          // is_use_cache: true,
-        ),
+            // is_use_cache: true,
+            ),
       ),
     );
   }

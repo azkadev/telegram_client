@@ -132,12 +132,11 @@ class TelegramBotApi {
     this.eventUpdate = "update",
     Uri? telegramUrlWebhook,
     Client? httpClient,
-  }) : crypto = crypto ?? Crypto(key: "aeatmlvodkm9ii37l2p0WGkaAAF3BWCh"),
-       httpClient = httpClient ?? Client(),
-       eventEmitter = eventEmitter ?? EventEmitter(),
-       telegramUrlWebhook =
-           telegramUrlWebhook ??
-           Uri.parse("http://0.0.0.0:8080/telegram/webhook") {
+  })  : crypto = crypto ?? Crypto(key: "aeatmlvodkm9ii37l2p0WGkaAAF3BWCh"),
+        httpClient = httpClient ?? Client(),
+        eventEmitter = eventEmitter ?? EventEmitter(),
+        telegramUrlWebhook = telegramUrlWebhook ??
+            Uri.parse("http://0.0.0.0:8080/telegram/webhook") {
     if (clientOption != null) {
       client_option.addAll(clientOption);
     }
@@ -236,14 +235,11 @@ class TelegramBotApi {
 
     final String url_webhook_old =
         get_webhook_info_old_procces["result"]["url"];
-    final String url_webhook_new =
-        telegramUrlWebhook
-            .replace(
-              path: path,
-              pathSegments: pathSegments,
-              queryParameters: {"tg": query_telegram_webhook},
-            )
-            .toString();
+    final String url_webhook_new = telegramUrlWebhook.replace(
+      path: path,
+      pathSegments: pathSegments,
+      queryParameters: {"tg": query_telegram_webhook},
+    ).toString();
 
     if (url_webhook_old == url_webhook_new) {
       final Map new_scheme = {
@@ -300,7 +296,7 @@ class TelegramBotApi {
   EventEmitterListener on(
     String type_update,
     FutureOr<dynamic> Function(UpdateTelegramClientTelegramBotApi updateBot)
-    callback,
+        callback,
   ) {
     return eventEmitter.on(
       eventName: type_update,
@@ -384,10 +380,8 @@ class TelegramBotApi {
         }
       }
     }
-    String url =
-        Uri.parse((urlApi ?? ""))
-            .replace(pathSegments: [(clientType ?? "bot") + tokenBot, method])
-            .toString();
+    String url = Uri.parse((urlApi ?? "")).replace(
+        pathSegments: [(clientType ?? "bot") + tokenBot, method]).toString();
     if (!is_form) {
       List<String> methodForm = [
         "sendDocument",

@@ -49,24 +49,22 @@ void main(List<String> args) async {
     directory_template.createSync(recursive: true);
   }
   Process.runSync("dart", ["format", directory_template.uri.toFilePath()]);
-  List<FileSystemEntity> fileSystemEntitys =
-      directory_template
-          .listSync()
-          .where(
-            (element) =>
-                element.statSync().type == FileSystemEntityType.directory,
-          )
-          .toList();
+  List<FileSystemEntity> fileSystemEntitys = directory_template
+      .listSync()
+      .where(
+        (element) => element.statSync().type == FileSystemEntityType.directory,
+      )
+      .toList();
   fileSystemEntitys.sort((a, b) => a.path.compareTo(b.path));
   for (var element in fileSystemEntitys) {
     String base_name = "${path.basename(element.path)}_telegram_client";
     if (element is Directory) {
       List<ScriptGenerator> scirpts = element.listSync().toScriptGenerate(
-        scriptGeneratorOptions: ScriptGeneratorOptions(
-          fileSystemEntityIgnore: "",
-          isVerbose: false,
-        ),
-      );
+            scriptGeneratorOptions: ScriptGeneratorOptions(
+              fileSystemEntityIgnore: "",
+              isVerbose: false,
+            ),
+          );
       String script = scirpts.toScriptDart(scriptName: base_name);
       File file = File(
         path.join(

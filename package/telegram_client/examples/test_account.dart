@@ -97,11 +97,10 @@ void main(List<String> args) async {
             }
 
             if (authorization_state["@type"] == "authorizationStateReady") {
-              Map get_me =
-                  (await tg.request(
-                    parameters: {"@type": "getMe"},
-                    telegramClientData: updateTelegramClient.telegramClientData,
-                  ))["result"];
+              Map get_me = (await tg.request(
+                parameters: {"@type": "getMe"},
+                telegramClientData: updateTelegramClient.telegramClientData,
+              ))["result"];
               get_me.removeByKeys(["phone_number"]);
               get_me.printPretty(2);
               File(
@@ -187,12 +186,12 @@ void main(List<String> args) async {
     );
 
     final TelegramClientLibraryTdlibOptionParameter
-    telegramClientLibraryTdlibOptionParameter =
+        telegramClientLibraryTdlibOptionParameter =
         TelegramClientLibraryTdlibOptionParameter.create(
-          database_directory: database_directory.path,
-          files_directory: database_directory.path,
-          use_test_dc: true,
-        );
+      database_directory: database_directory.path,
+      files_directory: database_directory.path,
+      use_test_dc: true,
+    );
     telegramClientLibraryTdlibOptionParameter["phone_number"] = phone_number;
     telegramClientLibraryTdlibOptionParameter["code"] = dc * 5;
     await tg.tdlib.createclient(

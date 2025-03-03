@@ -811,10 +811,9 @@ class Tdlib extends TdlibNative {
           array_rows.add(array_loop);
         }
         json["rows"] = array_rows;
-        json["resize_keyboard"] =
-            (keyboard["resize_keyboard"] is bool)
-                ? keyboard["resize_keyboard"]
-                : true;
+        json["resize_keyboard"] = (keyboard["resize_keyboard"] is bool)
+            ? keyboard["resize_keyboard"]
+            : true;
         json["one_time"] =
             (keyboard["one_time"] is bool) ? keyboard["one_time"] : true;
         json["is_personal"] =
@@ -932,9 +931,9 @@ class Tdlib extends TdlibNative {
     String? extra,
     bool? isAutoGetChat,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-    onGenerateExtraInvoke,
+        onGenerateExtraInvoke,
     FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)?
-    onGetInvokeData,
+        onGetInvokeData,
     bool? isInvokeThrowOnError,
     bool isAutoExtendMessage = false,
     bool? isUseCache,
@@ -1131,10 +1130,9 @@ class Tdlib extends TdlibNative {
         message_id: parameters["message_id"],
         text: parameters["text"],
         inline_message_id: parameters["inline_message_id"],
-        parse_mode:
-            (parameters["parse_mode"] is String)
-                ? parameters["parse_mode"]
-                : "html",
+        parse_mode: (parameters["parse_mode"] is String)
+            ? parameters["parse_mode"]
+            : "html",
         entities:
             (parameters["entities"] is List) ? parameters["entities"] : [],
         disable_web_page_preview:
@@ -1156,10 +1154,9 @@ class Tdlib extends TdlibNative {
         message_id: parameters["message_id"],
         caption: parameters["caption"],
         inline_message_id: parameters["inline_message_id"],
-        parse_mode:
-            (parameters["parse_mode"] is String)
-                ? parameters["parse_mode"]
-                : "html",
+        parse_mode: (parameters["parse_mode"] is String)
+            ? parameters["parse_mode"]
+            : "html",
         entities:
             (parameters["entities"] is List) ? parameters["entities"] : [],
         disable_web_page_preview:
@@ -1348,9 +1345,9 @@ class Tdlib extends TdlibNative {
     String? extra,
     bool? isAutoGetChat,
     FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
-    onGenerateExtraInvoke,
+        onGenerateExtraInvoke,
     FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)?
-    onGetInvokeData,
+        onGetInvokeData,
     bool? isInvokeThrowOnError,
     bool isAutoExtendMessage = false,
     bool? isUseCache,
@@ -1693,9 +1690,9 @@ class Tdlib extends TdlibNative {
       json["join_date"] = get_chat_member["joined_chat_date"];
       var status = get_chat_member["status"];
       json["status"] = status["@type"].toString().toLowerCase().replaceAll(
-        RegExp("chatmemberstatus", caseSensitive: false),
-        "",
-      );
+            RegExp("chatmemberstatus", caseSensitive: false),
+            "",
+          );
       json["custom_title"] = status["custom_title"];
       json["can_be_edited"] = status["can_be_edited"];
       json["can_manage_chat"] = status["can_manage_chat"];
@@ -1775,9 +1772,9 @@ class Tdlib extends TdlibNative {
             parameters: {
               "supergroup_id": int.parse(
                 chat_id.toString().replaceAll(
-                  RegExp("^-100", caseSensitive: false),
-                  "",
-                ),
+                      RegExp("^-100", caseSensitive: false),
+                      "",
+                    ),
               ),
             },
             isUseCache: isUseCache,
@@ -1872,9 +1869,9 @@ class Tdlib extends TdlibNative {
                 parameters: {
                   "supergroup_id": int.parse(
                     chat_id.toString().replaceAll(
-                      RegExp("^-100", caseSensitive: false),
-                      "",
-                    ),
+                          RegExp("^-100", caseSensitive: false),
+                          "",
+                        ),
                   ),
                 },
                 isUseCache: isUseCache,
@@ -1892,10 +1889,8 @@ class Tdlib extends TdlibNative {
               if (getSuperGroupFullInfo["photo"]["@type"] == "chatPhoto") {
                 if (getSuperGroupFullInfo["photo"]["sizes"] is List) {
                   try {
-                    var getPhoto =
-                        getSuperGroupFullInfo["photo"]["sizes"][getSuperGroupFullInfo["photo"]["sizes"]
-                                .length -
-                            1];
+                    var getPhoto = getSuperGroupFullInfo["photo"]["sizes"]
+                        [getSuperGroupFullInfo["photo"]["sizes"].length - 1];
                     var getPathPhoto =
                         getPhoto["photo"]["local"]["path"] as String;
                     json["profile_photo"]["path"] = getPathPhoto;
@@ -1951,9 +1946,9 @@ class Tdlib extends TdlibNative {
             parameters: {
               "basic_group_id": int.parse(
                 chat_id.toString().replaceAll(
-                  RegExp("^-", caseSensitive: false),
-                  "",
-                ),
+                      RegExp("^-", caseSensitive: false),
+                      "",
+                    ),
               ),
             },
             isUseCache: isUseCache,
@@ -2133,10 +2128,8 @@ class Tdlib extends TdlibNative {
                   if (getUserFullInfo["photo"]["@type"] == "chatPhoto") {
                     if (getUserFullInfo["photo"]["sizes"] is List) {
                       try {
-                        var getPhoto =
-                            getUserFullInfo["photo"]["sizes"][getUserFullInfo["photo"]["sizes"]
-                                    .length -
-                                1];
+                        var getPhoto = getUserFullInfo["photo"]["sizes"]
+                            [getUserFullInfo["photo"]["sizes"].length - 1];
                         var getPathPhoto =
                             getPhoto["photo"]["local"]["path"] as String;
                         json["profile_photo"]["path"] = getPathPhoto;
@@ -2560,8 +2553,8 @@ class Tdlib extends TdlibNative {
                   json["reply_to_message"]["message_id"];
               json["reply_to_message"]["api_message_id"] =
                   TgUtils.messageTdlibToApi(
-                    json["reply_to_message"]["message_id"],
-                  );
+                json["reply_to_message"]["message_id"],
+              );
             }
           } catch (e) {}
         }
@@ -2850,11 +2843,9 @@ class Tdlib extends TdlibNative {
             json["type_content"] = "new_member";
             List new_members = [];
             if (is_super_detail) {
-              for (
-                var i = 0;
-                i < update["content"]["member_user_ids"].length;
-                i++
-              ) {
+              for (var i = 0;
+                  i < update["content"]["member_user_ids"].length;
+                  i++) {
                 var loop_data = update["content"]["member_user_ids"][i];
                 try {
                   Map result_user = await getUser(
@@ -3067,12 +3058,12 @@ class Tdlib extends TdlibNative {
                         if (raw_keyboard_data["@type"] ==
                             "inlineKeyboardButtonTypeCallback") {
                           if (raw_keyboard_data["type"]["data"] is String) {
-                            jsonDataKeyboard["callback_data"] = convert.utf8
-                                .decode(
-                                  convert.base64.decode(
-                                    raw_keyboard_data["type"]["data"],
-                                  ),
-                                );
+                            jsonDataKeyboard["callback_data"] =
+                                convert.utf8.decode(
+                              convert.base64.decode(
+                                raw_keyboard_data["type"]["data"],
+                              ),
+                            );
                           }
                         }
                         //
@@ -3320,11 +3311,10 @@ class Tdlib extends TdlibNative {
           }
         } catch (e) {}
         json["from"] = from;
-        json["chat_type"] =
-            update["chat_type"]["@type"]
-                .toString()
-                .replaceAll(RegExp("chatType", caseSensitive: false), "")
-                .toLowerCase();
+        json["chat_type"] = update["chat_type"]["@type"]
+            .toString()
+            .replaceAll(RegExp("chatType", caseSensitive: false), "")
+            .toLowerCase();
         try {
           if (json["chat_type"] == "supergroup" &&
               update["chat_type"]["is_channel"]) {
