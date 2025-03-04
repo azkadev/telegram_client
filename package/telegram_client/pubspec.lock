@@ -170,10 +170,10 @@ packages:
     dependency: "direct main"
     description:
       name: general_lib
-      sha256: e900899e0467ce64430bf004d4461e79e98ef3e00bc3e3bc08fcbfee323c70e4
+      sha256: ea076e5f02986a792edeedd87ccda9158d6f2166ef8f1bc65e79becadfe21cd9
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.67"
+    version: "0.0.69"
   glob:
     dependency: transitive
     description:
@@ -226,10 +226,10 @@ packages:
     dependency: "direct main"
     description:
       name: io_universe
-      sha256: "8086b50254572b70e056cce2f4ed3622565d6ba0dd90d9f4b4453c7b209408cf"
+      sha256: e42dd887a33901505bf1db5c6653d936d9c6260f2367150fe90b019349406aad
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.7"
+    version: "0.0.8"
   js:
     dependency: transitive
     description:
@@ -318,22 +318,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
-  plugin_platform_interface:
-    dependency: transitive
-    description:
-      name: plugin_platform_interface
-      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.8"
   pointycastle:
     dependency: "direct overridden"
     description:
       name: pointycastle
-      sha256: "70fe966348fe08c34bf929582f1d8247d9d9408130723206472b4687227e4333"
+      sha256: "92aa3841d083cc4b0f4709b5c74fd6409a3e6ba833ffc7dc6a8fee096366acf5"
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.0"
+    version: "4.0.0"
   pool:
     dependency: transitive
     description:
@@ -370,10 +362,10 @@ packages:
     dependency: "direct main"
     description:
       name: server_universe
-      sha256: "6085506b05e9ac7013976ea4739710cd5c2307478ca67b0e16e9bd1a2218798a"
+      sha256: "3aaf0baffb0d87f46a66da1e4880a95ff76df33275e8e111286c1f65dcb14cc6"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.37"
+    version: "0.0.38"
   shelf:
     dependency: transitive
     description:
@@ -463,18 +455,18 @@ packages:
     dependency: "direct dev"
     description:
       name: system_information
-      sha256: "6385a7ea956ed61d2b95fccbfab5e8e907f71db75cf0de177783d8a73d4344b6"
+      sha256: "36ef787a388abb2110ce2bc68ed4e892002ddcc639824c6039ca01618454dd03"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.10"
+    version: "0.0.13"
   system_information_flutter:
     dependency: transitive
     description:
       name: system_information_flutter
-      sha256: f323c35b7f08477b774ff21abe5dedee74e9d7dd993d1991751e2d90cac886a5
+      sha256: "2f2b54c49445d78f5f6649d51b420b1bdd2b81fb0c3c498854173e7d63c0446c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.10"
+    version: "0.0.13"
   term_glyph:
     dependency: transitive
     description:

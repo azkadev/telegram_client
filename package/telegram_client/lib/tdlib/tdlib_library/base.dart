@@ -143,9 +143,11 @@ abstract class TdlibBase implements TdlibBaseCore {
   final ReceivePort receivePort = ReceivePort();
 
   /// TelegramClientUncompleDocumentation
-  final TelegramClientLibraryTdlibOptionParameter client_option = TelegramClientLibraryTdlibOptionParameter.create(
+  final TelegramClientLibraryTdlibOptionParameter client_option =
+      TelegramClientLibraryTdlibOptionParameter.create(
     api_id: num.tryParse("OTQ1NzU=".general_lib_utils_decryptFromBase64()),
-    api_hash: 'YTM0MDZkZThkMTcxYmI0MjJiYjZkZGYzYmJkODAwZTI='.general_lib_utils_decryptFromBase64(),
+    api_hash: 'YTM0MDZkZThkMTcxYmI0MjJiYjZkZGYzYmJkODAwZTI='
+        .general_lib_utils_decryptFromBase64(),
     database_directory: "tg_db",
     files_directory: "tg_file",
     use_file_database: true,
@@ -156,7 +158,8 @@ abstract class TdlibBase implements TdlibBaseCore {
     system_language_code: 'en',
     new_verbosity_level: 0,
     application_version: 'v1',
-    device_model: 'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'.general_lib_utils_decryptFromBase64(),
+    device_model: 'VGVsZWdyYW0gQ2xpZW50IEFaS0FERVYgR0xPQkFMIENPUlBPUkFUSU9O'
+        .general_lib_utils_decryptFromBase64(),
     system_version: Platform.operatingSystemVersion,
     database_key: "",
     start: true,
@@ -241,7 +244,6 @@ abstract class TdlibBase implements TdlibBaseCore {
     this.onGetInvokeData,
     this.onReceiveUpdate,
   }) : eventEmitter = eventEmitter ?? EventEmitter() {
-    
     if (delayInvoke != null) {
       delay_invoke = delayInvoke;
     }
@@ -590,7 +592,8 @@ abstract class TdlibBase implements TdlibBaseCore {
     required String extra,
     required bool isAutoGetChat,
     required bool isInvokeThrowOnError,
-    required FutureOr<String> Function(int client_id, TdlibBase libTdJson)? onGenerateExtraInvoke,
+    required FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
+        onGenerateExtraInvoke,
     required FutureOr<Map> Function(
       String extra,
       int client_id,
@@ -703,7 +706,9 @@ abstract class TdlibBase implements TdlibBaseCore {
       eventEmitter.off(listener: listener);
     } catch (e) {}
 
-    if (result.isEmpty || result["@type"] is String == false || result["@type"] == "error") {
+    if (result.isEmpty ||
+        result["@type"] is String == false ||
+        result["@type"] == "error") {
       if (isInvokeThrowOnError) {
         result["@type"] = "error";
         throw result;
@@ -778,8 +783,10 @@ abstract class TdlibBase implements TdlibBaseCore {
     bool? isUseCache,
     Duration? durationCacheExpire,
     bool? isAutoGetChat,
-    FutureOr<String> Function(int client_id, TdlibBase libTdJson)? onGenerateExtraInvoke,
-    FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)? onGetInvokeData,
+    FutureOr<String> Function(int client_id, TdlibBase libTdJson)?
+        onGenerateExtraInvoke,
+    FutureOr<Map> Function(String extra, int client_id, TdlibBase libTdJson)?
+        onGetInvokeData,
     bool? isInvokeThrowOnError,
   }) async {
     return await invoke(
