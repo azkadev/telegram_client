@@ -35,8 +35,9 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps,
 
 import 'dart:async';
-import 'package:general_lib/general_lib.dart';
-import 'package:mason_logger/mason_logger.dart';
+import 'package:general_lib/fork/mason_logger/mason_logger.dart';
+import 'package:general_lib/fork/mason_logger/src/mason_logger.dart';
+import 'package:general_lib/general_lib.dart'; 
 import 'package:path/path.dart';
 import 'package:telegram_client/scheme/telegram_client_library_tdlib_option_parameter.dart';
 import 'package:telegram_client/telegram_client.dart';
