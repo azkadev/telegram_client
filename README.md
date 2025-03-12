@@ -1,4 +1,9 @@
 # Telegram Client library
+
+this library will not be updated anymore, I made a new library with more features and allows any telegram client / platform
+
+check out: https://github.com/General-Developer/general_bot_library
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/azkadev/telegram_client/main/package/telegram_client/assets/telegram.png" width="350px">
 </p>
