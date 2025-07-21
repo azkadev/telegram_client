@@ -1,0 +1,22 @@
+name: 'quickstart'
+description: 'A sample command-line application.'
+version: '1.0.0'
+publish_to: none
+environment:
+  sdk: '>=3.6.0 <4.0.0'
+dependencies:
+  telegram_universe:
+    path: ../package/telegram_universe
+dev_dependencies:
+  lints: '^5.0.0'
+  test: 'any'
+project:
+  type: ''
+  is_use_direct_package: false
+  is_private: false
+  developers:
+    - username: ''
+      note: ''
+      social_medias:
+        - 'https://github.com'
+funding: []

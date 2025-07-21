@@ -1,0 +1,116 @@
+// ignore_for_file: non_constant_identifier_names, unused_import
+import "package:telegram_universe/json_scheme/json_scheme.dart";
+
+// import "dart:convert";
+
+
+/// Generate By Azka Axelion Gibran Aka AZKADEV Script Dont edit by hand or anything manual 
+class ReportReasonViolence extends JsonSchemeByAzkadev {
+
+  /// Generate By General Universe Script Dont edit by hand or anything manual
+  ReportReasonViolence(super.rawData);
+  
+  /// return default special type @type
+  /// "reportReasonViolence"
+  static String get defaultDataSpecialType {
+    return "reportReasonViolence";
+  }
+
+  /// return default data
+  /// 
+  static Map get defaultData {
+    return {"@type":"reportReasonViolence","@return_type":"reportReason"};
+  }
+
+  /// check data 
+  /// if raw data 
+  /// - rawData["@type"] == reportReasonViolence
+  /// if same return true
+  bool json_scheme_utils_checkDataIsSameBySpecialType() {
+    return rawData["@type"] == defaultData["@type"];
+  }
+
+  /// check value data whatever do yout want
+  bool json_scheme_utils_checkDataIsSameBuilder({
+    required bool Function(Map rawData, Map defaultData) onResult,
+  }) {
+    return onResult(rawData["@type"], defaultData["@type"]);
+  }
+
+  
+
+  /// create [ReportReasonViolence]
+  /// Empty  
+  static ReportReasonViolence empty() {
+    return ReportReasonViolence({});
+  }
+
+  
+
+  /// Generate By General Universe Script Dont edit by hand or anything manual
+  String? get special_type {
+    try {
+      if (rawData["@type"] is String == false){
+        return null;
+      }
+      return rawData["@type"] as String;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Generate By General Universe Script Dont edit by hand or anything manual
+  set special_type(String? value) {
+    rawData["@type"] = value;
+  }
+
+
+  /// Generate By General Universe Script Dont edit by hand or anything manual
+  String? get special_return_type {
+    try {
+      if (rawData["@return_type"] is String == false){
+        return null;
+      }
+      return rawData["@return_type"] as String;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Generate By General Universe Script Dont edit by hand or anything manual
+  set special_return_type(String? value) {
+    rawData["@return_type"] = value;
+  }
+
+
+  /// Generate By General Universe Script Dont edit by hand or anything manual
+  static ReportReasonViolence create({
+              bool schemeUtilsIsSetDefaultData = false,
+
+    String special_type = "reportReasonViolence",
+    String special_return_type = "reportReason",
+})  {
+    // ReportReasonViolence reportReasonViolence = ReportReasonViolence({
+final Map reportReasonViolence_data_create_json = {
+  
+      "@type": special_type,
+      "@return_type": special_return_type,
+
+
+};
+
+
+          reportReasonViolence_data_create_json.removeWhere((key, value) => value == null);
+
+    if (schemeUtilsIsSetDefaultData) {
+      defaultData.forEach((key, value) {
+        if (reportReasonViolence_data_create_json.containsKey(key) == false) {
+          reportReasonViolence_data_create_json[key] = value;
+        }
+      });
+    }
+return ReportReasonViolence(reportReasonViolence_data_create_json);
+
+
+      }
+}

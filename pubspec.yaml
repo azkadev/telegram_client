@@ -1,0 +1,32 @@
+name: 'telegram_client_project'
+description: 'telegram_client is program for help you, booster up your projects significants with amazing features and super easy for use'
+version: '0.0.0'
+platforms:
+  android: null
+  ios: null
+  linux: null
+  macos: null
+  web: null
+  windows: null
+environment:
+  sdk: '>=3.6.0 <4.0.0'
+dependencies:
+  path: '^1.9.0' 
+dev_dependencies:
+  lints: '^5.0.0'
+  test: 'any' 
+project:
+  type: ''
+  is_use_direct_package: true
+  is_private: true
+  developers:
+    - username: ''
+      note: ''
+      social_medias:
+        - 'https://github.com'
+funding:
+  - 'https://github.com/sponsors/azkadev' 
+homepage: 'https://youtube.com/azkadev'
+repository: 'https://github.com/azkadev/telegram_client'
+issue_tracker: 'https://t.me/DEVELOPER_GLOBAL_PUBLIC'
+documentation: 'https://youtube.com/azkadev'

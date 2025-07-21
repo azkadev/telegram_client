@@ -1,0 +1,33 @@
+name: 'tdlib_library'
+description: 'telegram_client is program for help you, booster up your projects significants with amazing features and super easy for use'
+version: '0.0.1'
+homepage: "https://youtube.com/@azkadev"
+repository: "https://github.com/azkadev/telegram_client"
+issue_tracker: "https://github.com/azkadev/telegram_client/issues"
+documentation: "https://github.com/azkadev/telegram_client"
+funding:
+  - "https://github.com/sponsors/azkadev"
+  - "https://www.patreon.com/c/azkadev"
+  - "https://opencollective.com/azkadev"
+  - "https://paypal.me/azkaaxeliongibran"
+  - "https://paypal.me/azkadev"
+environment:
+  sdk: '>=3.6.0 <4.0.0'
+  flutter: '>=3.3.0'
+dependencies:
+  flutter:
+    sdk: 'flutter'
+dev_dependencies: 
+  flutter_lints: '^5.0.0'
+flutter:
+  plugin:
+    platforms:
+      linux:
+        ffiPlugin: true
+platforms:
+  android: null
+  ios: null
+  linux: null
+  macos: null
+  web: null
+  windows: null
