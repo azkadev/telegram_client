@@ -31,7 +31,6 @@ import 'package:ffi/ffi.dart';
 import 'package:telegram_universe/event_emitter/event_emitter.dart' show EventEmitterByAzkadev, EventEmitterListenerByAzkadev;
 import 'package:telegram_universe/ffi/telegram_universe_native.dart' show TelegramUniverseTdlibNativeLibraryByAzkadev;
 import 'package:telegram_universe/uuid/uuid.dart';
- 
 
 /// No Doc By Azkadev
 class TelegramUniverse {
@@ -39,7 +38,31 @@ class TelegramUniverse {
   static String _pathTdlib = "";
   final EventEmitterByAzkadev _eventEmitter = EventEmitterByAzkadev();
 
-
+  static NativeCallable<Void Function(Pointer<Char>)> _initializedTdlibNativeCallbackFunction({
+    required EventEmitterByAzkadev eventEmitter,
+  }) {
+    return NativeCallable<Void Function(Pointer<Char>)>.listener((Pointer<Char> raw) {
+      try {
+        final valueRaw = raw.cast<Utf8>();
+        final value = valueRaw.toDartString();
+        if (value.isNotEmpty) {
+          final Map updateRaw = json.decode(value);
+          eventEmitter.emit(
+            eventName: () {
+              if (updateRaw["@extra"] is String) {
+                return "invoke";
+              }
+              return "update";
+            }(),
+            value: updateRaw,
+          );
+        }
+        try {
+          malloc.free(valueRaw);
+        } catch (e) {}
+      } catch (e) {}
+    });
+  }
 
   /// No Doc By Azkadev
   String getLibraryExtension() {
@@ -68,13 +91,18 @@ class TelegramUniverse {
   }) {
     _pathTdlib = getTdlibPath(pathTdlib: pathTdlib);
     _telegramUniverseNativeLibrary = TelegramUniverseTdlibNativeLibraryByAzkadev(DynamicLibrary.open(_pathTdlib));
+    _telegramUniverseNativeLibrary.InitializedTdlibNativeCallbackFunction(
+      Pointer.fromAddress(
+        TelegramUniverse._initializedTdlibNativeCallbackFunction(
+          eventEmitter: _eventEmitter,
+        ).nativeFunction.address,
+      ),
+    );
   }
 
   /// No Doc By Azkadev
 
-  Future<void> initialized() async {
-
-  }
+  Future<void> initialized() async {}
 
   /// No Doc By Azkadev
   Map tdlibInvokeRaw(Map parameters) {
