@@ -5,20 +5,22 @@
 cmake_minimum_required(VERSION 3.14)
 
 # Project-level configuration.
-set(PROJECT_NAME "tdlib_flutter")
+set(PROJECT_NAME "tdlib_library")
 project(${PROJECT_NAME} LANGUAGES CXX)
 
-# Invoke the build for native code shared with the other target platforms.
-# This can be changed to accommodate different builds.
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../src" "${CMAKE_CURRENT_BINARY_DIR}/shared")
 
 # List of absolute paths to libraries that should be bundled with the plugin.
 # This list could contain prebuilt libraries, or libraries created by an
 # external build triggered from this build file.
-set(tdlib_flutter_bundled_libraries
+set(tdlib_library_bundled_libraries
   # Defined in ../src/CMakeLists.txt.
   # This can be changed to accommodate different builds.
-  $<TARGET_FILE:tdlib_flutter>
+  # $<TARGET_FILE:tdlib_library>
+  "${CMAKE_CURRENT_SOURCE_DIR}/lib/libtelegram.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/lib/libtdjson.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/lib/libcrypto-1_1.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/lib/libssl-1_1.dll"
+  "${CMAKE_CURRENT_SOURCE_DIR}/lib/zlib1.dll"
   PARENT_SCOPE
 )
 

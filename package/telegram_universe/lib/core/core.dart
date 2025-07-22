@@ -64,6 +64,8 @@ class TelegramUniverse {
     });
   }
 
+  bool _isInitialized = false;
+
   /// No Doc By Azkadev
   String getLibraryExtension() {
     if (Platform.isMacOS || Platform.isIOS) {
@@ -80,7 +82,7 @@ class TelegramUniverse {
     String pathTdlib = "",
   }) {
     if (pathTdlib.isEmpty) {
-      return "libtdjson.${getLibraryExtension()}";
+      return "libtelegram.${getLibraryExtension()}";
     }
     return pathTdlib;
   }
@@ -102,7 +104,26 @@ class TelegramUniverse {
 
   /// No Doc By Azkadev
 
-  Future<void> initialized() async {}
+  Future<void> initialized() async {
+    if (_isInitialized) {
+      return;
+    }
+    _isInitialized = true;
+    tdlibInvokeRaw({
+      "@type": "initialized",
+    });
+    /// menutup semua client
+    /// ini sangat berguna karena pada dasrnya
+    /// ketika load library dan kamu debug di flutter
+    /// maka memori library tidak auto hilang
+    /// itu tandanya hanya program dart yang di restart dan memorinya yang hilang
+    /// maka jika tidak demikian
+    /// ketika kamu membuat client lagi maka tidak bisa akan error
+    /// 
+    tdlibInvokeRaw({
+      "@type": "closeClients",
+    });
+  }
 
   /// No Doc By Azkadev
   Map tdlibInvokeRaw(Map parameters) {

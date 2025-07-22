@@ -33,6 +33,6 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 
 <!-- END LICENSE --> */
 // Relative import to be able to reuse the C sources.
-// See the comment in ../tdlib_flutter.podspec for more information.
-#include "../../src/tdlib_flutter.c"
+// See the comment in ../tdlib_library.podspec for more information.
+#include "../../src/tdlib_library.c"
 

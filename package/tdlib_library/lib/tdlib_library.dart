@@ -2,6 +2,6 @@
 class TdlibLibrary {
   /// By Azkadev 
   static String prefixLibrary(){
-    return "libtdjson";
+    return "libtelegram";
   }
 }

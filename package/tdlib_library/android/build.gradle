@@ -1,6 +1,6 @@
 // The Android Gradle Plugin builds the native code with the Android NDK.
 
-group = "global_corporation.general_corporation.general_developer.tdlib_flutter"
+group = "global_corporation.general_corporation.general_developer.tdlib_library"
 version = "1.0"
 
 buildscript {
@@ -25,7 +25,7 @@ rootProject.allprojects {
 apply plugin: "com.android.library"
 
 android {
-    namespace = "global_corporation.general_corporation.general_developer.tdlib_flutter"
+    namespace = "global_corporation.general_corporation.general_developer.tdlib_library"
 
     // Bumping the plugin compileSdk version requires all clients of this plugin
     // to bump the version in their app.

@@ -22,7 +22,11 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
+      android:
+        ffiPlugin: true
       linux:
+        ffiPlugin: true
+      windows:
         ffiPlugin: true
 platforms:
   android: null
@@ -31,3 +35,11 @@ platforms:
   macos: null
   web: null
   windows: null
+
+
+false_secrets:
+  - 'android/jniLibs'
+  - 'linux/'
+  - 'windows/'
+  - 'macos/'
+  - 'ios/'
