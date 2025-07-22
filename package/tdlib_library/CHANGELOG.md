@@ -1,4 +1,5 @@
-## 0.0.0
+## 0.0.1
 
-- Initial version.
+- Menambahkan support android dan linux.
+- Windows selanjutnya
 
