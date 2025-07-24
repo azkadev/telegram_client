@@ -112,6 +112,7 @@ class TelegramUniverse {
     tdlibInvokeRaw({
       "@type": "initialized",
     });
+
     /// menutup semua client
     /// ini sangat berguna karena pada dasrnya
     /// ketika load library dan kamu debug di flutter
@@ -119,7 +120,7 @@ class TelegramUniverse {
     /// itu tandanya hanya program dart yang di restart dan memorinya yang hilang
     /// maka jika tidak demikian
     /// ketika kamu membuat client lagi maka tidak bisa akan error
-    /// 
+    ///
     tdlibInvokeRaw({
       "@type": "closeClients",
     });
